@@ -1,0 +1,15 @@
+{
+    "extends": ["lcy-vue"],
+    "globals": {
+        "uni": true,
+        "plus": true,
+        "wx": true
+    },
+    "rules": {
+        "wrap-regex": 0,
+        "no-irregular-whitespace": 0,
+        "no-inline-comments": 0,
+        "vue/order-in-components": "error",
+        "vue/no-v-model-argument": 0
+    }
+}
