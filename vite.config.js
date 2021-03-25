@@ -72,7 +72,7 @@ export default () => {
             }
         },
         server: {
-            port: 7773,
+            port: 7771,
             proxy: {
                 '/api': {
                     target: 'http://php.mmxiaowu.com',

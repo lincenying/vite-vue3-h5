@@ -4,7 +4,6 @@ for (let i = 10; i < 48; i++) {
 }
 
 module.exports = {
-    darkMode: 'class',
     theme: {
         extend: {
             colors: {
