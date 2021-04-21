@@ -3,7 +3,11 @@ import { useStore } from 'vuex'
 import { sleep, random } from '@/utils'
 
 export default init => {
-    const { ctx } = getCurrentInstance()
+    const ins = getCurrentInstance()
+    // eslint-disable-next-line no-unused-vars
+    const ctx = ins.appContext.config.globalProperties
+    // eslint-disable-next-line no-unused-vars
+    const options = ins.type
 
     const store = useStore()
 
@@ -49,10 +53,13 @@ export default init => {
         // <==列表数据
     })
 
+    const activeIndex = ref(0)
+
     const getList = async index => {
+        console.log(index)
         const list = res.list[index]
         if (list.page === 1) {
-            const body = document.querySelector('.' + ctx.$options.name)
+            const body = document.querySelector('.' + options.name)
             body.scrollTo(0, 0)
         }
         // 500毫秒显示路由loading
@@ -104,6 +111,7 @@ export default init => {
         body,
         res,
         getList,
-        onRefresh
+        onRefresh,
+        activeIndex
     }
 }
