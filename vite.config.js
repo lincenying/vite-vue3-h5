@@ -1,11 +1,16 @@
 const path = require('path')
+
+import { loadEnv } from 'vite'
 import { getBabelOutputPlugin } from '@rollup/plugin-babel'
 import styleImport from 'vite-plugin-style-import'
 import vue from '@vitejs/plugin-vue'
+import vueSvgPlugin from 'vite-plugin-vue-svg'
 import WindiCSS from 'vite-plugin-windicss'
 
 // https://vitejs.dev/config/
-export default () => {
+export default ({ mode }) => {
+    process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+
     const config = {
         css: {
             preprocessorOptions: {
@@ -28,6 +33,7 @@ export default () => {
                 plugins: ['@babel/plugin-proposal-class-properties']
             }),
             vue(),
+            vueSvgPlugin(),
             styleImport({
                 libs: [
                     {

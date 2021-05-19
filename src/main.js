@@ -5,7 +5,7 @@ import store from './store'
 import vant from './plugin/vant'
 import global from './plugin/global'
 
-import 'virtual:windi.css'
+console.log('当前环境: ' + import.meta.env.VITE_APP_ENV)
 
 const app = createApp(App)
 

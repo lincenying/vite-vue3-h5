@@ -1,6 +1,7 @@
 <template>
+    <!-- eslint-disable vue/valid-v-model -->
     <div class="about-wrap" :class="$options.name">
-        <div class="route-wrap">
+        <div class="route-wrap p-10px">
             <div class="">
                 <van-cell-group>
                     <van-cell icon="points" title="我的积分" is-link to="/about/detail" />
@@ -8,33 +9,33 @@
                     <van-cell icon="gift-o" title="我的头像" is-link to="/avatar" />
                 </van-cell-group>
             </div>
-            <div class="margin-top-20px">
+            <div class="mt-10px">
                 <van-cell-group>
                     <van-field value="输入框已禁用" label="用户名" left-icon="contact" />
                     <van-field value="输入框已禁用" label="密码" left-icon="browsing-history-o" />
                 </van-cell-group>
             </div>
-            <div class="margin-top-20px">
+            <div class="mt-10px">
                 <van-button plain hairline type="primary" size="small">细边框按钮</van-button>
                 <van-button loading type="primary" size="small" />
                 <van-button loading type="primary" size="small" loading-type="spinner" />
                 <van-button loading type="danger" size="small" loading-text="加载中..." />
             </div>
-            <div class="margin-top-20px">
+            <div class="mt-10px">
                 <van-image width="5rem" height="5rem" fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
             </div>
-            <div class="margin-top-20px">
+            <div class="mt-10px">
                 <van-button type="primary" size="small" @click="showPopup"> 展示弹出层 </van-button>
                 {{ res.dateText }}
             </div>
-            <div class="margin-top-20px">
+            <div class="mt-10px">
                 <van-button type="primary" size="small" @click="handleToast">加载提示</van-button>
             </div>
-            <div class="margin-top-20px">
+            <div class="mt-10px">
                 <van-button type="primary" size="small" @click="res.previewShow = true">图片预览</van-button>
                 <van-image-preview v-model:show="res.previewShow" :images="res.images"></van-image-preview>
             </div>
-            <div class="margin-top-20px">
+            <div class="mt-10px">
                 <van-button type="primary" size="small" @click="res.dialogShow = true">组件调用Dialog</van-button>
                 <van-button type="primary" size="small" @click="handleDialog">全局调用Dialog</van-button>
             </div>
@@ -45,7 +46,7 @@
                     <van-image width="120" height="120" :src="props.item" />
                 </template>
             </img-list>
-            <!-- <div class="margin-top-20px">
+            <!-- <div class="mt-10px">
                 <van-count-down :time="100000000" format="DD 天 HH 时 mm 分 ss 秒" />
                 <van-count-down :time="100000000" format="HH 时 mm 分 ss 秒" />
             </div> -->

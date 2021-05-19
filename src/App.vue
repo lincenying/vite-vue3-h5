@@ -93,6 +93,7 @@ import {
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
+import 'virtual:windi.css'
 import '@/assets/scss/style.scss'
 
 export default {
