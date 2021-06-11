@@ -1,7 +1,6 @@
 const path = require('path')
 
 import { loadEnv } from 'vite'
-import { getBabelOutputPlugin } from '@rollup/plugin-babel'
 import styleImport from 'vite-plugin-style-import'
 import vue from '@vitejs/plugin-vue'
 import vueSvgPlugin from 'vite-plugin-vue-svg'
@@ -20,18 +19,6 @@ export default ({ mode }) => {
             }
         },
         plugins: [
-            getBabelOutputPlugin({
-                presets: [
-                    [
-                        '@babel/preset-env',
-                        {
-                            useBuiltIns: 'usage',
-                            corejs: '3'
-                        }
-                    ]
-                ],
-                plugins: ['@babel/plugin-proposal-class-properties']
-            }),
             vue(),
             vueSvgPlugin(),
             styleImport({
