@@ -17,8 +17,7 @@
     </div>
 </template>
 <script>
-import { ref, reactive, getCurrentInstance } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import useGlobal from '@/mixins/global'
 
 export default {
     name: 'home-detail-router',
@@ -28,9 +27,8 @@ export default {
         }
     },
     setup() {
-        const { ctx } = getCurrentInstance()
-        const route = useRoute()
-        const router = useRouter()
+        // eslint-disable-next-line no-unused-vars
+        const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
 
         const res = reactive({
             detail: null

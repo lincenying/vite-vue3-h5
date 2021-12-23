@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-import { useRouter } from 'vue-router'
+import useGlobal from '@/mixins/global'
 import MyIcon from '@/assets/svgs/mp3.svg?component'
 
 export default {
@@ -25,7 +25,9 @@ export default {
         title: 'About Detail'
     },
     setup() {
-        const router = useRouter()
+        // eslint-disable-next-line no-unused-vars
+        const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
+
         const onClickLeft = () => {
             router.go(-1)
         }

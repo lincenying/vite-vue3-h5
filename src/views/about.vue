@@ -60,8 +60,7 @@
     </div>
 </template>
 <script>
-import { reactive, getCurrentInstance } from 'vue'
-
+import useGlobal from '@/mixins/global'
 import { UTC2Date } from '@/utils'
 import saveScroll from '@/mixins/save-scroll'
 import imgList from './_img-list.vue'
@@ -77,7 +76,8 @@ export default {
         title: 'About'
     },
     setup() {
-        const { ctx } = getCurrentInstance()
+        // eslint-disable-next-line no-unused-vars
+        const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
 
         saveScroll()
 

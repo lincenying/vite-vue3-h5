@@ -1,15 +1,10 @@
-import { ref, reactive, nextTick, getCurrentInstance } from 'vue'
-import { useStore } from 'vuex'
+import { nextTick } from 'vue'
 import { sleep, random } from '@/utils'
+import useGlobal from '@/mixins/global'
 
 export default init => {
-    const ins = getCurrentInstance()
     // eslint-disable-next-line no-unused-vars
-    const ctx = ins.appContext.config.globalProperties
-    // eslint-disable-next-line no-unused-vars
-    const options = ins.type
-
-    const store = useStore()
+    const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
 
     const body = ref(null)
     const res = reactive({

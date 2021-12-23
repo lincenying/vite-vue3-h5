@@ -1,11 +1,10 @@
-import { ref, reactive, nextTick, getCurrentInstance } from 'vue'
-import { useStore } from 'vuex'
+import { nextTick } from 'vue'
 import { sleep, random } from '@/utils'
+import useGlobal from '@/mixins/global'
 
 export default init => {
-    const { ctx } = getCurrentInstance()
-
-    const store = useStore()
+    // eslint-disable-next-line no-unused-vars
+    const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
 
     const body = ref(null)
     const res = reactive({
@@ -39,6 +38,7 @@ export default init => {
         // 第一页时不显示loading
         if (res.page > 1) res.loading = true
         await sleep(random(300, 600))
+        console.log(ctx)
         const { data, code } = await ctx.$api[init.api.method](init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer) clearTimeout(res.timer)
