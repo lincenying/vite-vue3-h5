@@ -6,14 +6,11 @@ import { useHead } from '@vueuse/head'
 
 export default () => {
     const ins = getCurrentInstance()
-    // eslint-disable-next-line no-unused-vars
     const ctx = ins.appContext.config.globalProperties
-    // eslint-disable-next-line no-unused-vars
     const options = ins.type
-    // eslint-disable-next-line no-unused-vars
+    const proxy = ins.proxy
     const route = useRoute()
     const router = useRouter()
-    // eslint-disable-next-line no-unused-vars
     const store = useStore()
 
     // autoUnlock === true 不管 fn 返回什么, 都自动解锁
@@ -37,6 +34,7 @@ export default () => {
     return {
         ctx,
         options,
+        proxy,
         route,
         router,
         store,

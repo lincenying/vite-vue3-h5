@@ -38,7 +38,6 @@ export default init => {
         // 第一页时不显示loading
         if (res.page > 1) res.loading = true
         await sleep(random(300, 600))
-        console.log(ctx)
         const { data, code } = await ctx.$api[init.api.method](init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer) clearTimeout(res.timer)
