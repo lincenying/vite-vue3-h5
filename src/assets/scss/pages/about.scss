@@ -7,6 +7,7 @@
         padding: 6.5px;
         font-size: 12px;
     }
+
     .van-panel__footer {
         text-align: right;
     }
@@ -23,22 +24,25 @@
         height: 200Px;
         margin: 10px auto;
         background-color: lightblue;
+
         // border: 2px solid grey;
         border-radius: 4px;
         box-sizing: content-box;
+
         canvas {
             border-radius: 0.08rem;
         }
     }
 
     .croppa-container:hover {
-        opacity: 1;
         background-color: #8ac9ef;
+        opacity: 1;
     }
 
     .preview {
         margin-top: 15px;
         text-align: center;
+
         img {
             max-width: 100px;
         }
