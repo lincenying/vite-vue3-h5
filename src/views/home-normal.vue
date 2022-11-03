@@ -45,7 +45,7 @@ export default {
         return {
             api: {
                 method: 'get',
-                url: 'ajax/article-list',
+                url: 'article/lists',
                 config: { perPage: 20 }
             }
         }

@@ -45,7 +45,7 @@ export default {
         saveScroll()
         const api = {
             method: 'get',
-            url: 'ajax/article-list',
+            url: 'article/lists',
             config: { perPage: 20 }
         }
         const { body, res, getList, onRefresh, reachBottom } = lists({ api })

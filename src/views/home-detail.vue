@@ -38,7 +38,7 @@ export default {
 
         const getDetail = async () => {
             // this.$store.commit('global/routerLoading', true)
-            const { code, data } = await ctx.$api.get('ajax/article-detail?id=' + route.query.id, {})
+            const { code, data } = await ctx.$api.get('article/detail/' + route.query.id, {})
             if (code === 200) {
                 res.detail = data
                 detail.value = data
