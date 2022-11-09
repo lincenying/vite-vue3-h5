@@ -53,7 +53,7 @@ export default ({ mode }) => {
                         libraryName: 'vant',
                         esModule: true,
                         resolveStyle: name => {
-                            return `vant/es/${name}/style/index`
+                            return `../es/${name}/style`
                         }
                     },
                     {

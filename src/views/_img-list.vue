@@ -2,7 +2,7 @@
     <div class="img-list-wrap" :class="$options.name" style="display: flex">
         <div v-for="(item, index) in imgArr" :key="index">
             <slot :item="item" :index="index">
-                <van-image width="100" height="100" :src="item" />
+                <van-image width="60" height="60" :src="item" />
             </slot>
         </div>
     </div>

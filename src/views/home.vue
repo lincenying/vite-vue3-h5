@@ -45,8 +45,8 @@ export default {
         saveScroll()
         const api = {
             method: 'get',
-            url: 'ajax/article-list',
-            config: { perPage: 20 }
+            url: 'article/lists',
+            config: { per_page: 20 }
         }
         const { body, res, getList, onRefresh, reachBottom } = lists({ api })
         onMounted(() => {
