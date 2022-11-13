@@ -46,7 +46,7 @@ export default {
         const api = {
             method: 'get',
             url: 'article/lists',
-            config: { perPage: 20 }
+            config: { per_page: 20 }
         }
         const { body, res, getList, onRefresh, reachBottom } = lists({ api })
         onMounted(() => {

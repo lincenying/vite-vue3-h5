@@ -43,7 +43,7 @@
             <img-list :img-arr="res.images">
                 <template v-slot:default="props">
                     <!-- {{ props }} -->
-                    <van-image width="120" height="120" :src="props.item" />
+                    <van-image @click="handleClickImg(props)" width="60" height="60" :src="props.item" />
                 </template>
             </img-list>
             <!-- <div class="mt-10px">
@@ -60,6 +60,8 @@
     </div>
 </template>
 <script>
+import { ImagePreview } from 'vant'
+
 import useGlobal from '@/mixins/global'
 import { UTC2Date } from '@/utils'
 import saveScroll from '@/mixins/save-scroll'
@@ -137,13 +139,21 @@ export default {
                 })
         }
 
+        const handleClickImg = props => {
+            ImagePreview({
+                images: res.images,
+                startPosition: props.index
+            })
+        }
+
         return {
             res,
             showPopup,
             dateChange,
             handleToast,
             dialogBeforeClose,
-            handleDialog
+            handleDialog,
+            handleClickImg
         }
     }
 }

@@ -46,7 +46,7 @@ export default {
             api: {
                 method: 'get',
                 url: 'article/lists',
-                config: { perPage: 20 }
+                config: { per_page: 20 }
             }
         }
     },
