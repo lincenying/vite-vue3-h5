@@ -32,15 +32,15 @@
                 <van-button type="primary" size="small" @click="handleToast">加载提示</van-button>
             </div>
             <div class="mt-10px">
-                <van-button type="primary" size="small" @click="res.previewShow = true">图片预览</van-button>
-                <van-image-preview v-model:show="res.previewShow" :images="res.images"></van-image-preview>
+                <van-button type="primary" size="small" @click="previewShow = true">图片预览</van-button>
+                <van-image-preview v-model:show="previewShow" :images="images"></van-image-preview>
             </div>
             <div class="mt-10px">
-                <van-button type="primary" size="small" @click="res.dialogShow = true">组件调用Dialog</van-button>
+                <van-button type="primary" size="small" @click="dialogShow = true">组件调用Dialog</van-button>
                 <van-button type="primary" size="small" @click="handleDialog">全局调用Dialog</van-button>
             </div>
             <!-- slot 插槽示例 -->
-            <img-list :img-arr="res.images">
+            <img-list :img-arr="images">
                 <template v-slot:default="props">
                     <!-- {{ props }} -->
                     <van-image @click="handleClickImg(props)" width="60" height="60" :src="props.item" />
@@ -51,110 +51,115 @@
                 <van-count-down :time="100000000" format="HH 时 mm 分 ss 秒" />
             </div> -->
             <van-popup v-model:show="res.show" position="bottom" class="fixed-center" :style="{ height: '40%' }">
-                <van-datetime-picker v-model="res.currentDate" type="date" @confirm="dateChange" @cancel="res.show = false" />
+                <van-date-picker v-model="res.currentDate" type="date" @confirm="dateChange" @cancel="res.show = false" />
             </van-popup>
-            <van-dialog v-model:show="res.dialogShow" :before-close="dialogBeforeClose" title="标题" show-cancel-button>
+            <van-dialog v-model:show="dialogShow" :before-close="dialogBeforeClose" title="标题" show-cancel-button>
                 <img src="https://img.yzcdn.cn/vant/apple-3.jpg" :style="`max-width: 100%;`" />
             </van-dialog>
         </div>
     </div>
 </template>
-<script>
-import { ImagePreview } from 'vant'
+<script setup name="about-router">
+import { showImagePreview } from 'vant'
 
 import useGlobal from '@/mixins/global'
-import { UTC2Date } from '@/utils'
 import saveScroll from '@/mixins/save-scroll'
 import imgList from './_img-list.vue'
 
-export default {
-    // 如果需要记录滚动条位置, name必须设置, 且每个路由组件的name必须保证唯一性
-    name: 'about-router',
-    components: {
-        imgList
-    },
-    metaInfo: {
-        // title will be injected into parent titleTemplate
-        title: 'About'
-    },
-    setup() {
-        // eslint-disable-next-line no-unused-vars
-        const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
+// eslint-disable-next-line no-unused-vars
+const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } = useGlobal('about-router')
 
-        saveScroll()
+useHead({
+    title: 'About'
+})
 
-        const res = reactive({
-            show: false,
-            currentDate: new Date(),
-            dateText: '',
-            previewShow: false,
-            images: [
-                'https://img.yzcdn.cn/public_files/2017/09/05/3bd347e44233a868c99cf0fe560232be.jpg',
-                'https://img.yzcdn.cn/public_files/2017/09/05/c0dab461920687911536621b345a0bc9.jpg',
-                'https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg',
-                'https://img.yzcdn.cn/public_files/2017/09/05/fd08f07665ed67d50e11b32a21ce0682.jpg'
-            ],
-            dialogShow: false
-        })
+// pinia 状态管理 ===>
+// const mainStore = useMainStore()
+// const { counter, name } = storeToRefs(mainStore)
+// const tmpCount = computed(() => mainStore.counter)
+// 监听状态变化
+// mainStore.$subscribe((mutation, state) => {
+//     console.log('mutation :>> ', mutation)
+//     console.log('state :>> ', JSON.stringify(state))
+// })
+// pinia 状态管理 <===
 
-        const showPopup = () => {
-            res.show = true
-        }
-        const dateChange = val => {
-            res.dateText = UTC2Date(val, 'y-m-d h:i:s')
-            res.show = false
-        }
-        const handleToast = () => {
-            const toast1 = ctx.$toast.loading({
-                duration: 0,
-                mask: true,
-                message: '加载中...'
-            })
+// 父子组件通讯 ===>
+// const prop = defineProps({
+//     imgArr: Array
+// })
+// eslint-disable-next-line no-unused-vars
+// const { imgArr } = toRefs(prop)
+// 父子组件通讯 <===
+
+// 全局组件通信 ===>
+// const dataIsReady = inject('dataIsReady')
+// 全局组件通信 <===
+
+saveScroll()
+
+const previewShow = ref(false)
+const dialogShow = ref(false)
+
+const res = reactive({
+    show: false,
+    currentDate: [],
+    dateText: ''
+})
+
+const showPopup = () => {
+    res.show = true
+}
+const dateChange = val => {
+    res.dateText = val.selectedValues.join('-')
+    res.show = false
+}
+
+const handleToast = () => {
+    const toast1 = ctx.$toast.loading({
+        duration: 0,
+        mask: true,
+        message: '加载中...'
+    })
+    setTimeout(() => {
+        toast1.close()
+    }, 3000)
+}
+const dialogBeforeClose = action => {
+    return new Promise(resolve => {
+        if (action === 'confirm') {
             setTimeout(() => {
-                toast1.clear()
-            }, 3000)
+                resolve(true)
+            }, 1000)
+        } else {
+            resolve(true)
         }
-        const dialogBeforeClose = action => {
-            return new Promise(resolve => {
-                if (action === 'confirm') {
-                    setTimeout(() => {
-                        resolve(true)
-                    }, 1000)
-                } else {
-                    resolve(true)
-                }
-            })
-        }
-        const handleDialog = () => {
-            ctx.$dialog
-                .confirm({
-                    title: '提示',
-                    message: '代码是写出来给人看的，附带能在机器上运行'
-                })
-                .then(() => {
-                    ctx.$toast('click confirm')
-                })
-                .catch(() => {
-                    ctx.$toast('click cancel')
-                })
-        }
+    })
+}
+const handleDialog = () => {
+    ctx.$dialog
+        .confirm({
+            title: '提示',
+            message: '代码是写出来给人看的，附带能在机器上运行'
+        })
+        .then(() => {
+            ctx.$toast.default('click confirm')
+        })
+        .catch(() => {
+            ctx.$toast.default('click cancel')
+        })
+}
 
-        const handleClickImg = props => {
-            ImagePreview({
-                images: res.images,
-                startPosition: props.index
-            })
-        }
-
-        return {
-            res,
-            showPopup,
-            dateChange,
-            handleToast,
-            dialogBeforeClose,
-            handleDialog,
-            handleClickImg
-        }
-    }
+const images = ref([
+    'https://img.yzcdn.cn/public_files/2017/09/05/3bd347e44233a868c99cf0fe560232be.jpg',
+    'https://img.yzcdn.cn/public_files/2017/09/05/c0dab461920687911536621b345a0bc9.jpg',
+    'https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg',
+    'https://img.yzcdn.cn/public_files/2017/09/05/fd08f07665ed67d50e11b32a21ce0682.jpg'
+])
+const handleClickImg = props => {
+    showImagePreview({
+        images: images.value,
+        startPosition: props.index
+    })
 }
 </script>

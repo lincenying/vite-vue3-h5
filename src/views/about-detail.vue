@@ -11,29 +11,48 @@
         </div>
     </div>
 </template>
-<script>
+
+<script setup name="about-detail-router">
+// eslint-disable-next-line no-unused-vars
+import { onMounted, nextTick, watch, computed, toRefs, inject } from 'vue'
+
 import useGlobal from '@/mixins/global'
+// import useMainStore from '@/pinia'
+
 import MyIcon from '@/assets/svgs/mp3.svg?component'
 
-export default {
-    name: 'about-detail-router',
-    components: {
-        MyIcon
-    },
-    metaInfo: {
-        // title will be injected into parent titleTemplate
-        title: 'About Detail'
-    },
-    setup() {
-        // eslint-disable-next-line no-unused-vars
-        const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
+// eslint-disable-next-line no-unused-vars
+const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } =
+    useGlobal('about-detail-router')
 
-        const onClickLeft = () => {
-            router.go(-1)
-        }
-        return {
-            onClickLeft
-        }
-    }
+useHead({
+    title: 'About Detail'
+})
+
+// pinia 状态管理 ===>
+// const mainStore = useMainStore()
+// const { counter, name } = storeToRefs(mainStore)
+// const tmpCount = computed(() => mainStore.counter)
+// 监听状态变化
+// mainStore.$subscribe((mutation, state) => {
+//     console.log('mutation :>> ', mutation)
+//     console.log('state :>> ', JSON.stringify(state))
+// })
+// pinia 状态管理 <===
+
+// 父子组件通讯 ===>
+// const prop = defineProps({
+//     imgArr: Array
+// })
+// eslint-disable-next-line no-unused-vars
+// const { imgArr } = toRefs(prop)
+// 父子组件通讯 <===
+
+// 全局组件通信 ===>
+// const dataIsReady = inject('dataIsReady')
+// 全局组件通信 <===
+
+const onClickLeft = () => {
+    router.go(-1)
 }
 </script>

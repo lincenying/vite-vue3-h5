@@ -9,14 +9,16 @@
         "skipLibCheck": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
+        "allowJs": true,
         "sourceMap": true,
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"]
         },
-        "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+        "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+        "outDir": "build"
     },
     "include": ["src/**/*.js", "src/**/*.vue"],
-    "exclude": ["node_modules"],
+    "exclude": ["node_modules", "build/**/*"],
     "files": ["main.ts"]
 }

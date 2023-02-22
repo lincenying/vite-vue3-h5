@@ -4,7 +4,7 @@ import ls from 'store2'
 import message from '@/utils/message'
 import jsonp from './jsonp'
 
-window.axios = axios
+window.$$axios = axios
 
 const headers = {
     'X-Requested-With': 'XMLHttpRequest',

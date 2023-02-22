@@ -26,39 +26,21 @@
     </div>
 </template>
 
-<script>
+<script setup name="home-router">
 import { onMounted } from 'vue'
 
 import saveScroll from '@/mixins/save-scroll'
 import lists from '@/mixins/lists'
 
-export default {
-    // 如果需要记录滚动条位置, name必须设置, 且每个路由组件的name必须保证唯一性
-    // name 统一设置成 `${页面文件名}-router`
-    name: 'home-router',
-    components: {},
-    metaInfo: {
-        // title will be injected into parent titleTemplate
-        title: 'Home'
-    },
-    setup() {
-        saveScroll()
-        const api = {
-            method: 'get',
-            url: 'article/lists',
-            config: { per_page: 20 }
-        }
-        const { body, res, getList, onRefresh, reachBottom } = lists({ api })
-        onMounted(() => {
-            getList()
-        })
-        return {
-            body,
-            res,
-            getList,
-            onRefresh,
-            reachBottom
-        }
-    }
+saveScroll()
+const api = {
+    method: 'get',
+    url: 'article/lists',
+    config: { per_page: 20 }
 }
+// eslint-disable-next-line no-unused-vars
+const { body, res, getList, onRefresh, reachBottom } = lists({ api })
+onMounted(() => {
+    getList()
+})
 </script>

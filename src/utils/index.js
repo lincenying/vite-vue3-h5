@@ -141,7 +141,7 @@ const upload_base = async (files, progress, params = {}) => {
         })
         oMyForm.append('file', files)
         const apiUrl = data.host + (data.host.indexOf('?') > -1 ? '&' : '?') + 'noLoading'
-        window.source = window.axios.CancelToken.source()
+        window.source = window.$$axios.CancelToken.source()
         const { Status, message } = await api.fetch(
             apiUrl,
             oMyForm,

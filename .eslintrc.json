@@ -6,10 +6,11 @@
         "wx": true
     },
     "rules": {
-        "wrap-regex": 0,
-        "no-irregular-whitespace": 0,
         "no-inline-comments": 0,
-        "vue/order-in-components": "error",
+        "no-irregular-whitespace": 0,
+        "no-unused-expressions": 0,
+        "vue/multi-word-component-names": 0,
+        "vue/no-v-for-template-key": 0,
         "vue/no-v-model-argument": 0
     }
 }

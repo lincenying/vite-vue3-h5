@@ -21,38 +21,19 @@
     </div>
 </template>
 
-<script>
+<script setup name="lists-router">
 import saveScroll from '@/mixins/save-scroll'
 import tabLists from '@/mixins/tab-lists'
 
-export default {
-    // 如果需要记录滚动条位置, name必须设置, 且每个路由组件的name必须保证唯一性
-    // name 统一设置成 `${页面文件名}-router`
-    name: 'lists-router',
+saveScroll()
 
-    metaInfo: {
-        // title will be injected into parent titleTemplate
-        title: 'Home'
-    },
-    setup() {
-        saveScroll()
-
-        const api = [
-            { method: 'get', url: 'article/lists', config: { per_page: 20, tab: '' } },
-            { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'ask' } },
-            { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'share' } },
-            { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'good' } }
-        ]
-        const tabs = ['全部', '问答', '分享', '推荐']
-        const { body, res, getList, onRefresh, activeIndex } = tabLists({ api, tabs })
-
-        return {
-            body,
-            res,
-            getList,
-            onRefresh,
-            activeIndex
-        }
-    }
-}
+const api = [
+    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: '' } },
+    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'ask' } },
+    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'share' } },
+    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'good' } }
+]
+const tabs = ['全部', '问答', '分享', '推荐']
+// eslint-disable-next-line no-unused-vars
+const { body, res, getList, onRefresh, activeIndex } = tabLists({ api, tabs })
 </script>

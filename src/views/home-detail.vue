@@ -16,47 +16,60 @@
         </div>
     </div>
 </template>
-<script>
+<script setup name="home-detail-router">
+import { computed } from 'vue'
+
 import useGlobal from '@/mixins/global'
 
-export default {
-    name: 'home-detail-router',
-    metaInfo() {
-        return {
-            title: (this.detail && this.detail.title) || 'home-detail'
-        }
-    },
-    setup() {
-        // eslint-disable-next-line no-unused-vars
-        const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
+// eslint-disable-next-line no-unused-vars
+const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } = useGlobal('home-detail-router')
 
-        const res = reactive({
-            detail: null
-        })
+// pinia 状态管理 ===>
+// const mainStore = useMainStore()
+// const { counter, name } = storeToRefs(mainStore)
+// const tmpCount = computed(() => mainStore.counter)
+// 监听状态变化
+// mainStore.$subscribe((mutation, state) => {
+//     console.log('mutation :>> ', mutation)
+//     console.log('state :>> ', JSON.stringify(state))
+// })
+// pinia 状态管理 <===
 
-        const detail = ref(null)
+// 父子组件通讯 ===>
+// const prop = defineProps({
+//     imgArr: Array
+// })
+// eslint-disable-next-line no-unused-vars
+// const { imgArr } = toRefs(prop)
+// 父子组件通讯 <===
 
-        const getDetail = async () => {
-            // this.$store.commit('global/routerLoading', true)
-            const { code, data } = await ctx.$api.get('article/detail/' + route.query.id, {})
-            if (code === 200) {
-                res.detail = data
-                detail.value = data
-            }
-            // this.$store.commit('global/routerLoading', false)
-        }
+// 全局组件通信 ===>
+// const dataIsReady = inject('dataIsReady')
+// 全局组件通信 <===
 
-        const onClickLeft = () => {
-            router.go(-1)
-        }
+const res = reactive({
+    detail: null
+})
 
-        getDetail()
+const detail = ref(null)
 
-        return {
-            res,
-            detail,
-            onClickLeft
-        }
+useHead({
+    title: computed(() => detail.value?.title)
+})
+
+const getDetail = async () => {
+    // this.$store.commit('global/routerLoading', true)
+    const { code, data } = await ctx.$api.get('article/detail/' + route.query.id, {})
+    if (code === 200) {
+        res.detail = data
+        detail.value = data
     }
+    // this.$store.commit('global/routerLoading', false)
 }
+
+const onClickLeft = () => {
+    router.go(-1)
+}
+
+getDetail()
 </script>

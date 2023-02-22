@@ -3,7 +3,7 @@ import qs from 'qs'
 import ls from 'store2'
 import config from '@/config'
 
-window.axios = axios
+window.$$axios = axios
 
 const headers = {
     'X-Requested-With': 'XMLHttpRequest',

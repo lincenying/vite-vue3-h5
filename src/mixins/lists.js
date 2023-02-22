@@ -4,7 +4,7 @@ import useGlobal from '@/mixins/global'
 
 export default init => {
     // eslint-disable-next-line no-unused-vars
-    const { ctx, options, route, router, store, useToggle, useHead, useLockFn, ref, reactive } = useGlobal()
+    const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useLockFn } = useGlobal()
 
     const body = ref(null)
     const res = reactive({
@@ -33,7 +33,7 @@ export default init => {
         res.isLock = true
         // 异步更新数据
         res.timer = setTimeout(() => {
-            store.commit('global/routerLoading', true)
+            globalStore.$patch({ routerLoading: true })
         }, 500)
         // 第一页时不显示loading
         if (res.page > 1) res.loading = true
@@ -41,7 +41,7 @@ export default init => {
         const { data, code } = await ctx.$api[init.api.method](init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer) clearTimeout(res.timer)
-        store.commit('global/routerLoading', false)
+        globalStore.$patch({ routerLoading: false })
         res.isLoaded = true
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据

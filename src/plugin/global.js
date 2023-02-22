@@ -7,11 +7,6 @@ function install(app) {
     app.config.globalProperties.$is = is
     app.config.globalProperties.$empty = isempty
     app.mixin({
-        computed: {
-            $$global() {
-                return oc(this.$store, 'state.global')
-            }
-        },
         mounted() {
             const blackComponents = ['router-link', 'keep-alive', 'transition-group']
             const componentName = this.$options.name

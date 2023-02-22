@@ -1,17 +1,27 @@
-import { getCurrentInstance, ref, reactive } from 'vue'
+import { getCurrentInstance, ref, reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { storeToRefs } from 'pinia'
+
 import { useToggle } from '@vueuse/core'
 import { useHead } from '@vueuse/head'
+import useGlobalStore from '@/pinia/global'
 
-export default () => {
-    const ins = getCurrentInstance()
+export default key => {
+    let ins = getCurrentInstance()
+    if (key) {
+        if (!ins) {
+            ins = window['$$' + key] || {}
+        } else {
+            window['$$' + key] = ins
+        }
+    }
+
     const ctx = ins.appContext.config.globalProperties
     const options = ins.type
     const proxy = ins.proxy
     const route = useRoute()
     const router = useRouter()
-    const store = useStore()
+    const globalStore = useGlobalStore()
 
     // autoUnlock === true 不管 fn 返回什么, 都自动解锁
     // autoUnlock === false 不管 fn 返回什么, 都不自动解锁
@@ -37,9 +47,11 @@ export default () => {
         proxy,
         route,
         router,
-        store,
+        storeToRefs,
+        globalStore,
         ref,
         reactive,
+        watch,
         useToggle,
         useHead,
         useLockFn

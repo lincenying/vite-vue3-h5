@@ -13,12 +13,6 @@ const routes = [
         meta: { title: '首页', index: 1 }
     },
     {
-        name: 'home-normal',
-        path: '/home-normal',
-        component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/home-normal.vue'),
-        meta: { title: '首页2', index: 1 }
-    },
-    {
         name: 'lists',
         path: '/lists',
         component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/lists.vue'),

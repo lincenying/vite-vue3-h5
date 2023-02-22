@@ -2,7 +2,7 @@
     <div class="wrap">
         <router-view v-slot="{ Component }" class="body" :class="{ 'is-tab': routeIsTab }">
             <transition
-                v-if="!$$global.globalLoading"
+                v-if="!globalLoading"
                 :name="transitionName"
                 @before-enter="handleBeforeEnter"
                 @after-enter="handleAfterEnter"
@@ -15,19 +15,19 @@
         </router-view>
         <van-tabbar v-if="routeIsTab" route :border="false" class="fixed-center">
             <van-tabbar-item replace to="/index" icon="home-o">首页</van-tabbar-item>
-            <van-tabbar-item replace to="/home-normal" icon="home-o">首页2</van-tabbar-item>
             <van-tabbar-item replace to="/lists" icon="home-o">列表</van-tabbar-item>
             <van-tabbar-item replace to="/about" icon="search">关于</van-tabbar-item>
         </van-tabbar>
-        <div v-if="$$global.globalLoading" class="global-loading">
+        <div v-if="globalLoading" class="global-loading">
             <van-loading type="spinner" size="32px" />
         </div>
-        <div v-if="$$global.routerLoading" class="router-loading">
+        <div v-if="routerLoading" class="router-loading">
             <van-loading type="spinner" size="32px" color="#1989fa" />
         </div>
     </div>
 </template>
-<script>
+
+<script setup name="app-root">
 import {
     // 创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 track 和 trigger 函数作为参数，并应返回一个带有 get 和 set 的对象
     // customRef,
@@ -46,7 +46,7 @@ import {
     // 获取一个对象 (响应式或纯对象) 或 ref 并返回原始 proxy 的只读 proxy
     // readonly,
     // 接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property .value
-    ref,
+    // ref,
     // 返回 reactive 或 readonly proxy 的原始对象
     // toRaw,
     // 可以用来为源响应式对象上的 property 新创建一个 ref
@@ -90,67 +90,72 @@ import {
     // 字符串模板的另一种选择，允许你充分利用 JavaScript 的编程功能
     // render
 } from 'vue'
-import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+import useGlobal from '@/mixins/global'
 
 import 'virtual:windi.css'
+import 'vue-cropper/dist/index.css'
 import '@/assets/scss/style.scss'
 
-export default {
-    name: 'app-root',
-    setup() {
-        const route = useRoute()
-        const store = useStore()
+// eslint-disable-next-line no-unused-vars
+const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useLockFn } = useGlobal('app-root')
 
-        setTimeout(() => {
-            store.commit('global/globalLoading', false)
-        }, 1500)
-
-        const transitionName = ref('fade')
-        const cacheComponents = ref('home-router,home-normal-router,lists-router,about-router')
-
-        const metaIndex = ref(route.meta.index)
-
-        watch(
-            () => route.fullPath,
-            () => {
-                const newMetaIndex = route.meta.index
-                // 同级路由切换或者打开的第一个页面, 使用 fade 切换动画
-                // 打开子级路由, 使用 slide-left 切换动画
-                // 子级路由返回, 使用 slide-right 切换动画
-                if (!metaIndex.value || newMetaIndex === metaIndex.value) {
-                    transitionName.value = 'fade'
-                } else if (newMetaIndex > metaIndex.value) {
-                    transitionName.value = 'slide-left'
-                } else {
-                    transitionName.value = 'slide-right'
-                }
-                metaIndex.value = newMetaIndex
-            }
-        )
-
-        const routeIsTab = computed(() => {
-            return ['/index', '/home-normal', '/lists', '/about'].includes(route.path)
+// pinia 状态管理 ===>
+const { globalLoading, routerLoading } = storeToRefs(globalStore)
+// const tmpCount = computed(() => globalStore.counter)
+// 监听状态变化
+globalStore.$subscribe((mutation, state) => {
+    if (mutation.events) {
+        let _Array = mutation.events
+        if (!Array.isArray(_Array)) _Array = [_Array]
+        _Array.forEach(item => {
+            console.log(`%c[${mutation.storeId}.${item?.key}] <${mutation.type}> >>> ${item?.oldValue} => ${item?.newValue}`, 'color: red')
         })
-
-        const handleBeforeEnter = () => {
-            store.commit('global/setPageSwitching', true)
-        }
-        const handleAfterEnter = () => {
-            store.commit('global/setPageSwitching', false)
-        }
-        const handleAfterLeave = () => {
-            // root.$emit('triggerScroll')
-        }
-
-        return {
-            routeIsTab,
-            transitionName,
-            cacheComponents,
-            handleBeforeEnter,
-            handleAfterEnter,
-            handleAfterLeave
-        }
     }
+    console.log('%c[state] >> ', 'color: red')
+    console.log(state)
+    console.log('%c<< [state]', 'color: red')
+})
+
+// pinia 状态管理 <===
+
+setTimeout(() => {
+    globalStore.setGlobalLoading(false)
+}, 200)
+
+const transitionName = ref('fade')
+const cacheComponents = ref('home-router,home-normal-router,lists-router,about-router')
+
+const metaIndex = ref(route.meta.index)
+
+watch(
+    () => route.fullPath,
+    () => {
+        const newMetaIndex = route.meta.index
+        // 同级路由切换或者打开的第一个页面, 使用 fade 切换动画
+        // 打开子级路由, 使用 slide-left 切换动画
+        // 子级路由返回, 使用 slide-right 切换动画
+        if (!metaIndex.value || newMetaIndex === metaIndex.value) {
+            transitionName.value = 'fade'
+        } else if (newMetaIndex > metaIndex.value) {
+            transitionName.value = 'slide-left'
+        } else {
+            transitionName.value = 'slide-right'
+        }
+        metaIndex.value = newMetaIndex
+    }
+)
+
+const routeIsTab = computed(() => {
+    return ['/index', '/home-normal', '/lists', '/about'].includes(route.path)
+})
+
+const handleBeforeEnter = () => {
+    globalStore.$patch({ isPageSwitching: true })
+}
+const handleAfterEnter = () => {
+    globalStore.$patch({ isPageSwitching: false })
+}
+const handleAfterLeave = () => {
+    // root.$emit('triggerScroll')
 }
 </script>

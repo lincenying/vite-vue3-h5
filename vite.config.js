@@ -2,10 +2,13 @@ const path = require('path')
 
 import { loadEnv } from 'vite'
 import { createStyleImportPlugin, AndDesignVueResolve, VantResolve, ElementPlusResolve, NutuiResolve, AntdResolve } from 'vite-plugin-style-import'
-import vue from '@vitejs/plugin-vue'
-import vueSvgPlugin from 'vite-plugin-vue-svg'
+import vuePlugin from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+
+import svgLoader from 'vite-svg-loader'
 import WindiCSS from 'vite-plugin-windicss'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -30,8 +33,16 @@ export default ({ mode }) => {
                     }
                 }
             }),
-            vue(),
-            vueSvgPlugin(),
+            vuePlugin({
+                template: {
+                    compilerOptions: {
+                        isCustomElement: tag => ['def'].includes(tag)
+                    }
+                }
+            }),
+            vueJsx(),
+            vueSetupExtend(),
+            svgLoader(),
             createStyleImportPlugin({
                 resolves: [AndDesignVueResolve(), VantResolve(), ElementPlusResolve(), NutuiResolve(), AntdResolve()],
                 libs: [
@@ -53,7 +64,20 @@ export default ({ mode }) => {
                         libraryName: 'vant',
                         esModule: true,
                         resolveStyle: name => {
-                            return `../es/${name}/style`
+                            if (
+                                [
+                                    'show-dialog',
+                                    'show-confirm-dialog',
+                                    'show-toast',
+                                    'show-loading-toast',
+                                    'show-success-toast',
+                                    'show-fail-toast',
+                                    'close-toast',
+                                    'show-image-preview'
+                                ].includes(name)
+                            )
+                                return ''
+                            return `../es/${name}/style/index.mjs`
                         }
                     },
                     {

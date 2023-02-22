@@ -27,7 +27,7 @@ import {
     // Coupon, // van-coupon
     // CouponCell, // van-coupon-cell
     // CouponList, // van-coupon-list
-    DatetimePicker, // van-datetime-picker
+    DatePicker, // van-date-picker
     Dialog, // van-dialog
     Divider, // van-divider
     // DropdownItem, // van-dropdown-item
@@ -82,9 +82,16 @@ import {
     TabbarItem, // van-tabbar-item
     Tabs, // van-tabs
     // Tag, // van-tag
-    Toast // van-toast
+    Toast, // van-toast
     // TreeSelect, // van-tree-select
     // Uploader // van-uploader
+    showDialog,
+    showConfirmDialog,
+    showToast,
+    showLoadingToast,
+    showSuccessToast,
+    showFailToast,
+    closeToast
 } from 'vant'
 
 function install(app) {
@@ -115,7 +122,7 @@ function install(app) {
     // app.use(Coupon) // van-coupon
     // app.use(CouponCell) // van-coupon-cell
     // app.use(CouponList) // van-coupon-list
-    app.use(DatetimePicker) // van-datetime-picker
+    app.use(DatePicker) // van-date-picker
     app.use(Dialog) // van-dialog
     app.use(Divider) // van-divider
     // app.use(DropdownItem) // van-dropdown-item
@@ -173,6 +180,18 @@ function install(app) {
     app.use(Toast) // van-toast
     // app.use(TreeSelect) // van-tree-select
     // app.use(Uploader) // van-uploader
+
+    app.config.globalProperties.$dialog = {
+        default: showDialog,
+        confirm: showConfirmDialog
+    }
+    app.config.globalProperties.$toast = {
+        default: showToast,
+        loading: showLoadingToast,
+        success: showSuccessToast,
+        fail: showFailToast,
+        close: closeToast
+    }
 }
 export default {
     install
