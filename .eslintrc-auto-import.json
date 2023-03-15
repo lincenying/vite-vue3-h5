@@ -47,7 +47,7 @@
     "isReactive": true,
     "isReadonly": true,
     "isRef": true,
-    "jsx": true,
+    "jsxComponents": true,
     "makeDestructurable": true,
     "markRaw": true,
     "nextTick": true,
