@@ -1,13 +1,11 @@
-import { UTC2Date } from '@/utils'
-
-export function fotmatTime(value, format) {
+export function formatTime(value, format) {
     format = format || 'y-m-d'
     return UTC2Date(value, format)
 }
 export function dateTime(value) {
     if (!value || typeof value !== 'string') return ''
     const arr = value.split(':')
-    return arr[0] + ':' + arr[1]
+    return `${arr[0]}:${arr[1]}`
 }
 
 export function arrToStr(value) {

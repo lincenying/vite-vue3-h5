@@ -1,8 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 import ls from 'store2'
-import message from '@/utils/message'
 import jsonp from './jsonp'
+import message from '@/utils/message'
 
 window.$$axios = axios
 
@@ -61,7 +61,7 @@ const api = {
             ...baseConfig,
             headers: {
                 ...baseConfig.headers,
-                Authorization: 'Bearer ' + token
+                Authorization: `Bearer ${token}`
             },
             method,
             url: process.env.VUE_APP_API + url
@@ -85,7 +85,7 @@ const api = {
             ...baseConfig,
             headers: {
                 ...baseConfig.headers,
-                Authorization: 'Bearer ' + token
+                Authorization: `Bearer ${token}`
             },
             method,
             url
@@ -107,7 +107,7 @@ const api = {
         config.cancelToken = cancelToken
         config.method = config.method || 'get'
         config.url = url || ''
-        if (url.indexOf('//img.') < 0 && url.indexOf('up.daliangju.com') < 0 && url.indexOf('aliyuncs.com') < 0) {
+        if (url.indexOf('//img.') < 0) {
             config.withCredentials = true
         }
         if (config.method === 'get') {

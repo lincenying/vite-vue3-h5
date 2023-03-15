@@ -1,10 +1,8 @@
-import { nextTick } from 'vue'
-import { sleep, random } from '@/utils'
-import useGlobal from '@/mixins/global'
+import { Sleep, Random } from '@/utils'
 
 export default init => {
     // eslint-disable-next-line no-unused-vars
-    const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useLockFn } = useGlobal()
+    const { ctx, options, route, router, globalStore, useLockFn } = useGlobal()
 
     const body = ref(null)
     const res = reactive({
@@ -54,7 +52,7 @@ export default init => {
         console.log(index)
         const list = res.list[index]
         if (list.page === 1) {
-            const body = document.querySelector('.' + options.name)
+            const body = document.querySelector(`.${options.name}`)
             body.scrollTo(0, 0)
         }
         // 500毫秒显示路由loading
@@ -67,7 +65,7 @@ export default init => {
         }
         // 异步更新数据
         const { method, url, config } = res.api[index]
-        await sleep(random(300, 600))
+        await Sleep(Random(300, 600))
         const { code, data } = await ctx.$api[method](url, { ...config, page: list.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer) clearTimeout(res.timer)

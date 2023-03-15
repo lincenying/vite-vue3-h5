@@ -1,5 +1,3 @@
-import { getCurrentInstance, onActivated } from 'vue'
-import { onBeforeRouteLeave, useRoute } from 'vue-router'
 import ls from 'store2'
 
 export default () => {
@@ -8,7 +6,7 @@ export default () => {
     const name = ins.ctx.$options.name
     onActivated(() => {
         if (name) {
-            const body = document.querySelector('.' + name)
+            const body = document.querySelector(`.${name}`)
             const scrollTop = ls.get(route.fullPath) || 0
             body.scrollTo(0, scrollTop)
             ls.remove(route.fullPath)

@@ -15,10 +15,10 @@
                 >
                     <van-cell
                         v-for="(item, index) in res.list"
-                        :key="index + '_' + item.c_id"
+                        :key="`${index}_${item.c_id}`"
                         :title="item.c_title"
                         is-link
-                        :to="`/index/detail?id=${item.c_id}`"
+                        :to="`/home/detail?id=${item.c_id}`"
                     />
                 </van-list>
             </van-pull-refresh>
@@ -26,20 +26,21 @@
     </div>
 </template>
 
-<script setup name="home-router">
-import { onMounted } from 'vue'
+<script setup>
+defineOptions({
+    name: 'home-router'
+})
 
-import saveScroll from '@/mixins/save-scroll'
-import lists from '@/mixins/lists'
-
-saveScroll()
 const api = {
     method: 'get',
     url: 'article/lists',
     config: { per_page: 20 }
 }
 // eslint-disable-next-line no-unused-vars
-const { body, res, getList, onRefresh, reachBottom } = lists({ api })
+const { body, res, getList, onRefresh, reachBottom } = useLists({ api })
+
+useSaveScroll()
+
 onMounted(() => {
     getList()
 })

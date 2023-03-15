@@ -1,31 +1,34 @@
 @use "sass:math";
 
-// 设计稿宽度
-$vm_design: 375;
-$vm_fontsize: 37.5;
+:root {
+    --design-width: #{$vmDesignWidth}px;
+    --design-multiple: #{$vmDesignMultiple};
+    --max-window: #{$maxWindow};
+    --min-window: #{$minWindow};
+}
 
 html {
     --body-width: 375px;
     --tabbar-height: 50px;
 
-    font-size: math.div($vm_fontsize, $vm_design) * 100vw;
+    font-size: math.div($vmFontSize, $vmDesignWidth) * 100vw;
 
     // 同时，通过Media Queries 限制根元素最大最小值
-    @media screen and (max-width: 320PX) {
-        font-size: math.div(320PX, $vm_design) * $vm_fontsize;
+    @media screen and (max-width: $minWindow) {
+        font-size: math.div($vmFontSize, $vmDesignWidth) * $minWindow;
     }
 
     @media screen and (min-width: 540PX) {
         --body-width: 540PX;
 
-        font-size: math.div(540PX, $vm_design) * $vm_fontsize;
+        font-size: math.div($vmFontSize, $vmDesignWidth) * $maxWindow;
     }
 }
 
 // body 也增加最大最小宽度限制，避免默认100%宽度的 block 元素跟随 body 而过大过小
 body {
-    max-width: 540PX;
-    min-width: 320PX;
+    max-width: var(--max-window);
+    min-width: var(--min-window);
     min-height: 100vh;
     margin: 0 auto !important;
     font-size: 12px;
@@ -37,8 +40,8 @@ body {
 .fixed-center {
     left: calc((100% - var(--body-width)) / 2) !important;
     width: 100%;
-    max-width: 540PX;
-    min-width: 320PX;
+    max-width: var(--max-window);
+    min-width: var(--min-window);
 }
 
 .body {
@@ -48,8 +51,8 @@ body {
     // height: 100vh;
     // padding-bottom: var(--tabbar-height);
     height: 100vh;
-    max-width: 540PX;
-    min-width: 320PX;
+    max-width: var(--max-window);
+    min-width: var(--min-window);
     overflow-y: scroll;
     background: #f8f8f8;
     box-sizing: border-box;

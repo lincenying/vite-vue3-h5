@@ -1,34 +1,34 @@
 <template>
     <div class="avatar-wrap">
-        <van-nav-bar title="" left-text="返回" left-arrow fixed :border="false" @click-left="onClickLeft" class="fixed-center" />
-        <div class="w-400px h-400px">
+        <van-nav-bar title="" left-text="返回" left-arrow fixed :border="false" class="fixed-center" @click-left="onClickLeft" />
+        <div class="w-375px h-375px">
             <VueCropper
                 ref="cropper"
                 :img="cropperOption.img"
-                :outputSize="cropperOption.size"
-                :outputType="cropperOption.outputType"
-                :canMove="cropperOption.canMove"
-                :canMoveBox="cropperOption.canMoveBox"
-                :autoCrop="cropperOption.autoCrop"
-                :fixedBox="cropperOption.fixedBox"
+                :output-size="cropperOption.size"
+                :output-type="cropperOption.outputType"
+                :can-move="cropperOption.canMove"
+                :can-move-box="cropperOption.canMoveBox"
+                :auto-crop="cropperOption.autoCrop"
+                :fixed-box="cropperOption.fixedBox"
                 :fixed="cropperOption.fixed"
-                :centerBox="true"
-                :autoCropWidth="cropperOption.autoCropWidth"
-                :autoCropHeight="cropperOption.autoCropHeight"
+                :center-box="true"
+                :auto-crop-width="cropperOption.autoCropWidth"
+                :auto-crop-height="cropperOption.autoCropHeight"
             ></VueCropper>
         </div>
         <div style="text-align: center">
-            <van-button @click="handleSave" type="primary" size="small">保存</van-button>
-            <van-button @click="handleUpload" type="primary" size="small">上传</van-button>
+            <van-button type="primary" size="small" @click="handleSave">保存</van-button>
+            <van-button type="primary" size="small" @click="handleUpload">上传</van-button>
             <label for="uploads">
                 重选
                 <input
-                    type="file"
                     id="uploads"
+                    ref="uploadImg"
+                    type="file"
                     style="position: absolute; clip: rect(0 0 0 0)"
                     accept="image/png, image/jpeg, image/gif, image/jpg"
                     @change="handleUploadImg($event, 1)"
-                    ref="uploadImg"
                 />
             </label>
         </div>
@@ -37,13 +37,15 @@
         </div>
     </div>
 </template>
-<script setup name="avatar-router">
+<script setup>
 import { VueCropper } from 'vue-cropper'
 
-import useGlobal from '@/mixins/global'
+defineOptions({
+    name: 'avatar-router'
+})
 
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } = useGlobal('app-root')
+const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('app-root')
 
 useHead({
     title: 'Avatar Detail'

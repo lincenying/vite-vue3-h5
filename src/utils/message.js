@@ -21,7 +21,7 @@ export default {
             message: content
         }).then(() => {
             window.$$lock = false
-            window.location.href = '/login?_=liangju&callback=' + pathname
+            window.location.href = `/login?_=liangju&callback=${pathname}`
         })
     }
 }

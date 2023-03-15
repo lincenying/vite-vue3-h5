@@ -7,7 +7,7 @@ import router from './router'
 import vant from './plugin/vant'
 import global from './plugin/global'
 
-console.log('当前环境: ' + import.meta.env.VITE_APP_ENV)
+console.log(`当前环境: ${import.meta.env.VITE_APP_ENV}`)
 
 const app = createApp(App)
 const store = createPinia()

@@ -52,7 +52,7 @@ export default {
             url: config.apiUrl + url,
             headers: {
                 ...baseConfig.headers,
-                Authorization: 'Bearer ' + token,
+                Authorization: `Bearer ${token}`,
                 ...header
             }
         }

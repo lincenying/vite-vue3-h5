@@ -1,35 +1,69 @@
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable require-atomic-updates */
-import api from '@/api'
-import config from '@/config'
-import cloneDeep from 'lodash/clonedeep'
 import get from 'lodash/get'
-import isBoolean from 'lodash/isboolean'
-import isEmpty from 'lodash/isempty'
-import isInteger from 'lodash/isinteger'
-import isNumber from 'lodash/isnumber'
+import isEmpty from 'lodash/isEmpty'
+import isNumber from 'lodash/isNumber'
+import isInteger from 'lodash/isInteger'
+import isBoolean from 'lodash/isBoolean'
+import isObject from 'lodash/isObject'
+import isNil from 'lodash/isNil'
+import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
-import ls from 'store2'
-
-const user = ls.get('user')
-let userId = (user && user.id) || ''
-userId = userId ? userId + '_' : ''
 
 export const inBrowser = typeof window !== 'undefined'
 
-export const getSumDay = (dateTemp, days) => {
-    const arr_dateTemp = dateTemp.split(' ')[0].split('-')
-    var nDate = new Date(arr_dateTemp[1] + '/' + arr_dateTemp[2] + '/' + arr_dateTemp[0] + ' 00:00:00')
-    var millSeconds = nDate.getTime() + days * 24 * 60 * 60 * 1000
-    var rDate = new Date(millSeconds)
-    var year = rDate.getFullYear()
-    var month = rDate.getMonth() + 1
-    if (month < 10) month = '0' + month
-    var date = rDate.getDate()
-    if (date < 10) date = '0' + date
-    return year + '-' + month + '-' + date
+// 返回 几xxx前
+export const getDateDiff = publishTime => {
+    const timeNow = parseInt(new Date().getTime() / 1000, 10)
+    const date = new Date(publishTime * 1000)
+    const Y = date.getFullYear()
+    let M = date.getMonth() + 1
+    let D = date.getDate()
+    let H = date.getHours()
+    let m = date.getMinutes()
+    let s = date.getSeconds()
+    //小于10的在前面补0
+    if (M < 10) {
+        M = `0${M}`
+    }
+    if (D < 10) {
+        D = `0${D}`
+    }
+    if (H < 10) {
+        H = `0${H}`
+    }
+    if (m < 10) {
+        m = `0${m}`
+    }
+    if (s < 10) {
+        s = `0${s}`
+    }
+
+    const d = timeNow - publishTime
+    const d_days = parseInt(d / 86400, 10)
+    const d_hours = parseInt(d / 3600, 10)
+    const d_minutes = parseInt(d / 60, 10)
+    const d_seconds = parseInt(d, 10)
+
+    if (d_days > 0 && d_days < 3) {
+        return `${d_days}天前`
+    } else if (d_days <= 0 && d_hours > 0) {
+        return `${d_hours}小时前`
+    } else if (d_hours <= 0 && d_minutes > 0) {
+        return `${d_minutes}分钟前`
+    } else if (d_seconds < 60) {
+        if (d_seconds <= 0) {
+            return '刚刚'
+        }
+        return `${d_seconds}秒前`
+    } else if (d_days >= 3 && d_days < 30) {
+        return `${M}-${D} ${H}:${m}`
+    } else if (d_days >= 30) {
+        return `${Y}-${M}-${D} ${H}:${m}`
+    }
 }
 
+// 日期格式化
 export const UTC2Date = (utc, format, add) => {
     if (!format) format = 'y-m-d'
     if (utc && typeof utc === 'string') utc = utc.replace(/-/g, '/').replace('.000000', '')
@@ -41,16 +75,16 @@ export const UTC2Date = (utc, format, add) => {
     let hours = newDate.getHours()
     let minutes = newDate.getMinutes()
     let seconds = newDate.getSeconds()
-    let mseconds = newDate.getMilliseconds()
-    month = month < 10 ? '0' + month : month
-    date = date < 10 ? '0' + date : date
-    hours = hours < 10 ? '0' + hours : hours
-    minutes = minutes < 10 ? '0' + minutes : minutes
-    seconds = seconds < 10 ? '0' + seconds : seconds
-    if (mseconds < 100 && mseconds > 9) {
-        mseconds = '0' + mseconds
-    } else if (mseconds < 10) {
-        mseconds = '00' + mseconds
+    let secondes = newDate.getMilliseconds()
+    month = month < 10 ? `0${month}` : month
+    date = date < 10 ? `0${date}` : date
+    hours = hours < 10 ? `0${hours}` : hours
+    minutes = minutes < 10 ? `0${minutes}` : minutes
+    seconds = seconds < 10 ? `0${seconds}` : seconds
+    if (secondes < 100 && secondes > 9) {
+        secondes = `0${secondes}`
+    } else if (secondes < 10) {
+        secondes = `00${secondes}`
     }
     return format
         .replace(/y/gi, year)
@@ -59,169 +93,36 @@ export const UTC2Date = (utc, format, add) => {
         .replace(/h/gi, hours)
         .replace(/i/gi, minutes)
         .replace(/s/gi, seconds)
-        .replace(/v/gi, mseconds)
+        .replace(/v/gi, secondes)
 }
 
-export const diff = (date, day) => {
-    if (date) {
-        date = date.replace(/-/g, '/').replace('.000000', '')
-        const now = new Date().getTime()
-        const dateTime = new Date(date).getTime()
-        return now - dateTime > day * 86400000
-    }
-    return false
-}
-
-export const diffDay = (date1, date2) => {
-    if (!date1) {
-        date1 = new Date()
-    } else {
-        date1 = new Date(date1.replace(/-/g, '/').replace('.000000', ''))
-    }
-    if (!date2) {
-        date2 = new Date()
-    } else {
-        date2 = new Date(date2.replace(/-/g, '/').replace('.000000', ''))
-    }
-    const days = date1.getTime() - date2.getTime()
-    return parseInt(days / (1000 * 60 * 60 * 24), 10)
-}
-
-export const formatSeconds = value => {
-    var theTime = parseInt(value, 10)
-    var theTime1 = 0
-    var theTime2 = 0
-    if (theTime > 60) {
-        theTime1 = parseInt(theTime / 60, 10)
-        theTime = parseInt(theTime % 60, 10)
-        if (theTime1 > 60) {
-            theTime2 = parseInt(theTime1 / 60, 10)
-            theTime1 = parseInt(theTime1 % 60, 10)
-        }
-    }
-    var s = parseInt(theTime, 10)
-    s = s > 9 ? s : '0' + s
-    var m = parseInt(theTime1, 10)
-    m = m > 9 ? m : '0' + m
-    var h = parseInt(theTime2, 10)
-    h = h > 9 ? h : '0' + h
-    var result = s
-    result = m + ':' + result
-    result = h + ':' + result
-    return result
-}
-
-function _randomChar(length) {
-    var x = '0123456789qwertyuioplkjhgfdsazxcvbnm'
-    var tmp = ''
-    var timestamp = new Date().getTime()
-    for (var i = 0; i < length; i++) {
+// 生成随机字符串
+export const randomChar = length => {
+    const x = '0123456789qwertyuioplkjhgfdsazxcvbnm'
+    let tmp = ''
+    const timestamp = new Date().getTime()
+    for (let i = 0; i < length; i++) {
         tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length)
     }
     return timestamp + tmp
 }
 
-export const randomChar = _randomChar
-
-const upload_base = async (files, progress, params = {}) => {
-    var oMyForm = new FormData()
-    try {
-        const data = await api.fetch(config.apiUrl + 'oss/upload?noLoading', params)
-        const name = files.name
-        const arr_name = name.split('.')
-        const ext = arr_name[arr_name.length - 1]
-        const key = data.dir + userId + _randomChar(6) + '.' + ext
-        const url = data.cdn_host + '/' + key
-        oMyForm.append('name', files.name)
-        oMyForm.append('key', key)
-        oMyForm.append('success_action_status', '200')
-        Object.keys(data).forEach(item => {
-            if (item === 'accessid') oMyForm.append('OSSAccessKeyId', data[item])
-            else oMyForm.append(item, data[item])
-        })
-        oMyForm.append('file', files)
-        const apiUrl = data.host + (data.host.indexOf('?') > -1 ? '&' : '?') + 'noLoading'
-        window.source = window.$$axios.CancelToken.source()
-        const { Status, message } = await api.fetch(
-            apiUrl,
-            oMyForm,
-            {
-                method: 'post',
-                withCredentials: false,
-                onUploadProgress: progress
-            },
-            window.source.token
-        )
-        if (Status === 'Ok') return Promise.resolve(url)
-        return Promise.reject(message || '上传失败')
-    } catch (error) {
-        return Promise.reject(error.toString())
-    }
-}
-
-// 上传图片
-const upload_img = async files => {
-    const isJPG = ['image/jpeg', 'image/x-png', 'image/png', 'image/gif'].includes(files.type)
-    const isLt2M = files.size / 1024 / 1024 < 2
-    if (!isJPG) {
-        return Promise.reject('选择的文件只能是图片格式!')
-    }
-    if (!isLt2M) {
-        return Promise.reject('上传的图片大小不能超过 2MB!')
-    }
-    try {
-        const url = await upload_base(files)
-        return Promise.resolve(url)
-    } catch (error) {
-        return Promise.reject(error.toString())
-    }
-}
-// 上传压缩文件
-const upload_rar = async (files, progress) => {
-    const name = files.name
-    const arr_name = name.split('.')
-    const ext = arr_name[arr_name.length - 1]
-    const isRAR = ['zip', 'rar'].includes(ext.toLowerCase())
-    if (!isRAR) {
-        return Promise.reject('选择的文件只能是 RAR 或者 ZIP 格式!')
-    }
-    try {
-        const url = await upload_base(files, progress)
-        return Promise.resolve(url)
-    } catch (error) {
-        return Promise.reject(error.toString())
-    }
-}
-// 上传视频文件
-const upload_video = async (files, progress) => {
-    const name = files.name
-    const arr_name = name.split('.')
-    const ext = arr_name[arr_name.length - 1]
-    const isRAR = ['mp4', 'mov'].includes(ext.toLowerCase())
-    if (!isRAR) {
-        return Promise.reject('选择的文件只能是 MP4 或者 MOV 格式!')
-    }
-    try {
-        const url = await upload_base(files, progress, { t: 'video' })
-        return Promise.resolve(url)
-    } catch (error) {
-        return Promise.reject(error.toString())
-    }
-}
-
-export const uploadBase = upload_base
-export const uploadimg = upload_img
-export const uploadrar = upload_rar
-export const uploadvideo = upload_video
-
 export const setConfig = () => ({
-    dialog: false,
+    show: false,
     row: {}
 })
 
-export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+export const getQueryStringByName = (search, name) => {
+    const result = search.match(new RegExp(`[?&]${name}=([^&|#]+)`, 'i'))
+    if (result == null || result.length < 1) {
+        return ''
+    }
+    return result[1]
+}
 
-export const str2array = str => {
+export const Sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+export const strToArray = str => {
     try {
         str = JSON.parse(str)
     } catch (error) {
@@ -234,35 +135,41 @@ export const str2array = str => {
 export const oc = get
 
 export const is = {
+    //$is.false(null) === true
+    //$is.false(undefined) === true
     // $is.false('') === true
-    // $is.false('1') === false
-    // $is.false(0.11) === false
-    // $is.false(0) === true
-    // $is.false(1) === false
-    // $is.false(null) === true
-    // $is.false({}) === true
-    // $is.false({ a: 1 }) === false
-    // $is.false([]) === true
-    // $is.false([1]) === false
-    // $is.false(undefined) === true
-    // $is.false(true) === false
-    // $is.false(false) === true
+    //$is.false([]) === true
+    //$is.false({}) === true
+    //$is.false(false) === true
+    //$is.false(NaN) === true
+    //$is.false(0) === true
+
+    //$is.false(true) === false
+    // $is.false('0') === false
+    //$is.false(0.11) === false
+    //$is.false(1) === false
+    //$is.false({ a: 1 }) === false
+    //$is.false([1]) === false
     false(payload) {
         return !!payload === false || (!isBoolean(payload) && !isNumber(payload) && isEmpty(payload))
     },
+    // $is.empty(null) === true
+    // $is.empty(undefined) === true
     // $is.empty('') === true
-    // $is.empty('1') === false
+    // $is.empty([]) === true
+    // $is.empty({}) === true
+
+    // $is.empty(true) === false
+    // $is.empty(false) === false
+    // $is.empty(NaN) === false
+    // $is.empty(0) === false
+    // $is.empty('0') === false
     // $is.empty(0.11) === false
     // $is.empty(1) === false
-    // $is.empty(null) === true
-    // $is.empty({}) === true
     // $is.empty({ a: 1 }) === false
     // $is.empty([1]) === false
-    // $is.empty(undefined) === true
-    // $is.empty(true) === true
-    // $is.empty(false) === true
     empty(payload) {
-        return !isNumber(payload) && isEmpty(payload)
+        return !isNumber(payload) && !isBoolean(payload) && isEmpty(payload)
     },
     number(payload) {
         return isNumber(payload)
@@ -272,17 +179,23 @@ export const is = {
     },
     int(payload) {
         return isInteger(payload)
+    },
+    object(payload) {
+        return isObject(payload)
+    },
+    boolean(payload) {
+        return isBoolean(payload)
+    },
+    nil(payload) {
+        return isNil(payload)
     }
-}
-export const isempty = payload => {
-    return !isNumber(payload) && isEmpty(payload)
 }
 
 // 获取滚动条宽度
 export const getScrollWidth = () => {
     //creates a DOM element
     const testDiv = document.createElement('div')
-    //stores the CSS atributes
+    //stores the CSS attributes
     const cssAttributes = {
         width: '100px',
         height: '100px',
@@ -305,7 +218,7 @@ export const getScrollWidth = () => {
 }
 
 export const addNewStyle = newStyle => {
-    var styleElement = document.getElementById('styles_js')
+    let styleElement = document.getElementById('styles_js')
 
     if (!styleElement) {
         styleElement = document.createElement('style')
@@ -319,7 +232,7 @@ export const addNewStyle = newStyle => {
 
 // 将字符串中的横线模式替换成驼峰模式
 // a-bc-df => aBcDf
-export const tranformStr = str => {
+export const transformStr = str => {
     const strArr = str.split('-')
     for (let i = 1; i < strArr.length; i++) {
         strArr[i] = strArr[i].charAt(0).toUpperCase() + strArr[i].substring(1)
@@ -330,10 +243,11 @@ export const tranformStr = str => {
 // 深度合并对象
 export const deepMerge = merge
 
-// 深度克隆
+// 深度克隆对象
 export const deepClone = cloneDeep
 
-export const strlen = str => {
+// 计算字符串长度, 汉字算2
+export const strLen = str => {
     var len = 0
     for (var i = 0; i < str.length; i++) {
         var c = str.charCodeAt(i)
@@ -359,8 +273,100 @@ export const paramsToObject = str => {
 }
 
 // 返回一个lower - upper之间的随机数
-export const random = (lower, upper) => {
+export const Random = (lower, upper) => {
     lower = +lower || 0
     upper = +upper || 0
     return Math.random() * (upper - lower) + lower
+}
+
+window.randomArray = (lower, upper, length) => {
+    return new Array(length).fill('').map(() => parseInt(Random(lower, upper), 10))
+}
+
+// 数组转对象
+/*
+[{name: "AAA", value: 1}, {name: "BBB", value: 2}, {name: "CCC", value: 3}, {name: "DDD", value: 4}]
+==>
+{
+    1:"AAA",
+    2:"BBB",
+    3:"CCC",
+    4:"DDD"
+}
+*/
+export const arrayToObject = (arr, key = 'value', val = 'name') => {
+    const obj = {}
+    arr.forEach(item => {
+        obj[item[key]] = item[val]
+    })
+    return obj
+}
+
+export const addStr = (str, num) => {
+    var arr = str ? str.split('') : [] // 要先判断字符串是否有字符 然后将它分割成数组
+    var newStr = ''
+    arr.forEach((item, index) => {
+        newStr += item
+        if ((index + 1) % num === 0 && index !== arr.length - 1) {
+            // 6可以更改，最后一位不加
+            newStr += '\n' // 加上插入的字符
+        }
+    })
+    return newStr
+}
+
+export const getSum = arr => {
+    return arr.reduce(function (prev, curr) {
+        return Number(prev) + Number(curr)
+    }, 0)
+}
+
+export const hexToRgba = (hex, opacity = 1) => {
+    const red = parseInt(`0x${hex.slice(1, 3)}`, 16)
+    const green = parseInt(`0x${hex.slice(3, 5)}`, 16)
+    const blue = parseInt(`0x${hex.slice(5, 7)}`, 16)
+    const RGBA = `rgba(${red},${green},${blue},${opacity})`
+    return {
+        red,
+        green,
+        blue,
+        rgb: `${red},${green},${blue}`,
+        rgba: RGBA
+    }
+}
+
+export const RGB2Hex = color => {
+    const rgb = color.split(',')
+    const r = parseInt(rgb[0].split('(')[1], 10)
+    const g = parseInt(rgb[1], 10)
+    const b = parseInt(rgb[2].split(')')[0], 10)
+    // eslint-disable-next-line no-bitwise
+    const hex = `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`
+    return hex
+}
+
+export const batchHexToRgba = arr => {
+    if (!arr) return []
+    arr = arr.map(item => {
+        if (Array.isArray(item)) return batchHexToRgba(item)
+        if (item.indexOf('#') === 0) {
+            return hexToRgba(item).rgb
+        }
+        if (item.indexOf('rgba(') === 0) {
+            const re = /rgba\(\s*([\d]+)\s*,\s*([\d]+)\s*,\s*([\d]+)\s*,\s*([\d]+)\s*\)/i
+            const match = re.exec(item)
+            if (match) {
+                return `${match[1]},${match[2]},${match[3]}`
+            }
+        }
+        if (item.indexOf('rgb(') === 0) {
+            const re = /rgb\(\s*([\d]+)\s*,\s*([\d]+)\s*,\s*([\d]+)\s*\)/i
+            const match = re.exec(item)
+            if (match) {
+                return `${match[1]},${match[2]},${match[3]}`
+            }
+        }
+        return item
+    })
+    return arr
 }

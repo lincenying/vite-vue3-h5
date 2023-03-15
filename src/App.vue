@@ -14,7 +14,7 @@
             </transition>
         </router-view>
         <van-tabbar v-if="routeIsTab" route :border="false" class="fixed-center">
-            <van-tabbar-item replace to="/index" icon="home-o">首页</van-tabbar-item>
+            <van-tabbar-item replace to="/" icon="home-o">首页</van-tabbar-item>
             <van-tabbar-item replace to="/lists" icon="home-o">列表</van-tabbar-item>
             <van-tabbar-item replace to="/about" icon="search">关于</van-tabbar-item>
         </van-tabbar>
@@ -28,76 +28,16 @@
 </template>
 
 <script setup name="app-root">
-import {
-    // 创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制。它需要一个工厂函数，该函数接收 track 和 trigger 函数作为参数，并应返回一个带有 get 和 set 的对象
-    // customRef,
-    // 检查对象是否是由 reactive 或 readonly 创建的 proxy
-    // isProxy,
-    // 检查对象是否是 reactive创建的响应式 proxy
-    // isReactive,
-    // 检查对象是否是由readonly创建的只读 proxy
-    // isReadonly,
-    // 检查值是否是由 ref 创建的 proxy
-    // isRef,
-    // 标记一个对象，使其永远不会转换为 proxy。返回对象本身
-    // markRaw,
-    // 返回对象的响应式副本
-    // reactive,
-    // 获取一个对象 (响应式或纯对象) 或 ref 并返回原始 proxy 的只读 proxy
-    // readonly,
-    // 接受一个内部值并返回一个响应式且可变的 ref 对象。ref 对象具有指向内部值的单个 property .value
-    // ref,
-    // 返回 reactive 或 readonly proxy 的原始对象
-    // toRaw,
-    // 可以用来为源响应式对象上的 property 新创建一个 ref
-    // toRef,
-    // 使用 getter 函数，并为从 getter 返回的值返回一个不变的响应式 ref 对象
-    computed,
-    // 创建一个只有在需要时才会加载的异步组件
-    // defineAsyncComponent,
-    // 从实现上看，defineComponent 只返回传递给它的对象
-    // defineComponent,
-    // getCurrentInstance 支持访问内部组件实例，用于高阶用法或库的开发
-    // getCurrentInstance,
-    // 将回调推迟到下一个 DOM 更新周期之后执行
-    // nextTick,
-    // 生命周期 ======>
-    // 被 keep-alive 缓存的组件激活时调用
-    // onActivated,
-    // 在挂载开始之前被调用
-    // onBeforeMount,
-    // 在卸载组件实例之前调用
-    // onBeforeUnmount,
-    // 数据更新时调用，发生在虚拟 DOM 打补丁之前
-    // onBeforeUpdate,
-    // 被 keep-alive 缓存的组件停用时调用
-    // onDeactivated,
-    // 当捕获一个来自子孙组件的错误时被调用
-    // onErrorCaptured,
-    // 实例被挂载后调用
-    // onMounted,
-    // 卸载组件实例后调用
-    // onUnmounted,
-    // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子
-    // onUpdated,
-    // 生命周期 <======
-    // useContext,
-    watch
-    // 在响应式地跟踪其依赖项时立即运行一个函数，并在更改依赖项时重新运行它
-    // watchEffect,
-    // 返回一个提供应用上下文的应用实例。应用实例挂载的整个组件树共享同一个上下文
-    // createApp,
-    // 字符串模板的另一种选择，允许你充分利用 JavaScript 的编程功能
-    // render
-} from 'vue'
-import useGlobal from '@/mixins/global'
-
-import 'virtual:windi.css'
+import 'uno.css'
 import 'vue-cropper/dist/index.css'
+import 'vant/es/toast/style'
+import 'vant/es/dialog/style'
+import 'vant/es/notify/style'
+import 'vant/es/image-preview/style'
 import '@/assets/scss/style.scss'
 
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useLockFn } = useGlobal('app-root')
+const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('app-root')
 
 // pinia 状态管理 ===>
 const { globalLoading, routerLoading } = storeToRefs(globalStore)
@@ -122,10 +62,10 @@ setTimeout(() => {
     globalStore.setGlobalLoading(false)
 }, 200)
 
-const transitionName = ref('fade')
-const cacheComponents = ref('home-router,home-normal-router,lists-router,about-router')
+const cacheComponents = $ref('home-router,lists-router,about-router')
 
-const metaIndex = ref(route.meta.index)
+let transitionName = $ref('fade')
+let metaIndex = $ref(route.meta.index)
 
 watch(
     () => route.fullPath,
@@ -134,19 +74,19 @@ watch(
         // 同级路由切换或者打开的第一个页面, 使用 fade 切换动画
         // 打开子级路由, 使用 slide-left 切换动画
         // 子级路由返回, 使用 slide-right 切换动画
-        if (!metaIndex.value || newMetaIndex === metaIndex.value) {
-            transitionName.value = 'fade'
+        if (!metaIndex || newMetaIndex === metaIndex) {
+            transitionName = 'fade'
         } else if (newMetaIndex > metaIndex.value) {
-            transitionName.value = 'slide-left'
+            transitionName = 'slide-left'
         } else {
-            transitionName.value = 'slide-right'
+            transitionName = 'slide-right'
         }
-        metaIndex.value = newMetaIndex
+        metaIndex = newMetaIndex
     }
 )
 
 const routeIsTab = computed(() => {
-    return ['/index', '/home-normal', '/lists', '/about'].includes(route.path)
+    return ['/', '/lists', '/about'].includes(route.path)
 })
 
 const handleBeforeEnter = () => {

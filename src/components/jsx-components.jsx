@@ -1,4 +1,4 @@
-import { defineComponent, ref, withModifiers } from 'vue'
+import { withModifiers } from 'vue'
 
 const App = defineComponent({
     setup() {

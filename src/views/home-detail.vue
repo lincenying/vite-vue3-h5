@@ -1,6 +1,6 @@
 <template>
     <div class="home-detail-wrap">
-        <van-nav-bar title="" left-text="返回" left-arrow fixed :border="false" @click-left="onClickLeft" class="fixed-center" />
+        <van-nav-bar title="" left-text="返回" left-arrow fixed :border="false" class="fixed-center" @click-left="onClickLeft" />
         <div class="route-wrap">
             <van-skeleton v-if="!detail" title :row="4" class="mt-20px" />
             <div v-else class="article-content flex flex-col">
@@ -16,13 +16,12 @@
         </div>
     </div>
 </template>
-<script setup name="home-detail-router">
-import { computed } from 'vue'
-
-import useGlobal from '@/mixins/global'
-
+<script setup>
+defineOptions({
+    name: 'home-detail-router'
+})
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } = useGlobal('home-detail-router')
+const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('home-detail-router')
 
 // pinia 状态管理 ===>
 // const mainStore = useMainStore()
@@ -59,7 +58,7 @@ useHead({
 
 const getDetail = async () => {
     // this.$store.commit('global/routerLoading', true)
-    const { code, data } = await ctx.$api.get('article/detail/' + route.query.id, {})
+    const { code, data } = await ctx.$api.get(`article/detail/${route.query.id}`, {})
     if (code === 200) {
         res.detail = data
         detail.value = data

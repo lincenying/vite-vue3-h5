@@ -1,50 +1,16 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-// import Meta from 'vue-meta'
+const pages = import.meta.glob('../views/*.vue')
 
-const routes = [
-    {
-        path: '/',
-        redirect: '/index'
-    },
-    {
-        name: 'index',
-        path: '/index',
-        component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/home.vue'),
-        meta: { title: '首页', index: 1 }
-    },
-    {
-        name: 'lists',
-        path: '/lists',
-        component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/lists.vue'),
-        meta: { title: '列表', index: 1 }
-    },
-    {
-        name: 'index-detail',
-        path: '/index/detail',
-        component: () => import(/* webpackChunkName: "chunk-index" */ '@/views/home-detail.vue'),
-        meta: { title: '详情', index: 2 }
-    },
-    {
-        name: 'about',
-        path: '/about',
-        component: () => import(/* webpackChunkName: "chunk-about" */ '@/views/about.vue'),
-        meta: { title: '关于', index: 1 }
-    },
-    {
-        name: 'about-detail',
-        path: '/about/detail',
-        component: () => import(/* webpackChunkName: "chunk-about" */ '@/views/about-detail.vue'),
-        meta: { title: '关于', index: 2 }
-    },
-    {
-        name: 'avatar',
-        path: '/avatar',
-        component: () => import(/* webpackChunkName: "chunk-about" */ '@/views/avatar.vue'),
-        meta: { title: '头像', index: 2 }
-    },
+const routes1 = Object.keys(pages).map(path => {
+    const name = path.match(/\.\/views(.*)\.vue$/)[1].toLowerCase()
+    return {
+        name: name.replace('/', ''),
+        path: name === '/home' ? '/' : name.replace(/-/g, '/'),
+        component: pages[path], // () => import('./views/*.vue')
+        meta: { index: name.split('-').length }
+    }
+})
 
-    { path: '/:pathMatch(.*)', redirect: '/' }
-]
+const routes = [...routes1, { path: '/:pathMatch(.*)', redirect: '/' }]
 
 const router = createRouter({
     history: createWebHashHistory(),

@@ -16,9 +16,10 @@
             "@/*": ["src/*"]
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-        "outDir": "build"
+        "outDir": "build",
+        "types": ["unplugin-vue-macros/macros-global"]
     },
-    "include": ["src/**/*.js", "src/**/*.vue"],
-    "exclude": ["node_modules", "build/**/*"],
+    "include": ["src/**/*.js", "src/**/*.vue", "src/auto-imports.d.ts", "components.d.ts"],
+    "exclude": ["node_modules", "build/**/*", "dist/**/*", "public/**/*"],
     "files": ["main.ts"]
 }

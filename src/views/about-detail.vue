@@ -1,6 +1,6 @@
 <template>
     <div class="about-detail-wrap">
-        <van-nav-bar title="标题" left-text="返回" left-arrow fixed :border="false" @click-left="onClickLeft" class="fixed-center" />
+        <van-nav-bar title="标题" left-text="返回" left-arrow fixed :border="false" class="fixed-center" @click-left="onClickLeft" />
         <div class="route-wrap">
             <div class="mt-10px">
                 <van-grid square>
@@ -12,18 +12,15 @@
     </div>
 </template>
 
-<script setup name="about-detail-router">
-// eslint-disable-next-line no-unused-vars
-import { onMounted, nextTick, watch, computed, toRefs, inject } from 'vue'
-
-import useGlobal from '@/mixins/global'
-// import useMainStore from '@/pinia'
-
+<script setup>
 import MyIcon from '@/assets/svgs/mp3.svg?component'
 
+defineOptions({
+    name: 'about-detail-router'
+})
+
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } =
-    useGlobal('about-detail-router')
+const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('about-detail-router')
 
 useHead({
     title: 'About Detail'

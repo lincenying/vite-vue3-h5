@@ -6,7 +6,7 @@
                 <van-cell-group>
                     <van-cell icon="points" title="我的积分" is-link to="/about/detail" />
                     <van-cell icon="gold-coin-o" title="我的优惠券" is-link to="/about/detail" />
-                    <van-cell icon="gift-o" title="我的头像" is-link to="/avatar" />
+                    <van-cell icon="gift-o" title="我的头像" is-link to="/about/avatar" />
                 </van-cell-group>
             </div>
             <div class="mt-10px">
@@ -41,9 +41,9 @@
             </div>
             <!-- slot 插槽示例 -->
             <img-list :img-arr="images">
-                <template v-slot:default="props">
+                <template #default="props">
                     <!-- {{ props }} -->
-                    <van-image @click="handleClickImg(props)" width="60" height="60" :src="props.item" />
+                    <van-image width="60" height="60" :src="props.item" @click="handleClickImg(props)" />
                 </template>
             </img-list>
             <!-- <div class="mt-10px">
@@ -59,15 +59,15 @@
         </div>
     </div>
 </template>
-<script setup name="about-router">
+<script setup>
 import { showImagePreview } from 'vant'
 
-import useGlobal from '@/mixins/global'
-import saveScroll from '@/mixins/save-scroll'
-import imgList from './_img-list.vue'
+defineOptions({
+    name: 'about-router'
+})
 
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } = useGlobal('about-router')
+const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('about-router')
 
 useHead({
     title: 'About'
@@ -96,7 +96,7 @@ useHead({
 // const dataIsReady = inject('dataIsReady')
 // 全局组件通信 <===
 
-saveScroll()
+useSaveScroll()
 
 const previewShow = ref(false)
 const dialogShow = ref(false)

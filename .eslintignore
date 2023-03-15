@@ -1,5 +1,7 @@
-build/*.js
-config/*.js
 public/static/**/*.js
+public/assets/**/*.js
 dist/**/*.js
 dist/**/*.css
+src/assets/icon-font/*
+components.d.ts
+auto-imports.d.ts

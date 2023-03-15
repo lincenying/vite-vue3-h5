@@ -1,26 +1,54 @@
-const path = require('path')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import { loadEnv } from 'vite'
-import { createStyleImportPlugin, AndDesignVueResolve, VantResolve, ElementPlusResolve, NutuiResolve, AntdResolve } from 'vite-plugin-style-import'
+
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
-import svgLoader from 'vite-svg-loader'
-import WindiCSS from 'vite-plugin-windicss'
+import vueSvgPlugin from 'vite-svg-loader'
+import UnoCSS from 'unocss/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import vueSetupExtend from 'vite-plugin-vue-setup-extend'
+
+import VueMacros from 'unplugin-vue-macros/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { VantResolver } from 'unplugin-vue-components/resolvers'
+
+const vmDesignWidth = 375 // 设计稿宽度
+const vmDesignMultiple = vmDesignWidth / 750
+const minWindow = '320Px' // 兼容最小宽度
+const maxWindow = '540Px' // 兼容最小宽度
+const vmFontSize = 37.5
+
+export const fontSize = vmFontSize
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
     process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
+    const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
     const config = {
         css: {
             preprocessorOptions: {
-                less: {
-                    javascriptEnabled: true
+                scss: {
+                    additionalData: `
+                    $vmDesignWidth: ${vmDesignWidth};
+                    $vmDesignMultiple: ${vmDesignMultiple};
+                    $minWindow: ${minWindow};
+                    $maxWindow: ${maxWindow};
+                    $vmFontSize: ${vmFontSize};
+                `
                 }
             }
+        },
+        define: {
+            designWidth: JSON.stringify(vmDesignWidth),
+            designMultiple: JSON.stringify(vmDesignMultiple),
+            minWindow: JSON.stringify(minWindow),
+            maxWindow: JSON.stringify(maxWindow),
+            fontsize: JSON.stringify(vmFontSize)
         },
         plugins: [
             createHtmlPlugin({
@@ -33,80 +61,90 @@ export default ({ mode }) => {
                     }
                 }
             }),
-            vuePlugin({
-                template: {
-                    compilerOptions: {
-                        isCustomElement: tag => ['def'].includes(tag)
-                    }
+            VueMacros({
+                plugins: {
+                    vue: vuePlugin({
+                        template: {
+                            compilerOptions: {
+                                isCustomElement: tag => ['def'].includes(tag)
+                            }
+                        }
+                    }),
+                    vueJsx: vueJsx()
                 }
             }),
-            vueJsx(),
-            vueSetupExtend(),
-            svgLoader(),
-            createStyleImportPlugin({
-                resolves: [AndDesignVueResolve(), VantResolve(), ElementPlusResolve(), NutuiResolve(), AntdResolve()],
-                libs: [
+            // vuePlugin({
+            //     reactivityTransform: true,
+            //     template: {
+            //         compilerOptions: {
+            //             isCustomElement: tag => ['def'].includes(tag)
+            //         }
+            //     }
+            // }),
+            // vueJsx(),
+            vueSvgPlugin(),
+            AutoImport({
+                eslintrc: {
+                    enabled: true
+                },
+                include: [
+                    /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+                    /\.vue$/,
+                    /\.vue\?vue/, // .vue
+                    /\.md$/ // .md
+                ],
+                imports: [
+                    'vue',
+                    'vue-router',
+                    '@vueuse/core',
+                    '@vueuse/head',
                     {
-                        libraryName: 'ant-design-vue',
-                        esModule: true,
-                        resolveStyle: name => {
-                            return `ant-design-vue/es/${name}/style/index`
-                        }
-                    },
-                    {
-                        libraryName: 'antd',
-                        esModule: true,
-                        resolveStyle: name => {
-                            return `antd/es/${name}/style/index`
-                        }
-                    },
-                    {
-                        libraryName: 'vant',
-                        esModule: true,
-                        resolveStyle: name => {
-                            if (
-                                [
-                                    'show-dialog',
-                                    'show-confirm-dialog',
-                                    'show-toast',
-                                    'show-loading-toast',
-                                    'show-success-toast',
-                                    'show-fail-toast',
-                                    'close-toast',
-                                    'show-image-preview'
-                                ].includes(name)
-                            )
-                                return ''
-                            return `../es/${name}/style/index.mjs`
-                        }
-                    },
-                    {
-                        libraryName: 'element-ui',
-                        resolveStyle: name => {
-                            return `element-ui/lib/theme-chalk/${name}.css`
-                        },
-                        resolveComponent: name => {
-                            return `element-ui/lib/${name}`
-                        }
-                    },
-                    {
-                        libraryName: 'element-plus',
-                        resolveStyle: name => {
-                            return `element-plus/lib/theme-chalk/${name}.css`
-                        },
-                        resolveComponent: name => {
-                            return `element-plus/lib/${name}`
-                        }
+                        pinia: ['defineStore', 'storeToRefs'],
+                        'vue-router': ['createRouter', 'createWebHashHistory'],
+                        '@/utils': ['UTC2Date', 'deepClone']
                     }
-                ]
+                ],
+                dts: 'src/auto-imports.d.ts',
+                dirs: ['src/components', 'src/echarts', 'src/pinia', 'src/mixins'],
+
+                resolvers: [VantResolver()],
+                defaultExportByFilename: false,
+                vueTemplate: true,
+                cache: false
             }),
-            WindiCSS({
-                safelist: 'prose prose-sm m-auto text-left'
+            Components({
+                include: [
+                    /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+                    /\.vue$/,
+                    /\.vue\?vue/, // .vue
+                    /\.md$/ // .md
+                ],
+                extensions: ['vue', 'tsx', 'jsx'],
+                resolvers: [VantResolver()],
+                dts: 'src/components.d.ts'
+            }),
+            UnoCSS({
+                /* options */
             })
+            // Inspect()
         ],
         resolve: {
             alias: {
                 '@': path.join(__dirname, './src')
+            }
+        },
+
+        base: './',
+        build: {
+            minify: true,
+            assetsInlineLimit: 4096,
+            chunkSizeWarningLimit: 1000,
+            outDir: 'dist',
+            rollupOptions: {
+                input: {
+                    main: path.resolve(__dirname, 'index.html')
+                },
+                external: /\.\/assets.*/
             }
         },
         server: {

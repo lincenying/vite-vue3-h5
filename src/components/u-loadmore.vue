@@ -3,8 +3,8 @@
         class="u-load-more-wrap"
         :style="{
             backgroundColor: bgColor,
-            marginBottom: marginBottom + 'px',
-            marginTop: marginTop + 'px',
+            marginBottom: `${marginBottom}px`,
+            marginTop: `${marginTop}px`,
             height: height
         }"
     >
@@ -45,7 +45,7 @@
  * @example <u-loadmore :status="status" icon-type="iconType" load-text="loadText" />
  */
 export default {
-    name: 'u-loadmore',
+    name: 'ULoadmore',
     props: {
         // 组件背景色
         bgColor: {
@@ -114,6 +114,7 @@ export default {
             default: 'auto'
         }
     },
+    emits: ['loadmore'],
     data() {
         return {
             // 粗点
@@ -125,7 +126,7 @@ export default {
         loadTextStyle() {
             return {
                 color: this.color,
-                fontSize: this.fontSize + 'px',
+                fontSize: `${this.fontSize}px`,
                 position: 'relative',
                 zIndex: 1,
                 backgroundColor: this.bgColor

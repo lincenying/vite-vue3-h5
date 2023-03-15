@@ -8,16 +8,20 @@
     </div>
 </template>
 
-<script setup name="img-list">
+<script setup>
+const prop = defineProps({
+    imgArr: {
+        type: Array,
+        default: () => []
+    }
+})
+
+defineOptions({
+    name: 'img-list'
+})
+
 // eslint-disable-next-line no-unused-vars
-import { onMounted, nextTick, watch, computed, toRefs, inject } from 'vue'
-
-// import useMainStore from '@/pinia'
-
-import useGlobal from '@/mixins/global'
-
-// eslint-disable-next-line no-unused-vars
-const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, reactive, useToggle, useHead, useLockFn } = useGlobal('echarts-box1')
+const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('echarts-box1')
 
 // pinia 状态管理 ===>
 // const mainStore = useMainStore()
@@ -31,9 +35,6 @@ const { ctx, options, proxy, route, router, storeToRefs, globalStore, ref, react
 // pinia 状态管理 <===
 
 // 父子组件通讯 ===>
-const prop = defineProps({
-    imgArr: Array
-})
 // eslint-disable-next-line no-unused-vars
 const { imgArr } = toRefs(prop)
 // 父子组件通讯 <===
