@@ -44,11 +44,11 @@ export default ({ mode }) => {
             }
         },
         define: {
-            designWidth: JSON.stringify(vmDesignWidth),
-            designMultiple: JSON.stringify(vmDesignMultiple),
-            minWindow: JSON.stringify(minWindow),
-            maxWindow: JSON.stringify(maxWindow),
-            fontsize: JSON.stringify(vmFontSize)
+            _designWidth: JSON.stringify(vmDesignWidth),
+            _designMultiple: JSON.stringify(vmDesignMultiple),
+            _minWindow: JSON.stringify(minWindow),
+            _maxWindow: JSON.stringify(maxWindow),
+            _fontsize: JSON.stringify(vmFontSize)
         },
         plugins: [
             createHtmlPlugin({
