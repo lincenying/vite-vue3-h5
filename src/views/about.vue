@@ -59,7 +59,7 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { showImagePreview } from 'vant'
 
 defineOptions({
@@ -67,7 +67,7 @@ defineOptions({
 })
 
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('about-router')
+const { ctx } = useGlobal()
 
 useHead({
     title: 'About'
@@ -110,7 +110,7 @@ const res = reactive({
 const showPopup = () => {
     res.show = true
 }
-const dateChange = val => {
+const dateChange = (val: { selectedValues: any[] }) => {
     res.dateText = val.selectedValues.join('-')
     res.show = false
 }
@@ -125,7 +125,7 @@ const handleToast = () => {
         toast1.close()
     }, 3000)
 }
-const dialogBeforeClose = action => {
+const dialogBeforeClose = (action: 'confirm' | 'cancel'): any => {
     return new Promise(resolve => {
         if (action === 'confirm') {
             setTimeout(() => {
@@ -156,7 +156,7 @@ const images = ref([
     'https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg',
     'https://img.yzcdn.cn/public_files/2017/09/05/fd08f07665ed67d50e11b32a21ce0682.jpg'
 ])
-const handleClickImg = props => {
+const handleClickImg = (props: { index: number }) => {
     showImagePreview({
         images: images.value,
         startPosition: props.index

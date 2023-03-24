@@ -1,5 +1,7 @@
 {
   "globals": {
+    "$Api": true,
+    "$is": true,
     "Component": true,
     "ComponentPublicInstance": true,
     "ComputedRef": true,
@@ -31,6 +33,7 @@
     "debouncedRef": true,
     "debouncedWatch": true,
     "deepClone": true,
+    "deepMerge": true,
     "defineAsyncComponent": true,
     "defineComponent": true,
     "defineStore": true,
@@ -91,6 +94,8 @@
     "shallowReactive": true,
     "shallowReadonly": true,
     "shallowRef": true,
+    "showDialog": true,
+    "showMsg": true,
     "storeToRefs": true,
     "syncRef": true,
     "syncRefs": true,
@@ -187,6 +192,7 @@
     "useLink": true,
     "useLists": true,
     "useLocalStorage": true,
+    "useLockFn": true,
     "useMagicKeys": true,
     "useManualRefHistory": true,
     "useMediaControls": true,

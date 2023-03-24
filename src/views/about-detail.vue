@@ -12,7 +12,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import MyIcon from '@/assets/svgs/mp3.svg?component'
 
 defineOptions({
@@ -20,7 +20,7 @@ defineOptions({
 })
 
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('about-detail-router')
+const { router } = useGlobal()
 
 useHead({
     title: 'About Detail'

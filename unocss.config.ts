@@ -1,11 +1,17 @@
 /* eslint-disable no-useless-escape */
 import { defineConfig, presetAttributify, presetUno, transformerDirectives, transformerVariantGroup } from 'unocss'
+import type { Preset } from '@unocss/core'
+
 import { fontSize } from './vite.config'
 
 const pxRE = /(-?[\.\d]+)px/g
 const remRE = /(-?[\.\d]+)rem/g
 
-function pxToRemPreset(options = {}) {
+interface opType {
+    baseFontSize?: number
+}
+
+function pxToRemPreset(options: opType = {}): Preset {
     const { baseFontSize = 100 } = options
 
     return {

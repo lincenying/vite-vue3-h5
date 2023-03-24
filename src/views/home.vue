@@ -26,18 +26,20 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { userListsInitApi } from '@/composables'
+
 defineOptions({
     name: 'home-router'
 })
 
-const api = {
+const api: userListsInitApi = {
     method: 'get',
     url: 'article/lists',
     config: { per_page: 20 }
 }
 // eslint-disable-next-line no-unused-vars
-const { body, res, getList, onRefresh, reachBottom } = useLists({ api })
+const { res, getList, onRefresh } = useLists({ api })
 
 useSaveScroll()
 

@@ -8,20 +8,14 @@
     </div>
 </template>
 
-<script setup>
-const prop = defineProps({
-    imgArr: {
-        type: Array,
-        default: () => []
-    }
-})
+<script setup lang="ts">
+const prop = defineProps<{
+    imgArr: string[]
+}>()
 
 defineOptions({
     name: 'img-list'
 })
-
-// eslint-disable-next-line no-unused-vars
-const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('echarts-box1')
 
 // pinia 状态管理 ===>
 // const mainStore = useMainStore()

@@ -27,7 +27,7 @@
     </div>
 </template>
 
-<script setup name="app-root">
+<script setup lang="ts">
 import 'uno.css'
 import 'vue-cropper/dist/index.css'
 import 'vant/es/toast/style'
@@ -36,25 +36,16 @@ import 'vant/es/notify/style'
 import 'vant/es/image-preview/style'
 import '@/assets/scss/style.scss'
 
+defineOptions({
+    name: 'app-root'
+})
+
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('app-root')
+const { route, globalStore } = useGlobal()
 
 // pinia 状态管理 ===>
 const { globalLoading, routerLoading } = storeToRefs(globalStore)
 // const tmpCount = computed(() => globalStore.counter)
-// 监听状态变化
-globalStore.$subscribe((mutation, state) => {
-    if (mutation.events) {
-        let _Array = mutation.events
-        if (!Array.isArray(_Array)) _Array = [_Array]
-        _Array.forEach(item => {
-            console.log(`%c[${mutation.storeId}.${item?.key}] <${mutation.type}> >>> ${item?.oldValue} => ${item?.newValue}`, 'color: red')
-        })
-    }
-    console.log('%c[state] >> ', 'color: red')
-    console.log(state)
-    console.log('%c<< [state]', 'color: red')
-})
 
 // pinia 状态管理 <===
 
@@ -65,18 +56,18 @@ setTimeout(() => {
 const cacheComponents = $ref('home-router,lists-router,about-router')
 
 let transitionName = $ref('fade')
-let metaIndex = $ref(route.meta.index)
+let metaIndex = $ref<number>(route.meta.index as number)
 
 watch(
     () => route.fullPath,
     () => {
-        const newMetaIndex = route.meta.index
+        const newMetaIndex = route.meta.index as number
         // 同级路由切换或者打开的第一个页面, 使用 fade 切换动画
         // 打开子级路由, 使用 slide-left 切换动画
         // 子级路由返回, 使用 slide-right 切换动画
         if (!metaIndex || newMetaIndex === metaIndex) {
             transitionName = 'fade'
-        } else if (newMetaIndex > metaIndex.value) {
+        } else if (newMetaIndex > metaIndex) {
             transitionName = 'slide-left'
         } else {
             transitionName = 'slide-right'

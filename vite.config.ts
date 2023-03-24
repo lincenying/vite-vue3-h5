@@ -1,10 +1,12 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { loadEnv } from 'vite'
+import { loadEnv, defineConfig } from 'vite'
 
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+
+import { viteMockServe } from 'vite-plugin-mock'
 
 import vueSvgPlugin from 'vite-svg-loader'
 import UnoCSS from 'unocss/vite'
@@ -24,10 +26,13 @@ const vmFontSize = 37.5
 export const fontSize = vmFontSize
 
 // https://vitejs.dev/config/
-export default ({ mode }) => {
+export default defineConfig(({ mode, command }) => {
     process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
     const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+    const localMock = true
+    const prodMock = false
 
     const config = {
         css: {
@@ -83,6 +88,16 @@ export default ({ mode }) => {
             // }),
             // vueJsx(),
             vueSvgPlugin(),
+            viteMockServe({
+                mockPath: 'mock',
+                localEnabled: command === 'serve' && localMock,
+                prodEnabled: command !== 'serve' && prodMock,
+                injectCode: `
+                  import { setupProdMockServer } from './mockProdServer';
+                  setupProdMockServer();
+                `,
+                logger: true
+            }),
             AutoImport({
                 eslintrc: {
                     enabled: true
@@ -101,11 +116,12 @@ export default ({ mode }) => {
                     {
                         pinia: ['defineStore', 'storeToRefs'],
                         'vue-router': ['createRouter', 'createWebHashHistory'],
-                        '@/utils': ['UTC2Date', 'deepClone']
+                        vant: ['showDialog'],
+                        '@/utils': ['deepClone', 'deepMerge', '$is', 'showMsg', 'UTC2Date']
                     }
                 ],
                 dts: 'src/auto-imports.d.ts',
-                dirs: ['src/components', 'src/echarts', 'src/pinia', 'src/mixins'],
+                dirs: ['src/components', 'src/composables', 'src/pinia', 'src/api'],
 
                 resolvers: [VantResolver()],
                 defaultExportByFilename: false,
@@ -136,6 +152,8 @@ export default ({ mode }) => {
 
         base: './',
         build: {
+            target: 'es2018',
+            cssTarget: 'chrome79',
             minify: true,
             assetsInlineLimit: 4096,
             chunkSizeWarningLimit: 1000,
@@ -153,12 +171,10 @@ export default ({ mode }) => {
                 '/api': {
                     target: 'http://php.mmxiaowu.com',
                     changeOrigin: true,
-                    pathRewrite: {
-                        '^/api': '/api'
-                    }
+                    rewrite: (path: string) => path.replace(new RegExp(`^/api`), '/api')
                 }
             }
         }
     }
     return config
-}
+})

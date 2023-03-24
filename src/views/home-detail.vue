@@ -16,12 +16,14 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
+import type { Article } from '@/types'
+
 defineOptions({
     name: 'home-detail-router'
 })
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('home-detail-router')
+const { route, router } = useGlobal()
 
 // pinia 状态管理 ===>
 // const mainStore = useMainStore()
@@ -46,22 +48,17 @@ const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('home-
 // const dataIsReady = inject('dataIsReady')
 // 全局组件通信 <===
 
-const res = reactive({
-    detail: null
-})
-
-const detail = ref(null)
+let detail = $ref<Article>()
 
 useHead({
-    title: computed(() => detail.value?.title)
+    title: computed(() => detail?.c_title || '')
 })
 
 const getDetail = async () => {
     // this.$store.commit('global/routerLoading', true)
-    const { code, data } = await ctx.$api.get(`article/detail/${route.query.id}`, {})
+    const { code, data } = await $Api.get(`article/detail/${route.query.id}`, {})
     if (code === 200) {
-        res.detail = data
-        detail.value = data
+        detail = data
     }
     // this.$store.commit('global/routerLoading', false)
 }

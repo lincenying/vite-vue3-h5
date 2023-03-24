@@ -1,7 +1,9 @@
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import qs from 'qs'
 import ls from 'store2'
 import config from '@/config'
+import type { anyObject } from '@/types'
 
 window.$$axios = axios
 
@@ -28,25 +30,32 @@ axios.interceptors.response.use(
     error => Promise.resolve(error.response || error)
 )
 
-function checkStatus(response) {
+function checkStatus(response: AxiosResponse) {
     if (response && (response.status === 200 || response.status === 304)) {
-        return response.data
+        return response
     }
     return {
-        code: -404,
-        info: response.message || response.statusText || response.toString(),
-        data: response.message || response.statusText || response.toString()
+        data: {
+            code: -404,
+            message: (response && response.statusText) || '未知错误',
+            data: ''
+        }
     }
 }
 
-function checkCode(data) {
-    return data
+function checkCode(res: any) {
+    if (res.data.code === -500) {
+        window.location.href = '/backend'
+    } else if (res.data.code === -400) {
+        window.location.href = '/'
+    }
+    return res && res.data
 }
 
-export default {
-    async RESTful(url, params = {}, method = 'get', header = {}) {
+export const $Api = {
+    async RESTful(url: string, params = {}, method = 'get', header = {}) {
         const token = ls.get('token')
-        const payload = {
+        const payload: AxiosRequestConfig = {
             ...baseConfig,
             method,
             url: config.apiUrl + url,
@@ -66,7 +75,7 @@ export default {
         const data = await checkStatus(response)
         return checkCode(data)
     },
-    async fetch(url, params = {}, payload = {}, cancelToken) {
+    async fetch(url: string, params = {}, payload: AxiosRequestConfig = {}, cancelToken: any) {
         payload.cancelToken = cancelToken
         payload.method = payload.method || 'get'
         payload.url = url || ''
@@ -78,19 +87,19 @@ export default {
         const response = await axios(payload)
         return checkStatus(response)
     },
-    file(url, data, header = {}) {
+    file(url: string, data: anyObject, header = {}) {
         return this.RESTful(url, data, 'post', header)
     },
-    post(url, data, header = {}) {
+    post(url: string, data: anyObject, header = {}) {
         return this.RESTful(url, qs.stringify(data), 'post', header)
     },
-    get(url, params = {}, header = {}) {
+    get(url: string, params = {}, header = {}) {
         return this.RESTful(url, params, 'get', header)
     },
-    put(url, data, header = {}) {
+    put(url: string, data: anyObject, header = {}) {
         return this.RESTful(url, qs.stringify(data), 'put', header)
     },
-    delete(url, data, header = {}) {
+    delete(url: string, data: anyObject, header = {}) {
         return this.RESTful(url, qs.stringify(data), 'delete', header)
     }
 }

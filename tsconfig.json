@@ -1,25 +1,25 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
+        "baseUrl": ".",
+        "module": "ESNext",
+        "target": "ESNext",
+        "lib": ["DOM", "ESNext"],
         "strict": true,
+        "esModuleInterop": true,
         "jsx": "preserve",
+        "skipLibCheck": true,
         "importHelpers": true,
         "moduleResolution": "node",
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "noUnusedLocals": true,
+        "strictNullChecks": true,
         "allowJs": true,
-        "sourceMap": true,
-        "baseUrl": ".",
+        "forceConsistentCasingInFileNames": true,
+        "types": ["vite/client", "vue/ref-macros", "unplugin-vue-macros/macros-global"],
         "paths": {
             "@/*": ["src/*"]
         },
-        "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-        "outDir": "build",
-        "types": ["unplugin-vue-macros/macros-global"]
+        "outDir": "build"
     },
-    "include": ["src/**/*.js", "src/**/*.vue", "src/auto-imports.d.ts", "components.d.ts"],
-    "exclude": ["node_modules", "build/**/*", "dist/**/*", "public/**/*"],
-    "files": ["main.ts"]
+    "exclude": ["node_modules", "dist/**/*", "public/**/*"]
 }

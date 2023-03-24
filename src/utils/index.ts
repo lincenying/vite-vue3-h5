@@ -10,18 +10,20 @@ import isNil from 'lodash/isNil'
 import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
 
+import type { anyObject } from '@/types'
+
 export const inBrowser = typeof window !== 'undefined'
 
 // 返回 几xxx前
-export const getDateDiff = publishTime => {
-    const timeNow = parseInt(new Date().getTime() / 1000, 10)
+export const getDateDiff = (publishTime: number): string => {
+    const timeNow = parseInt(`${new Date().getTime() / 1000}`, 10)
     const date = new Date(publishTime * 1000)
     const Y = date.getFullYear()
-    let M = date.getMonth() + 1
-    let D = date.getDate()
-    let H = date.getHours()
-    let m = date.getMinutes()
-    let s = date.getSeconds()
+    let M: number | string = date.getMonth() + 1
+    let D: number | string = date.getDate()
+    let H: number | string = date.getHours()
+    let m: number | string = date.getMinutes()
+    let s: number | string = date.getSeconds()
     //小于10的在前面补0
     if (M < 10) {
         M = `0${M}`
@@ -40,10 +42,10 @@ export const getDateDiff = publishTime => {
     }
 
     const d = timeNow - publishTime
-    const d_days = parseInt(d / 86400, 10)
-    const d_hours = parseInt(d / 3600, 10)
-    const d_minutes = parseInt(d / 60, 10)
-    const d_seconds = parseInt(d, 10)
+    const d_days = parseInt(`${d / 86400}`, 10)
+    const d_hours = parseInt(`${d / 3600}`, 10)
+    const d_minutes = parseInt(`${d / 60}`, 10)
+    const d_seconds = parseInt(`${d}`, 10)
 
     if (d_days > 0 && d_days < 3) {
         return `${d_days}天前`
@@ -61,21 +63,22 @@ export const getDateDiff = publishTime => {
     } else if (d_days >= 30) {
         return `${Y}-${M}-${D} ${H}:${m}`
     }
+    return ''
 }
 
 // 日期格式化
-export const UTC2Date = (utc, format, add) => {
+export const UTC2Date = (utc: any, format?: string, add?: number): string => {
     if (!format) format = 'y-m-d'
     if (utc && typeof utc === 'string') utc = utc.replace(/-/g, '/').replace('.000000', '')
     let newDate = utc ? new Date(utc) : new Date()
     if (add) newDate = new Date(newDate.setDate(newDate.getDate() + add))
-    const year = newDate.getFullYear()
-    let month = newDate.getMonth() + 1
-    let date = newDate.getDate()
-    let hours = newDate.getHours()
-    let minutes = newDate.getMinutes()
-    let seconds = newDate.getSeconds()
-    let secondes = newDate.getMilliseconds()
+    const year: number | string = newDate.getFullYear()
+    let month: number | string = newDate.getMonth() + 1
+    let date: number | string = newDate.getDate()
+    let hours: number | string = newDate.getHours()
+    let minutes: number | string = newDate.getMinutes()
+    let seconds: number | string = newDate.getSeconds()
+    let secondes: number | string = newDate.getMilliseconds()
     month = month < 10 ? `0${month}` : month
     date = date < 10 ? `0${date}` : date
     hours = hours < 10 ? `0${hours}` : hours
@@ -87,32 +90,27 @@ export const UTC2Date = (utc, format, add) => {
         secondes = `00${secondes}`
     }
     return format
-        .replace(/y/gi, year)
-        .replace(/m/gi, month)
-        .replace(/d/gi, date)
-        .replace(/h/gi, hours)
-        .replace(/i/gi, minutes)
-        .replace(/s/gi, seconds)
-        .replace(/v/gi, secondes)
+        .replace(/y/gi, `${year}`)
+        .replace(/m/gi, `${month}`)
+        .replace(/d/gi, `${date}`)
+        .replace(/h/gi, `${hours}`)
+        .replace(/i/gi, `${minutes}`)
+        .replace(/s/gi, `${seconds}`)
+        .replace(/v/gi, `${secondes}`)
 }
 
 // 生成随机字符串
-export const randomChar = length => {
+export const randomChar = (length: number): string => {
     const x = '0123456789qwertyuioplkjhgfdsazxcvbnm'
     let tmp = ''
-    const timestamp = new Date().getTime()
+    const timestamp = `${new Date().getTime()}`
     for (let i = 0; i < length; i++) {
         tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length)
     }
     return timestamp + tmp
 }
 
-export const setConfig = () => ({
-    show: false,
-    row: {}
-})
-
-export const getQueryStringByName = (search, name) => {
+export const getQueryStringByName = (search: string, name: string): string => {
     const result = search.match(new RegExp(`[?&]${name}=([^&|#]+)`, 'i'))
     if (result == null || result.length < 1) {
         return ''
@@ -120,9 +118,9 @@ export const getQueryStringByName = (search, name) => {
     return result[1]
 }
 
-export const Sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+export const Sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
-export const strToArray = str => {
+export const strToArray = (str: any): any[] => {
     try {
         str = JSON.parse(str)
     } catch (error) {
@@ -134,7 +132,7 @@ export const strToArray = str => {
 
 export const oc = get
 
-export const is = {
+export const $is = {
     //$is.false(null) === true
     //$is.false(undefined) === true
     // $is.false('') === true
@@ -150,7 +148,7 @@ export const is = {
     //$is.false(1) === false
     //$is.false({ a: 1 }) === false
     //$is.false([1]) === false
-    false(payload) {
+    false(payload: any): boolean {
         return !!payload === false || (!isBoolean(payload) && !isNumber(payload) && isEmpty(payload))
     },
     // $is.empty(null) === true
@@ -168,31 +166,31 @@ export const is = {
     // $is.empty(1) === false
     // $is.empty({ a: 1 }) === false
     // $is.empty([1]) === false
-    empty(payload) {
+    empty(payload: any): boolean {
         return !isNumber(payload) && !isBoolean(payload) && isEmpty(payload)
     },
-    number(payload) {
+    number(payload: any): boolean {
         return isNumber(payload)
     },
-    array(payload) {
+    array(payload: any): boolean {
         return Array.isArray(payload)
     },
-    int(payload) {
+    int(payload: any): boolean {
         return isInteger(payload)
     },
-    object(payload) {
+    object(payload: any): boolean {
         return isObject(payload)
     },
-    boolean(payload) {
+    boolean(payload: any): boolean {
         return isBoolean(payload)
     },
-    nil(payload) {
+    nil(payload: any): boolean {
         return isNil(payload)
     }
 }
 
 // 获取滚动条宽度
-export const getScrollWidth = () => {
+export const getScrollWidth = (): number => {
     //creates a DOM element
     const testDiv = document.createElement('div')
     //stores the CSS attributes
@@ -205,7 +203,7 @@ export const getScrollWidth = () => {
     }
     //sets all the styles on testDiv
     for (const attr in cssAttributes) {
-        testDiv.style[attr] = cssAttributes[attr]
+        ;(testDiv.style as any)[attr] = (cssAttributes as any)[attr]
     }
     //adds the testDiv to the DOM
     document.body.appendChild(testDiv)
@@ -217,12 +215,11 @@ export const getScrollWidth = () => {
     return width
 }
 
-export const addNewStyle = newStyle => {
-    let styleElement = document.getElementById('styles_js')
+export const addNewStyle = (newStyle: string): void => {
+    let styleElement = <HTMLStyleElement>document.getElementById('styles_js')
 
     if (!styleElement) {
         styleElement = document.createElement('style')
-        styleElement.type = 'text/css'
         styleElement.id = 'styles_js'
         document.getElementsByTagName('head')[0].appendChild(styleElement)
     }
@@ -232,7 +229,7 @@ export const addNewStyle = newStyle => {
 
 // 将字符串中的横线模式替换成驼峰模式
 // a-bc-df => aBcDf
-export const transformStr = str => {
+export const transformStr = (str: string): string => {
     const strArr = str.split('-')
     for (let i = 1; i < strArr.length; i++) {
         strArr[i] = strArr[i].charAt(0).toUpperCase() + strArr[i].substring(1)
@@ -247,10 +244,10 @@ export const deepMerge = merge
 export const deepClone = cloneDeep
 
 // 计算字符串长度, 汉字算2
-export const strLen = str => {
-    var len = 0
-    for (var i = 0; i < str.length; i++) {
-        var c = str.charCodeAt(i)
+export const strLen = (str: string): number => {
+    let len = 0
+    for (let i = 0; i < str.length; i++) {
+        const c = str.charCodeAt(i)
         //单字节加1
         if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
             len++
@@ -261,28 +258,23 @@ export const strLen = str => {
     return len
 }
 
-export const paramsToObject = str => {
+export const paramsToObject = (str: string): anyObject => {
     const obj = {}
-    if (!str) return null
+    if (!str) return {}
     const strArr = str.split('&')
     strArr.forEach(item => {
         const arr_item = item.split(':')
-        obj[arr_item[0]] = arr_item[1]
+        ;(obj as any)[arr_item[0]] = arr_item[1]
     })
     return obj
 }
 
 // 返回一个lower - upper之间的随机数
-export const Random = (lower, upper) => {
+export const Random = (lower: number, upper: number): number => {
     lower = +lower || 0
     upper = +upper || 0
     return Math.random() * (upper - lower) + lower
 }
-
-window.randomArray = (lower, upper, length) => {
-    return new Array(length).fill('').map(() => parseInt(Random(lower, upper), 10))
-}
-
 // 数组转对象
 /*
 [{name: "AAA", value: 1}, {name: "BBB", value: 2}, {name: "CCC", value: 3}, {name: "DDD", value: 4}]
@@ -294,7 +286,7 @@ window.randomArray = (lower, upper, length) => {
     4:"DDD"
 }
 */
-export const arrayToObject = (arr, key = 'value', val = 'name') => {
+export const arrayToObject = (arr: [], key = 'value', val = 'name'): anyObject => {
     const obj = {}
     arr.forEach(item => {
         obj[item[key]] = item[val]
@@ -302,10 +294,10 @@ export const arrayToObject = (arr, key = 'value', val = 'name') => {
     return obj
 }
 
-export const addStr = (str, num) => {
-    var arr = str ? str.split('') : [] // 要先判断字符串是否有字符 然后将它分割成数组
-    var newStr = ''
-    arr.forEach((item, index) => {
+export const addStr = (str: string, num: number): string => {
+    const arr = str ? str.split('') : [] // 要先判断字符串是否有字符 然后将它分割成数组
+    let newStr = ''
+    arr.forEach((item: string, index: number) => {
         newStr += item
         if ((index + 1) % num === 0 && index !== arr.length - 1) {
             // 6可以更改，最后一位不加
@@ -315,13 +307,21 @@ export const addStr = (str, num) => {
     return newStr
 }
 
-export const getSum = arr => {
+export const getSum = (arr: number[]): number => {
     return arr.reduce(function (prev, curr) {
         return Number(prev) + Number(curr)
     }, 0)
 }
 
-export const hexToRgba = (hex, opacity = 1) => {
+interface hexToRgbaType {
+    red: number
+    green: number
+    blue: number
+    rgb: string
+    rgba: string
+}
+
+export const hexToRgba = (hex: string, opacity = 1): hexToRgbaType => {
     const red = parseInt(`0x${hex.slice(1, 3)}`, 16)
     const green = parseInt(`0x${hex.slice(3, 5)}`, 16)
     const blue = parseInt(`0x${hex.slice(5, 7)}`, 16)
@@ -335,7 +335,7 @@ export const hexToRgba = (hex, opacity = 1) => {
     }
 }
 
-export const RGB2Hex = color => {
+export const RGB2Hex = (color: string): string => {
     const rgb = color.split(',')
     const r = parseInt(rgb[0].split('(')[1], 10)
     const g = parseInt(rgb[1], 10)
@@ -345,7 +345,7 @@ export const RGB2Hex = color => {
     return hex
 }
 
-export const batchHexToRgba = arr => {
+export const batchHexToRgba = (arr: any[]) => {
     if (!arr) return []
     arr = arr.map(item => {
         if (Array.isArray(item)) return batchHexToRgba(item)

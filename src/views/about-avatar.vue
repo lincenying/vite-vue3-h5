@@ -37,7 +37,7 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { VueCropper } from 'vue-cropper'
 
 defineOptions({
@@ -45,7 +45,7 @@ defineOptions({
 })
 
 // eslint-disable-next-line no-unused-vars
-const { ctx, options, route, router, globalStore, useLockFn } = useGlobal('app-root')
+const { router } = useGlobal()
 
 useHead({
     title: 'Avatar Detail'
@@ -86,29 +86,29 @@ const cropperOption = reactive({
     canMove: true,
     canMoveBox: false
 })
-const avatar = ref('')
-const cropper = ref(null)
-const uploadImg = ref(null)
+let avatar = $ref('')
+const cropper = $ref<any>(null)
+const uploadImg = $ref<HTMLInputElement>()!
 
 const handleSave = async () => {
-    avatar.value = await new Promise(resolve => cropper.value.getCropData(resolve))
+    avatar = await new Promise(resolve => cropper.getCropData(resolve))
 }
 const handleUpload = () => {
-    cropper.value.getCropBlob(blob => {
+    cropper.getCropBlob((blob: Blob) => {
         const formData = new FormData()
         formData.append('file', blob, 'test.jpg')
-        ctx.$api.RESTful('qiniu', formData, 'post')
+        $Api.RESTful('qiniu', formData, 'post')
     })
 }
-const handleUploadImg = (ev, num) => {
+const handleUploadImg = (ev: any, num: number) => {
     var file = ev.target.files[0]
     const preg = /\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/
-    if (!preg.test(ev.target.value)) {
+    if (!preg.test(ev.target?.value)) {
         console.log('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')
         return false
     }
     const reader = new FileReader()
-    reader.onload = function (e) {
+    reader.onload = function (e: any) {
         let data
         if (typeof e.target.result === 'object') {
             // 把Array Buffer转化为blob 如果是base64不需要
@@ -119,7 +119,7 @@ const handleUploadImg = (ev, num) => {
         if (num === 1) {
             cropperOption.img = data
         }
-        uploadImg.value.value = ''
+        uploadImg.value = ''
     }
     // 转化为base64
     // reader.readAsDataURL(file)
