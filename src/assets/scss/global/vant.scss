@@ -4,8 +4,9 @@
 
 // 防止 414 屏幕弹窗时出现内容下移
 .van-dialog__header {
-    padding-top: 2.5px;
-    line-height: 2.5px;
+    padding-top: 20px;
+
+    // line-height: 2.5px;
 }
 
 .wrap {

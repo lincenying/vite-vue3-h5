@@ -7,6 +7,7 @@
                     <van-grid-item v-for="value in 28" :key="value" icon="photo-o" text="文字" />
                 </van-grid>
                 <div class="w-30px h-30px"><MyIcon></MyIcon></div>
+                <JsxComponents></JsxComponents>
             </div>
         </div>
     </div>

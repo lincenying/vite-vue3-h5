@@ -10,7 +10,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ImgList: typeof import('./components/img-list.vue')['default']
-    JsxComponents: typeof import('./components/jsx-components.jsx')['default']
+    JsxComponents: typeof import('./components/jsx-components.tsx')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ULoadmore: typeof import('./components/u-loadmore.vue')['default']
@@ -29,10 +29,7 @@ declare module '@vue/runtime-core' {
     VanNavBar: typeof import('vant/es')['NavBar']
     VanPopup: typeof import('vant/es')['Popup']
     VanPullRefresh: typeof import('vant/es')['PullRefresh']
-    VanSkeleton: typeof import('vant/es')['Skeleton']
-    VanTab: typeof import('vant/es')['Tab']
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
-    VanTabs: typeof import('vant/es')['Tabs']
   }
 }
