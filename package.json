@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "husky install",
+    "del": "sh delete-ts.sh",
     "serve": "vite",
     "build": "vite build",
     "start": "vite preview",
@@ -37,7 +38,7 @@
     "mockjs": "^1.1.0",
     "postcss": "^8.4.21",
     "postcss-pxtorem": "^6.0.0",
-    "prettier": "^2.8.6",
+    "prettier": "^2.8.7",
     "sass": "^1.60.0",
     "stylelint-config-lcy": "^1.15.10",
     "typescript": "^5.0.2",
