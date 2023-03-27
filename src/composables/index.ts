@@ -1,5 +1,5 @@
 import ls from 'store2'
-import type { anyObject, Fn } from '@/types'
+import type { Fn } from '@/types'
 import { Sleep, Random } from '@/utils'
 
 export const useGlobal = () => {
@@ -63,7 +63,7 @@ interface userListConfig {
 export interface userListsInitApi {
     method: 'get' | 'post' | 'put' | 'delete'
     url: string
-    config: anyObject
+    config: Record<string, any>
 }
 
 export interface userListsInit {

@@ -1,30 +1,28 @@
 import type { GlobalStore } from '@/types'
 
-const useStore = defineStore('globalStore', {
-    // arrow function recommended for full type inference
-    state: (): GlobalStore => {
-        return {
-            globalLoading: true,
-            routerLoading: false,
-            ISLocal: import.meta.env.VITE_APP_ENV === 'development',
-            ISDEV: import.meta.env.VITE_APP_ENV === 'development',
-            ISPRE: import.meta.env.VITE_APP_ENV === 'pre-release',
-            ISPROD: import.meta.env.VITE_APP_ENV === 'production',
-            isPageSwitching: false
-        }
-    },
-    // 相当于 vue 中的 computed 计算属性
-    getters: {
-        getGlobalStore: state => state
-    },
-    // 相当于 vue 中的 methods 方法
-    actions: {
-        setGlobalLoading(payload: boolean) {
-            this.globalLoading = payload
-        },
-        setRouterLoading(payload: boolean) {
-            this.routerLoading = payload
-        }
+const useStore = defineStore('globalStore', () => {
+    const state = reactive<GlobalStore>({
+        globalLoading: true,
+        routerLoading: false,
+        ISLocal: import.meta.env.VITE_APP_ENV === 'development',
+        ISDEV: import.meta.env.VITE_APP_ENV === 'development',
+        ISPRE: import.meta.env.VITE_APP_ENV === 'pre-release',
+        ISPROD: import.meta.env.VITE_APP_ENV === 'production',
+        isPageSwitching: false
+    })
+
+    const setGlobalLoading = (payload: boolean) => {
+        state.globalLoading = payload
+    }
+    const setRouterLoading = (payload: boolean) => {
+        state.routerLoading = payload
+    }
+
+    return {
+        ...toRefs(state),
+        setGlobalLoading,
+        setRouterLoading
     }
 })
+
 export default useStore //导出

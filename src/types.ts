@@ -1,6 +1,8 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
+
+import type { AxiosRequestConfig } from 'axios'
+
 declare type Nullable<T> = T | null
-// eslint-disable-next-line no-unused-vars
 declare type NonNullable<T> = T extends null | undefined ? never : T
 
 export interface anyObject {
@@ -11,7 +13,6 @@ export interface anyArray {
     [index: number]: any
 }
 
-// eslint-disable-next-line no-unused-vars
 export type Fn = (...args: any[]) => void
 
 export interface GlobalStore {
@@ -29,4 +30,14 @@ export interface Article {
     c_title: string
     c_content: string
     c_posttime?: string
+}
+
+export interface ApiReturn {
+    get(url: string, params: Record<string, any>, headers?: Record<string, any>): Promise<any>
+    post(url: string, data: Record<string, any>, headers?: Record<string, any>): Promise<any>
+    put(url: string, data: Record<string, any>, headers?: Record<string, any>): Promise<any>
+    delete(url: string, data: Record<string, any>, headers?: Record<string, any>): Promise<any>
+    file(url: string, data: Record<string, any>, headers?: Record<string, any>): Promise<any>
+    RESTful(url: string, params: Record<string, any>, method: 'get' | 'post' | 'put' | 'delete', headers?: Record<string, any>): Promise<any>
+    fetch(url: string, params: Record<string, any>, payload: AxiosRequestConfig, cancelToken?: any): Promise<any>
 }

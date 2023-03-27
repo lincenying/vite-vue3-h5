@@ -1,15 +1,20 @@
+import type { NotifyType } from 'vant'
 import { showNotify } from 'vant'
-import type { anyObject } from '@/types'
+
+interface ConfigType {
+    content: string
+    type: NotifyType
+}
 
 export default {
-    showMsg(config: anyObject | string) {
-        let content, type
+    showMsg(config: ConfigType | string) {
+        let content, type: NotifyType
         if (!config) {
             content = '接口返回数据错误'
-            type = 'error'
+            type = 'danger'
         } else if (typeof config === 'string') {
             content = config
-            type = 'error'
+            type = 'danger'
         } else {
             content = config.content
             type = config.type

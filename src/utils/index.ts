@@ -10,8 +10,6 @@ import isNil from 'lodash/isNil'
 import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
 
-import type { anyObject } from '@/types'
-
 export const inBrowser = typeof window !== 'undefined'
 
 // 返回 几xxx前
@@ -258,13 +256,13 @@ export const strLen = (str: string): number => {
     return len
 }
 
-export const paramsToObject = (str: string): anyObject => {
-    const obj = {}
+export const paramsToObject = (str: string) => {
+    const obj: Record<string, string> = {}
     if (!str) return {}
     const strArr = str.split('&')
     strArr.forEach(item => {
         const arr_item = item.split(':')
-        ;(obj as any)[arr_item[0]] = arr_item[1]
+        obj[arr_item[0]] = arr_item[1]
     })
     return obj
 }
@@ -286,8 +284,8 @@ export const Random = (lower: number, upper: number): number => {
     4:"DDD"
 }
 */
-export const arrayToObject = (arr: [], key = 'value', val = 'name'): anyObject => {
-    const obj = {}
+export const arrayToObject = (arr: [], key = 'value', val = 'name') => {
+    const obj: Record<string, number> = {}
     arr.forEach(item => {
         obj[item[key]] = item[val]
     })

@@ -3,7 +3,7 @@ import axios from 'axios'
 import qs from 'qs'
 import ls from 'store2'
 import config from '@/config'
-import type { anyObject } from '@/types'
+import type { ApiReturn } from '@/types'
 
 window.$$axios = axios
 
@@ -52,8 +52,8 @@ function checkCode(res: any) {
     return res && res.data
 }
 
-export const $Api = {
-    async RESTful(url: string, params = {}, method = 'get', header = {}) {
+export const $Api: ApiReturn = {
+    async RESTful(url, params = {}, method = 'get', header = {}) {
         const token = ls.get('token')
         const payload: AxiosRequestConfig = {
             ...baseConfig,
@@ -75,7 +75,7 @@ export const $Api = {
         const data = await checkStatus(response)
         return checkCode(data)
     },
-    async fetch(url: string, params = {}, payload: AxiosRequestConfig = {}, cancelToken: any) {
+    async fetch(url, params = {}, payload = {}, cancelToken) {
         payload.cancelToken = cancelToken
         payload.method = payload.method || 'get'
         payload.url = url || ''
@@ -87,19 +87,19 @@ export const $Api = {
         const response = await axios(payload)
         return checkStatus(response)
     },
-    file(url: string, data: anyObject, header = {}) {
+    file(url, data, header = {}) {
         return this.RESTful(url, data, 'post', header)
     },
-    post(url: string, data: anyObject, header = {}) {
+    post(url, data, header = {}) {
         return this.RESTful(url, qs.stringify(data), 'post', header)
     },
-    get(url: string, params = {}, header = {}) {
+    get(url, params = {}, header = {}) {
         return this.RESTful(url, params, 'get', header)
     },
-    put(url: string, data: anyObject, header = {}) {
+    put(url, data, header = {}) {
         return this.RESTful(url, qs.stringify(data), 'put', header)
     },
-    delete(url: string, data: anyObject, header = {}) {
+    delete(url, data, header = {}) {
         return this.RESTful(url, qs.stringify(data), 'delete', header)
     }
 }
