@@ -17,14 +17,13 @@
 import MyIcon from '@/assets/svgs/mp3.svg?component'
 
 defineOptions({
-    name: 'about-detail-router'
+    name: 'about-detail-router',
 })
 
-// eslint-disable-next-line no-unused-vars
 const { router } = useGlobal()
 
 useHead({
-    title: 'About Detail'
+    title: 'About Detail',
 })
 
 // pinia 状态管理 ===>
@@ -42,7 +41,7 @@ useHead({
 // const prop = defineProps({
 //     imgArr: Array
 // })
-// eslint-disable-next-line no-unused-vars
+
 // const { imgArr } = toRefs(prop)
 // 父子组件通讯 <===
 

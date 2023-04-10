@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { loadEnv, defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -12,7 +12,7 @@ import vueSvgPlugin from 'vite-svg-loader'
 import UnoCSS from 'unocss/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
-import VueMacros from 'unplugin-vue-macros/vite'
+import VueMacros from 'unplugin-vue-macros'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
@@ -44,16 +44,16 @@ export default defineConfig(({ mode, command }) => {
                     $minWindow: ${minWindow};
                     $maxWindow: ${maxWindow};
                     $vmFontSize: ${vmFontSize};
-                `
-                }
-            }
+                `,
+                },
+            },
         },
         define: {
             _designWidth: JSON.stringify(vmDesignWidth),
             _designMultiple: JSON.stringify(vmDesignMultiple),
             _minWindow: JSON.stringify(minWindow),
             _maxWindow: JSON.stringify(maxWindow),
-            _fontsize: JSON.stringify(vmFontSize)
+            _fontsize: JSON.stringify(vmFontSize),
         },
         plugins: [
             createHtmlPlugin({
@@ -62,21 +62,21 @@ export default defineConfig(({ mode, command }) => {
                         VITE_APP_ENV: process.env.VITE_APP_ENV,
                         VITE_APP_API_DOMAIN: process.env.VITE_APP_API_DOMAIN,
                         VITE_APP_API: process.env.VITE_APP_API,
-                        MODE: mode
-                    }
-                }
+                        MODE: mode,
+                    },
+                },
             }),
-            VueMacros({
+            VueMacros.vite({
                 plugins: {
                     vue: vuePlugin({
                         template: {
                             compilerOptions: {
-                                isCustomElement: tag => ['def'].includes(tag)
-                            }
-                        }
+                                isCustomElement: (tag) => ['def'].includes(tag),
+                            },
+                        },
                     }),
-                    vueJsx: vueJsx()
-                }
+                    vueJsx: vueJsx(),
+                },
             }),
             // vuePlugin({
             //     reactivityTransform: true,
@@ -96,17 +96,17 @@ export default defineConfig(({ mode, command }) => {
                   import { setupProdMockServer } from './mockProdServer';
                   setupProdMockServer();
                 `,
-                logger: true
+                logger: true,
             }),
             AutoImport({
                 eslintrc: {
-                    enabled: true
+                    enabled: true,
                 },
                 include: [
                     /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
                     /\.vue$/,
                     /\.vue\?vue/, // .vue
-                    /\.md$/ // .md
+                    /\.md$/, // .md
                 ],
                 imports: [
                     'vue',
@@ -117,8 +117,8 @@ export default defineConfig(({ mode, command }) => {
                         pinia: ['defineStore', 'storeToRefs'],
                         'vue-router': ['createRouter', 'createWebHashHistory'],
                         vant: ['showDialog'],
-                        '@/utils': ['deepClone', 'deepMerge', '$is', 'showMsg', 'UTC2Date']
-                    }
+                        'lcy-utils': ['deepClone', 'deepMerge', 'UTC2Date'],
+                    },
                 ],
                 dts: 'src/auto-imports.d.ts',
                 dirs: ['src/components', 'src/composables', 'src/pinia', 'src/api'],
@@ -126,28 +126,28 @@ export default defineConfig(({ mode, command }) => {
                 resolvers: [VantResolver()],
                 defaultExportByFilename: false,
                 vueTemplate: true,
-                cache: false
+                cache: false,
             }),
             Components({
                 include: [
                     /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
                     /\.vue$/,
                     /\.vue\?vue/, // .vue
-                    /\.md$/ // .md
+                    /\.md$/, // .md
                 ],
                 extensions: ['vue', 'tsx', 'jsx'],
                 resolvers: [VantResolver()],
-                dts: 'src/components.d.ts'
+                dts: 'src/components.d.ts',
             }),
             UnoCSS({
                 /* options */
-            })
+            }),
             // Inspect()
         ],
         resolve: {
             alias: {
-                '@': path.join(__dirname, './src')
-            }
+                '@': path.join(__dirname, './src'),
+            },
         },
 
         base: './',
@@ -160,10 +160,10 @@ export default defineConfig(({ mode, command }) => {
             outDir: 'dist',
             rollupOptions: {
                 input: {
-                    main: path.resolve(__dirname, 'index.html')
+                    main: path.resolve(__dirname, 'index.html'),
                 },
-                external: /\.\/assets.*/
-            }
+                external: /\.\/assets.*/,
+            },
         },
         server: {
             port: 7771,
@@ -171,10 +171,10 @@ export default defineConfig(({ mode, command }) => {
                 '/api': {
                     target: 'http://php.mmxiaowu.com',
                     changeOrigin: true,
-                    rewrite: (path: string) => path.replace(new RegExp(`^/api`), '/api')
-                }
-            }
-        }
+                    rewrite: (path: string) => path.replace(/^\/api/, '/api'),
+                },
+            },
+        },
     }
     return config
 })

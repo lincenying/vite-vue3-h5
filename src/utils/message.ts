@@ -20,5 +20,5 @@ export default {
             type = config.type
         }
         showNotify({ type, message: content })
-    }
+    },
 }

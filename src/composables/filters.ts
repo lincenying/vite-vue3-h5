@@ -28,5 +28,5 @@ export const useFilters = () => ({
     formatTime,
     dateTime,
     arrToStr,
-    tofixed
+    tofixed,
 })

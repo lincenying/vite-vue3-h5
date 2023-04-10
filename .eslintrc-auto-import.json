@@ -1,7 +1,6 @@
 {
   "globals": {
     "$Api": true,
-    "$is": true,
     "Component": true,
     "ComponentPublicInstance": true,
     "ComputedRef": true,
@@ -95,7 +94,6 @@
     "shallowReadonly": true,
     "shallowRef": true,
     "showDialog": true,
-    "showMsg": true,
     "storeToRefs": true,
     "syncRef": true,
     "syncRefs": true,
@@ -172,6 +170,7 @@
     "useFetch": true,
     "useFileDialog": true,
     "useFileSystemAccess": true,
+    "useFilters": true,
     "useFocus": true,
     "useFocusWithin": true,
     "useFps": true,

@@ -30,15 +30,15 @@
 import type { userListsInitApi } from '@/composables'
 
 defineOptions({
-    name: 'home-router'
+    name: 'home-router',
 })
 
 const api: userListsInitApi = {
     method: 'get',
     url: 'article/lists',
-    config: { per_page: 20 }
+    config: { per_page: 20 },
 }
-// eslint-disable-next-line no-unused-vars
+
 const { res, getList, onRefresh } = useLists({ api })
 
 useSaveScroll()

@@ -25,17 +25,17 @@
 import type { userListsInitApi } from '@/composables'
 
 defineOptions({
-    name: 'lists-router'
+    name: 'lists-router',
 })
 
 const api: userListsInitApi[] = [
     { method: 'get', url: 'article/lists', config: { per_page: 20, tab: '' } },
     { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'ask' } },
     { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'share' } },
-    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'good' } }
+    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'good' } },
 ]
 const tabs = ['全部', '问答', '分享', '推荐']
-// eslint-disable-next-line no-unused-vars
+
 const { res, getList, onRefresh, activeIndex } = useTabLists({ api, tabs })
 
 useSaveScroll()

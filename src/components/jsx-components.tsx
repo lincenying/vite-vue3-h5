@@ -14,7 +14,7 @@ const App = defineComponent({
                 <van-button onClick={withModifiers(inc, ['self'])}>&lt;&lt;&lt;&lt; {count} &lt;&lt;&lt;&lt;</van-button>
             </div>
         )
-    }
+    },
 })
 
 export default App

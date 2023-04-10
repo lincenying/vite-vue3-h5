@@ -8,7 +8,7 @@ const useStore = defineStore('globalStore', () => {
         ISDEV: import.meta.env.VITE_APP_ENV === 'development',
         ISPRE: import.meta.env.VITE_APP_ENV === 'pre-release',
         ISPROD: import.meta.env.VITE_APP_ENV === 'production',
-        isPageSwitching: false
+        isPageSwitching: false,
     })
 
     const setGlobalLoading = (payload: boolean) => {
@@ -21,8 +21,8 @@ const useStore = defineStore('globalStore', () => {
     return {
         ...toRefs(state),
         setGlobalLoading,
-        setRouterLoading
+        setRouterLoading,
     }
 })
 
-export default useStore //导出
+export default useStore // 导出

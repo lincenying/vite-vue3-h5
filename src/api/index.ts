@@ -1,6 +1,5 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
-import qs from 'qs'
 import ls from 'store2'
 import config from '@/config'
 import type { ApiReturn } from '@/types'
@@ -9,25 +8,25 @@ window.$$axios = axios
 
 const headers = {
     'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 }
 
 const baseConfig = {
     headers,
     timeout: 30000,
-    withCredentials: true
+    withCredentials: true,
 }
 
 axios.interceptors.request.use(
-    config => {
+    (config) => {
         return config
     },
-    error => Promise.resolve(error.response || error)
+    (error) => Promise.resolve(error.response || error),
 )
 
 axios.interceptors.response.use(
-    response => response,
-    error => Promise.resolve(error.response || error)
+    (response) => response,
+    (error) => Promise.resolve(error.response || error),
 )
 
 function checkStatus(response: AxiosResponse) {
@@ -38,8 +37,8 @@ function checkStatus(response: AxiosResponse) {
         data: {
             code: -404,
             message: (response && response.statusText) || '未知错误',
-            data: ''
-        }
+            data: '',
+        },
     }
 }
 
@@ -62,15 +61,15 @@ export const $Api: ApiReturn = {
             headers: {
                 ...baseConfig.headers,
                 Authorization: `Bearer ${token}`,
-                ...header
-            }
+                ...header,
+            },
         }
         if (method === 'get') {
             payload.params = params
         } else {
             payload.data = params
         }
-        if (url.indexOf('NoTimeout') > -1) payload.timeout = 9999999
+        if (url.includes('NoTimeout')) payload.timeout = 9999999
         const response = await axios(payload)
         const data = await checkStatus(response)
         return checkCode(data)
@@ -91,15 +90,15 @@ export const $Api: ApiReturn = {
         return this.RESTful(url, data, 'post', header)
     },
     post(url, data, header = {}) {
-        return this.RESTful(url, qs.stringify(data), 'post', header)
+        return this.RESTful(url, data, 'post', header)
     },
     get(url, params = {}, header = {}) {
         return this.RESTful(url, params, 'get', header)
     },
     put(url, data, header = {}) {
-        return this.RESTful(url, qs.stringify(data), 'put', header)
+        return this.RESTful(url, data, 'put', header)
     },
     delete(url, data, header = {}) {
-        return this.RESTful(url, qs.stringify(data), 'delete', header)
-    }
+        return this.RESTful(url, data, 'delete', header)
+    },
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 interface SearchFunc {
     (source: string, subString: string): boolean
 }
@@ -32,7 +31,7 @@ function pickCard(x: any) {
 const myDeck = [
     { suit: 'diamonds', card: 2 },
     { suit: 'spades', card: 10 },
-    { suit: 'hearts', card: 4 }
+    { suit: 'hearts', card: 4 },
 ]
 const pickedCard1 = myDeck[pickCard(myDeck)]
 const pickedCard2 = pickCard(13)
@@ -55,7 +54,7 @@ interface GenericIdentityFn {
     <T>(arg: T): Promise<T>
 }
 
-const myIdentity: GenericIdentityFn = arg => {
+const myIdentity: GenericIdentityFn = (arg) => {
     return Promise.resolve(arg)
 }
 
@@ -76,8 +75,8 @@ const loggingIdentity3 = (arg: Lengthwise): Lengthwise => {
     return arg
 }
 
-loggingIdentity2(0)
-loggingIdentity3(0)
+loggingIdentity2('0')
+loggingIdentity3('0')
 
 // ==============
 
@@ -88,4 +87,4 @@ function getProperty<T, K extends keyof T>(obj: T, key: K) {
 const x = { a: 1, b: 2, c: 3, d: 4 }
 
 getProperty(x, 'a') // okay
-getProperty(x, 'm') // error: Argument of type 'm' isn't assignable to 'a' | 'b' | 'c' | 'd'.
+getProperty(x, 'b') // error: Argument of type 'm' isn't assignable to 'a' | 'b' | 'c' | 'd'.

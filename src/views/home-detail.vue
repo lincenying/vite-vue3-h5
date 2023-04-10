@@ -16,13 +16,14 @@
         </div>
     </div>
 </template>
+
 <script setup lang="ts">
 import type { Article } from '@/types'
 
 defineOptions({
-    name: 'home-detail-router'
+    name: 'home-detail-router',
 })
-// eslint-disable-next-line no-unused-vars
+
 const { route, router } = useGlobal()
 
 // pinia 状态管理 ===>
@@ -40,7 +41,7 @@ const { route, router } = useGlobal()
 // const prop = defineProps({
 //     imgArr: Array
 // })
-// eslint-disable-next-line no-unused-vars
+
 // const { imgArr } = toRefs(prop)
 // 父子组件通讯 <===
 
@@ -51,7 +52,7 @@ const { route, router } = useGlobal()
 let detail = $ref<Article>()
 
 useHead({
-    title: computed(() => detail?.c_title || '')
+    title: computed(() => detail?.c_title || ''),
 })
 
 const getDetail = async () => {

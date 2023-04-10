@@ -14,7 +14,7 @@ const prop = defineProps<{
 }>()
 
 defineOptions({
-    name: 'img-list'
+    name: 'img-list',
 })
 
 // pinia 状态管理 ===>
@@ -29,7 +29,7 @@ defineOptions({
 // pinia 状态管理 <===
 
 // 父子组件通讯 ===>
-// eslint-disable-next-line no-unused-vars
+
 const { imgArr } = toRefs(prop)
 // 父子组件通讯 <===
 

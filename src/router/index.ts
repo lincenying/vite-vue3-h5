@@ -10,7 +10,7 @@ Object.keys(pages).forEach((path: string) => {
         routes.push({
             name: name.replace('/', ''),
             path: name === '/home' ? '/' : name.replace(/-/g, '/'),
-            component: pages[path] // () => import('./views/*.vue')
+            component: pages[path], // () => import('./views/*.vue')
         })
     }
     return {}
@@ -22,7 +22,7 @@ console.log(routes)
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes
+    routes,
 })
 
 export default router

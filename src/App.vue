@@ -37,10 +37,9 @@ import 'vant/es/image-preview/style'
 import '@/assets/scss/style.scss'
 
 defineOptions({
-    name: 'app-root'
+    name: 'app-root',
 })
 
-// eslint-disable-next-line no-unused-vars
 const { route, globalStore } = useGlobal()
 
 // pinia 状态管理 ===>
@@ -73,7 +72,7 @@ watch(
             transitionName = 'slide-right'
         }
         metaIndex = newMetaIndex
-    }
+    },
 )
 
 const routeIsTab = computed(() => {

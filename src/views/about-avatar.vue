@@ -37,18 +37,18 @@
         </div>
     </div>
 </template>
+
 <script setup lang="ts">
 import { VueCropper } from 'vue-cropper'
 
 defineOptions({
-    name: 'avatar-router'
+    name: 'avatar-router',
 })
 
-// eslint-disable-next-line no-unused-vars
 const { router } = useGlobal()
 
 useHead({
-    title: 'Avatar Detail'
+    title: 'Avatar Detail',
 })
 
 // pinia 状态管理 ===>
@@ -66,7 +66,7 @@ useHead({
 // const prop = defineProps({
 //     imgArr: Array
 // })
-// eslint-disable-next-line no-unused-vars
+
 // const { imgArr } = toRefs(prop)
 // 父子组件通讯 <===
 
@@ -84,14 +84,14 @@ const cropperOption = reactive({
     outputType: 'png',
     fixedBox: false,
     canMove: true,
-    canMoveBox: false
+    canMoveBox: false,
 })
 let avatar = $ref('')
 const cropper = $ref<any>(null)
 const uploadImg = $ref<HTMLInputElement>()!
 
 const handleSave = async () => {
-    avatar = await new Promise(resolve => cropper.getCropData(resolve))
+    avatar = await new Promise((resolve) => cropper.getCropData(resolve))
 }
 const handleUpload = () => {
     cropper.getCropBlob((blob: Blob) => {
@@ -101,7 +101,7 @@ const handleUpload = () => {
     })
 }
 const handleUploadImg = (ev: any, num: number) => {
-    var file = ev.target.files[0]
+    const file = ev.target.files[0]
     const preg = /\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/
     if (!preg.test(ev.target?.value)) {
         console.log('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')

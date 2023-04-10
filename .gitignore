@@ -1,6 +1,9 @@
 .DS_Store
+.idea/
 node_modules
 /dist
+/wz
+wz.zip
 
 # local env files
 .env.local
@@ -10,7 +13,6 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 
 # Editor directories and files
 .idea
@@ -20,3 +22,13 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+*-port.txt
+
+package-lock.json
+admin.lock
+yarn-error.log
+server/config/secret.js
+server/config/mpapp.js
+server/config/shihua.js
+svg-backup/
+docs/

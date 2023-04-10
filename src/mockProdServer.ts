@@ -3,7 +3,7 @@ import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
 const modules: Record<string, any> = import.meta.glob('../mock/*.ts', { eager: true })
 
 const _mockModules: Array<string> = []
-Object.keys(modules).forEach(key => {
+Object.keys(modules).forEach((key) => {
     if (key.includes('/_')) {
         return
     }

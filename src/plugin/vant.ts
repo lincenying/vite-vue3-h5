@@ -1,20 +1,19 @@
-/* eslint-disable no-inline-comments */
-import { showDialog, showConfirmDialog, showToast, showLoadingToast, showSuccessToast, showFailToast, closeToast } from 'vant'
+import { closeToast, showConfirmDialog, showDialog, showFailToast, showLoadingToast, showSuccessToast, showToast } from 'vant'
 import type { App } from 'vue'
 
 function install(app: App) {
     app.config.globalProperties.$dialog = {
         default: showDialog,
-        confirm: showConfirmDialog
+        confirm: showConfirmDialog,
     }
     app.config.globalProperties.$toast = {
         default: showToast,
         loading: showLoadingToast,
         success: showSuccessToast,
         fail: showFailToast,
-        close: closeToast
+        close: closeToast,
     }
 }
 export default {
-    install
+    install,
 }

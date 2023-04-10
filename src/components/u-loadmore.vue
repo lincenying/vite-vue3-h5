@@ -5,19 +5,19 @@
             backgroundColor: bgColor,
             marginBottom: `${marginBottom}px`,
             marginTop: `${marginTop}px`,
-            height: height
+            height,
         }"
     >
         <!-- 加载中和没有更多的状态才显示两边的横线 -->
-        <div :class="status == 'loadmore' || status == 'nomore' ? 'u-more' : ''" class="u-load-more-inner">
+        <div :class="status === 'loadmore' || status === 'nomore' ? 'u-more' : ''" class="u-load-more-inner">
             <div class="u-loadmore-icon-wrap">
-                <van-loading v-show="status == 'loading' && icon" :color="iconColor" :type="iconType" size="18px" />
+                <van-loading v-show="status === 'loading' && icon" :color="iconColor" :type="iconType" size="18px" />
             </div>
             <!-- 如果没有更多的状态下，显示内容为dot（粗点），加载特定样式 -->
             <div
                 class="u-line-1"
                 :style="[loadTextStyle]"
-                :class="[status == 'nomore' && isDot == true ? 'u-dot-text' : 'u-more-text']"
+                :class="[status === 'nomore' && isDot === true ? 'u-dot-text' : 'u-more-text']"
                 @click="loadMore"
             >
                 {{ showText }}
@@ -50,32 +50,32 @@ export default {
         // 组件背景色
         bgColor: {
             type: String,
-            default: 'transparent'
+            default: 'transparent',
         },
         // 是否显示加载中的图标
         icon: {
             type: Boolean,
-            default: true
+            default: true,
         },
         // 字体大小
         fontSize: {
             type: String,
-            default: '14'
+            default: '14',
         },
         // 字体颜色
         color: {
             type: String,
-            default: '#606266'
+            default: '#606266',
         },
         // 组件状态，loadmore-加载前的状态，loading-加载中的状态，nomore-没有更多的状态
         status: {
             type: String,
-            default: 'loadmore'
+            default: 'loadmore',
         },
         // 加载中状态的图标，spinner-花朵状图标，circular-圆圈状图标
         iconType: {
             type: String,
-            default: 'circular'
+            default: 'circular',
         },
         // 显示的文字
         loadText: {
@@ -84,41 +84,41 @@ export default {
                 return {
                     loadmore: '加载更多',
                     loading: '正在加载...',
-                    nomore: '没有更多了'
+                    nomore: '没有更多了',
                 }
-            }
+            },
         },
         // 在“没有更多”状态下，是否显示粗点
         isDot: {
             type: Boolean,
-            default: false
+            default: false,
         },
         // 加载中显示圆圈动画时，动画的颜色
         iconColor: {
             type: String,
-            default: '#b7b7b7'
+            default: '#b7b7b7',
         },
         // 上边距
         marginTop: {
             type: [String, Number],
-            default: 0
+            default: 0,
         },
         // 下边距
         marginBottom: {
             type: [String, Number],
-            default: 0
+            default: 0,
         },
         // 高度，单位rpx
         height: {
             type: [String, Number],
-            default: 'auto'
-        }
+            default: 'auto',
+        },
     },
     emits: ['loadmore'],
     data() {
         return {
             // 粗点
-            dotText: '●'
+            dotText: '●',
         }
     },
     computed: {
@@ -129,14 +129,14 @@ export default {
                 fontSize: `${this.fontSize}px`,
                 position: 'relative',
                 zIndex: 1,
-                backgroundColor: this.bgColor
+                backgroundColor: this.bgColor,
                 // 如果是加载中状态，动画和文字需要距离近一点
             }
         },
         // 加载中圆圈动画的样式
         cricleStyle() {
             return {
-                borderColor: `#e5e5e5 #e5e5e5 #e5e5e5 ${this.circleColor}`
+                borderColor: `#e5e5e5 #e5e5e5 #e5e5e5 ${this.circleColor}`,
             }
         },
         // 加载中花朵动画形式
@@ -152,14 +152,14 @@ export default {
             else if (this.status === 'nomore' && this.isDot) text = this.dotText
             else text = this.loadText.nomore
             return text
-        }
+        },
     },
     methods: {
         loadMore() {
             // 只有在“加载更多”的状态下才发送点击事件，内容不满一屏时无法触发底部上拉事件，所以需要点击来触发
             if (this.status === 'loadmore') this.$emit('loadmore')
-        }
-    }
+        },
+    },
 }
 </script>
 

@@ -1,6 +1,6 @@
 import ls from 'store2'
+import { Random, sleep as Sleep } from 'lcy-utils'
 import type { Fn } from '@/types'
-import { Sleep, Random } from '@/utils'
 
 export const useGlobal = () => {
     const ins = getCurrentInstance()!
@@ -11,14 +11,12 @@ export const useGlobal = () => {
     const router = useRouter()
     const globalStore = useGlobalStore()
 
-    // eslint-disable-next-line no-unused-vars
-
     return {
         ctx,
         options,
         route,
         router,
-        globalStore
+        globalStore,
     }
 }
 
@@ -71,7 +69,6 @@ export interface userListsInit {
 }
 
 export const useLists = (init: userListsInit) => {
-    // eslint-disable-next-line no-unused-vars
     const { globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
@@ -92,7 +89,7 @@ export const useLists = (init: userListsInit) => {
         isLock: false,
         loading: false,
         error: false,
-        finished: false
+        finished: false,
         // <==滚动加载
     })
 
@@ -164,7 +161,7 @@ export const useLists = (init: userListsInit) => {
         getList,
         onRefresh,
         reachBottom,
-        lazyLoading
+        lazyLoading,
     }
 }
 
@@ -217,7 +214,6 @@ interface useTabListsInit {
 }
 
 export const useTabLists = (init: useTabListsInit) => {
-    // eslint-disable-next-line no-unused-vars
     const { options, globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
@@ -232,7 +228,7 @@ export const useTabLists = (init: useTabListsInit) => {
                 refreshing: false,
                 loading: false,
                 error: false,
-                finished: false
+                finished: false,
             },
             {
                 page: 1,
@@ -240,7 +236,7 @@ export const useTabLists = (init: useTabListsInit) => {
                 refreshing: false,
                 loading: false,
                 error: false,
-                finished: false
+                finished: false,
             },
             {
                 page: 1,
@@ -248,7 +244,7 @@ export const useTabLists = (init: useTabListsInit) => {
                 refreshing: false,
                 loading: false,
                 error: false,
-                finished: false
+                finished: false,
             },
             {
                 page: 1,
@@ -256,9 +252,9 @@ export const useTabLists = (init: useTabListsInit) => {
                 refreshing: false,
                 loading: false,
                 error: false,
-                finished: false
-            }
-        ]
+                finished: false,
+            },
+        ],
         // <==列表数据
     })
 
@@ -320,6 +316,6 @@ export const useTabLists = (init: useTabListsInit) => {
         res,
         getList,
         onRefresh,
-        activeIndex
+        activeIndex,
     }
 }
