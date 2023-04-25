@@ -6,7 +6,7 @@ import { defineConfig, loadEnv } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
-import { viteMockServe } from 'vite-plugin-mock'
+import { viteMockServe } from '@lincy/vite-plugin-mock'
 
 import vueSvgPlugin from 'vite-svg-loader'
 import UnoCSS from 'unocss/vite'
@@ -32,29 +32,22 @@ export default defineConfig(({ mode, command }) => {
     const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
     const localMock = true
-    const prodMock = false
 
     const config = {
         css: {
             preprocessorOptions: {
                 scss: {
                     additionalData: `
-                    $vmDesignWidth: ${vmDesignWidth};
-                    $vmDesignMultiple: ${vmDesignMultiple};
-                    $minWindow: ${minWindow};
-                    $maxWindow: ${maxWindow};
-                    $vmFontSize: ${vmFontSize};
-                `,
+                        $vmDesignWidth: ${vmDesignWidth};
+                        $vmDesignMultiple: ${vmDesignMultiple};
+                        $maxWindow: ${maxWindow};
+                        $minWindow: ${minWindow};
+                        $vmFontSize: ${vmFontSize};
+                    `,
                 },
             },
         },
-        define: {
-            _designWidth: JSON.stringify(vmDesignWidth),
-            _designMultiple: JSON.stringify(vmDesignMultiple),
-            _minWindow: JSON.stringify(minWindow),
-            _maxWindow: JSON.stringify(maxWindow),
-            _fontsize: JSON.stringify(vmFontSize),
-        },
+
         plugins: [
             createHtmlPlugin({
                 inject: {
@@ -63,6 +56,11 @@ export default defineConfig(({ mode, command }) => {
                         VITE_APP_API_DOMAIN: process.env.VITE_APP_API_DOMAIN,
                         VITE_APP_API: process.env.VITE_APP_API,
                         MODE: mode,
+                        _designWidth: JSON.stringify(vmDesignWidth),
+                        _designMultiple: JSON.stringify(vmDesignMultiple),
+                        _maxWindow: JSON.stringify(maxWindow),
+                        _minWindow: JSON.stringify(minWindow),
+                        _fontSize: JSON.stringify(vmFontSize),
                     },
                 },
             }),
@@ -71,7 +69,7 @@ export default defineConfig(({ mode, command }) => {
                     vue: vuePlugin({
                         template: {
                             compilerOptions: {
-                                isCustomElement: (tag) => ['def'].includes(tag),
+                                isCustomElement: tag => ['def'].includes(tag),
                             },
                         },
                     }),
@@ -90,12 +88,7 @@ export default defineConfig(({ mode, command }) => {
             vueSvgPlugin(),
             viteMockServe({
                 mockPath: 'mock',
-                localEnabled: command === 'serve' && localMock,
-                prodEnabled: command !== 'serve' && prodMock,
-                injectCode: `
-                  import { setupProdMockServer } from './mockProdServer';
-                  setupProdMockServer();
-                `,
+                enable: command === 'serve' && localMock,
                 logger: true,
             }),
             AutoImport({
@@ -114,10 +107,10 @@ export default defineConfig(({ mode, command }) => {
                     '@vueuse/core',
                     '@vueuse/head',
                     {
-                        pinia: ['defineStore', 'storeToRefs'],
+                        'pinia': ['defineStore', 'storeToRefs'],
                         'vue-router': ['createRouter', 'createWebHashHistory'],
-                        vant: ['showDialog'],
-                        'lcy-utils': ['deepClone', 'deepMerge', 'UTC2Date'],
+                        'vant': ['showDialog'],
+                        '@lincy/utils': ['deepClone', 'deepMerge', 'UTC2Date'],
                     },
                 ],
                 dts: 'src/auto-imports.d.ts',

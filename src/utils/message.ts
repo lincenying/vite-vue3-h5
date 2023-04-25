@@ -12,10 +12,12 @@ export default {
         if (!config) {
             content = '接口返回数据错误'
             type = 'danger'
-        } else if (typeof config === 'string') {
+        }
+        else if (typeof config === 'string') {
             content = config
             type = 'danger'
-        } else {
+        }
+        else {
             content = config.content
             type = config.type
         }

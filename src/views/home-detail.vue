@@ -6,7 +6,7 @@
             <div v-else class="article-content flex flex-col">
                 <div class="title text-16px leading-20px">{{ detail.c_title }}</div>
                 <p class="date-time">{{ detail.c_posttime }}</p>
-                <div class="content text-green-500 p-10px text-12px font-500 rounded-full" v-html="detail.c_content"></div>
+                <div class="content text-green-500 p-10px text-12px font-500 rounded-full" v-html="detail.c_content" />
             </div>
             <!-- <div v-if="detail" class="replies">
                 <van-panel v-for="(item, index) in detail.replies" :key="index" :title="item.author.loginname" :desc="item.create_at" status="">
@@ -55,16 +55,16 @@ useHead({
     title: computed(() => detail?.c_title || ''),
 })
 
-const getDetail = async () => {
+async function getDetail() {
     // this.$store.commit('global/routerLoading', true)
     const { code, data } = await $Api.get(`article/detail/${route.query.id}`, {})
-    if (code === 200) {
+    if (code === 200)
         detail = data
-    }
+
     // this.$store.commit('global/routerLoading', false)
 }
 
-const onClickLeft = () => {
+function onClickLeft() {
     router.go(-1)
 }
 

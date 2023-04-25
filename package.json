@@ -1,9 +1,10 @@
 {
   "name": "vite-vue3",
-  "version": "3.0.0",
-  "author": "lincenying <lincenying@qq.com>",
-  "private": true,
   "type": "module",
+  "version": "3.0.0",
+  "private": true,
+  "packageManager": "pnpm@7.29.1",
+  "author": "lincenying <lincenying@qq.com>",
   "scripts": {
     "postinstall": "husky install",
     "del": "sh delete-ts.sh",
@@ -14,62 +15,62 @@
     "lint:fix": "eslint ./src --ext .vue,.ts,.tsx --fix"
   },
   "dependencies": {
-    "@vueuse/core": "^9.13.0",
-    "@vueuse/head": "^1.1.23",
-    "axios": "^1.3.5",
+    "@lincy/utils": "^0.3.0",
+    "@vueuse/core": "^10.1.0",
+    "@vueuse/head": "^1.1.26",
+    "axios": "^1.3.6",
     "default-passive-events": "^2.0.0",
-    "lcy-utils": "^0.2.2",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
-    "pinia": "^2.0.34",
+    "pinia": "^2.0.35",
     "qs": "^6.11.1",
     "store2": "^2.14.2",
-    "vant": "^4.1.2",
+    "vant": "^4.2.0",
     "vue": "^3.2.47",
     "vue-cropper": "^1.0.8",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.192",
+    "@lincy/eslint-config": "^1.1.1",
+    "@lincy/stylelint-config": "^1.15.10",
+    "@lincy/vite-plugin-mock": "^3.0.0",
+    "@types/lodash": "^4.14.194",
     "@types/qs": "^6.9.7",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "eslint": "^8.38.0",
-    "eslint-config-lcy": "^1.0.8",
+    "eslint": "^8.39.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
     "mockjs": "^1.1.0",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.23",
     "postcss-pxtorem": "^6.0.0",
-    "prettier": "^2.8.7",
-    "sass": "^1.61.0",
-    "stylelint-config-lcy": "^1.15.10",
+    "sass": "^1.62.0",
     "typescript": "^5.0.4",
-    "unocss": "^0.51.2",
-    "unplugin-auto-import": "^0.15.2",
+    "unocss": "^0.51.8",
+    "unplugin-auto-import": "^0.15.3",
     "unplugin-vue-components": "^0.24.1",
     "unplugin-vue-macros": "^2.0.0",
     "url-search-params-polyfill": "^8.1.1",
-    "vite": "^4.2.1",
+    "vite": "^4.3.1",
     "vite-plugin-html": "^3.2.0",
-    "vite-plugin-inspect": "^0.7.19",
-    "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-inspect": "^0.7.24",
+    "vite-plugin-mock": "^3.0.0",
     "vite-plugin-style-import": "^2.0.0",
     "vite-svg-loader": "^4.0.0"
   },
-  "lint-staged": {
-    "*.{js,ts,tsx,vue}": [
-      "eslint --fix"
-    ]
-  },
-  "packageManager": "pnpm@7.29.1",
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
         "rollup",
         "postcss",
+        "esbuild",
         "prettier"
       ]
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue}": [
+      "eslint --fix"
+    ]
   }
 }

@@ -21,18 +21,18 @@ axios.interceptors.request.use(
     (config) => {
         return config
     },
-    (error) => Promise.resolve(error.response || error),
+    error => Promise.resolve(error.response || error),
 )
 
 axios.interceptors.response.use(
-    (response) => response,
-    (error) => Promise.resolve(error.response || error),
+    response => response,
+    error => Promise.resolve(error.response || error),
 )
 
 function checkStatus(response: AxiosResponse) {
-    if (response && (response.status === 200 || response.status === 304)) {
+    if (response && (response.status === 200 || response.status === 304))
         return response
-    }
+
     return {
         data: {
             code: -404,
@@ -43,11 +43,11 @@ function checkStatus(response: AxiosResponse) {
 }
 
 function checkCode(res: any) {
-    if (res.data.code === -500) {
+    if (res.data.code === -500)
         window.location.href = '/backend'
-    } else if (res.data.code === -400) {
+    else if (res.data.code === -400)
         window.location.href = '/'
-    }
+
     return res && res.data
 }
 
@@ -64,12 +64,13 @@ export const $Api: ApiReturn = {
                 ...header,
             },
         }
-        if (method === 'get') {
+        if (method === 'get')
             payload.params = params
-        } else {
+        else
             payload.data = params
-        }
-        if (url.includes('NoTimeout')) payload.timeout = 9999999
+
+        if (url.includes('NoTimeout'))
+            payload.timeout = 9999999
         const response = await axios(payload)
         const data = await checkStatus(response)
         return checkCode(data)
@@ -78,11 +79,11 @@ export const $Api: ApiReturn = {
         payload.cancelToken = cancelToken
         payload.method = payload.method || 'get'
         payload.url = url || ''
-        if (payload.method === 'get') {
+        if (payload.method === 'get')
             payload.params = params
-        } else {
+        else
             payload.data = params
-        }
+
         const response = await axios(payload)
         return checkStatus(response)
     },

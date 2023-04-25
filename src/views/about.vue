@@ -33,7 +33,7 @@
             </div>
             <div class="mt-10px">
                 <van-button type="primary" size="small" @click="previewShow = true">图片预览</van-button>
-                <van-image-preview v-model:show="previewShow" :images="images"></van-image-preview>
+                <van-image-preview v-model:show="previewShow" :images="images" />
             </div>
             <div class="mt-10px">
                 <van-button type="primary" size="small" @click="dialogShow = true">组件调用Dialog</van-button>
@@ -54,7 +54,7 @@
                 <van-date-picker v-model="res.currentDate" type="date" @confirm="dateChange" @cancel="res.show = false" />
             </van-popup>
             <van-dialog v-model:show="dialogShow" :before-close="dialogBeforeClose" title="标题" show-cancel-button>
-                <img src="https://img.yzcdn.cn/vant/apple-3.jpg" style="max-width: 100%" />
+                <img src="https://img.yzcdn.cn/vant/apple-3.jpg" style="max-width: 100%">
             </van-dialog>
         </div>
     </div>
@@ -107,15 +107,15 @@ const res = reactive({
     dateText: '',
 })
 
-const showPopup = () => {
+function showPopup() {
     res.show = true
 }
-const dateChange = (val: { selectedValues: any[] }) => {
+function dateChange(val: { selectedValues: any[] }) {
     res.dateText = val.selectedValues.join('-')
     res.show = false
 }
 
-const handleToast = () => {
+function handleToast() {
     const toast1 = ctx.$toast.loading({
         duration: 0,
         mask: true,
@@ -125,18 +125,19 @@ const handleToast = () => {
         toast1.close()
     }, 3000)
 }
-const dialogBeforeClose = (action: 'confirm' | 'cancel'): any => {
+function dialogBeforeClose(action: 'confirm' | 'cancel'): any {
     return new Promise((resolve) => {
         if (action === 'confirm') {
             setTimeout(() => {
                 resolve(true)
             }, 1000)
-        } else {
+        }
+        else {
             resolve(true)
         }
     })
 }
-const handleDialog = () => {
+function handleDialog() {
     ctx.$dialog
         .confirm({
             title: '提示',
@@ -156,7 +157,7 @@ const images = ref([
     'https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg',
     'https://img.yzcdn.cn/public_files/2017/09/05/fd08f07665ed67d50e11b32a21ce0682.jpg',
 ])
-const handleClickImg = (props: { index: number }) => {
+function handleClickImg(props: { index: number }) {
     showImagePreview({
         images: images.value,
         startPosition: props.index,

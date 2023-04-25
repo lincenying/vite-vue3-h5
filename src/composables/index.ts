@@ -1,8 +1,8 @@
 import ls from 'store2'
-import { Random, sleep as Sleep } from 'lcy-utils'
+import { Random, sleep as Sleep } from '@lincy/utils'
 import type { Fn } from '@/types'
 
-export const useGlobal = () => {
+export function useGlobal() {
     const ins = getCurrentInstance()!
 
     const ctx = ins.appContext.config.globalProperties
@@ -23,15 +23,18 @@ export const useGlobal = () => {
 // autoUnlock === true 不管 fn 返回什么, 都自动解锁
 // autoUnlock === false 不管 fn 返回什么, 都不自动解锁
 // autoUnlock === 'auto' 当 fn 返回 false 时, 不自动解锁, 返回其他值时, 自动解锁
-export const useLockFn = (fn: Fn, autoUnlock: boolean | string = 'auto') => {
+export function useLockFn(fn: Fn, autoUnlock: boolean | string = 'auto') {
     const [lock, toggleLock] = useToggle(false)
     return async (...args: any[]) => {
-        if (lock.value) return
+        if (lock.value)
+            return
         toggleLock(true)
         try {
             const $return: any = await fn(...args)
-            if (autoUnlock === true || (autoUnlock === 'auto' && $return !== false)) toggleLock(false)
-        } catch (e) {
+            if (autoUnlock === true || (autoUnlock === 'auto' && $return !== false))
+                toggleLock(false)
+        }
+        catch (e) {
             toggleLock(false)
             throw e
         }
@@ -68,7 +71,7 @@ export interface userListsInit {
     api: userListsInitApi
 }
 
-export const useLists = (init: userListsInit) => {
+export function useLists(init: userListsInit) {
     const { globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
@@ -94,18 +97,21 @@ export const useLists = (init: userListsInit) => {
     })
 
     const getList = async () => {
-        if (res.isLock) return
+        if (res.isLock)
+            return
         res.isLock = true
         // 异步更新数据
         res.timer = setTimeout(() => {
             globalStore.$patch({ routerLoading: true })
         }, 500)
         // 第一页时不显示loading
-        if (res.page > 1) res.loading = true
+        if (res.page > 1)
+            res.loading = true
         await Sleep(Random(300, 600))
         const { data, code } = await $Api[init.api.method](init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
-        if (res.timer) clearTimeout(res.timer)
+        if (res.timer)
+            clearTimeout(res.timer)
         globalStore.$patch({ routerLoading: false })
         res.isLoaded = true
         if (code === 200) {
@@ -113,7 +119,8 @@ export const useLists = (init: userListsInit) => {
             if (res.isRefresh) {
                 res.list = [].concat(data.data)
                 res.isRefresh = false
-            } else {
+            }
+            else {
                 res.list = res.list.concat(data.data)
             }
             await nextTick()
@@ -123,12 +130,14 @@ export const useLists = (init: userListsInit) => {
             if (data.last_page <= data.current_page) {
                 res.finished = true
                 res.loadStatus = 'nomore'
-            } else {
+            }
+            else {
                 res.loadStatus = 'loadmore'
                 res.page += 1
             }
             res.isLock = false
-        } else {
+        }
+        else {
             res.error = true
         }
     }
@@ -141,7 +150,8 @@ export const useLists = (init: userListsInit) => {
     }
 
     const reachBottom = () => {
-        if (res.loadStatus === 'nomore' || res.loadStatus === 'loading') return
+        if (res.loadStatus === 'nomore' || res.loadStatus === 'loading')
+            return
         res.loadStatus = 'loading'
         getList()
     }
@@ -150,9 +160,8 @@ export const useLists = (init: userListsInit) => {
         const scrollTop = body.scrollTop
         const clientHeight = body.clientHeight
         const scrollHeight = body.scrollHeight
-        if (scrollTop + clientHeight >= scrollHeight - 300) {
+        if (scrollTop + clientHeight >= scrollHeight - 300)
             reachBottom()
-        }
     }
 
     return {
@@ -165,13 +174,13 @@ export const useLists = (init: userListsInit) => {
     }
 }
 
-export const useSaveScroll = () => {
+export function useSaveScroll() {
     const ins = getCurrentInstance()
     const route = useRoute()
     let name: string | undefined = ''
-    if (ins) {
+    if (ins)
         name = ins.type.name
-    }
+
     onActivated(() => {
         if (name) {
             const body = document.querySelector(`.${name}`)
@@ -185,9 +194,9 @@ export const useSaveScroll = () => {
 
     onBeforeRouteLeave((to, from, next) => {
         const body = document.querySelector('.body')
-        if (body) {
+        if (body)
             ls.set(from.fullPath, body.scrollTop || 0)
-        }
+
         next()
     })
 }
@@ -213,7 +222,7 @@ interface useTabListsInit {
     tabs: string[]
 }
 
-export const useTabLists = (init: useTabListsInit) => {
+export function useTabLists(init: useTabListsInit) {
     const { options, globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
@@ -271,34 +280,36 @@ export const useTabLists = (init: useTabListsInit) => {
             globalStore.$patch({ routerLoading: true })
         }, 500)
         // 第一页直接用路由loading
-        if (list.page === 1) {
+        if (list.page === 1)
             list.loading = false
-        }
+
         // 异步更新数据
         const { method, url, config } = res.api[index]
         await Sleep(Random(300, 600))
         const { code, data } = await $Api[method](url, { ...config, page: list.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
-        if (res.timer) clearTimeout(res.timer)
+        if (res.timer)
+            clearTimeout(res.timer)
         globalStore.$patch({ routerLoading: false })
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据
             if (list.refreshing) {
                 list.items = [].concat(data.data)
                 list.refreshing = false
-            } else {
+            }
+            else {
                 list.items = list.items.concat(data.data)
             }
             await nextTick()
             // 加载状态结束
             list.loading = false
             // 数据全部加载完成
-            if (data.last_page <= data.current_page) {
+            if (data.last_page <= data.current_page)
                 list.finished = true
-            } else {
+            else
                 list.page += 1
-            }
-        } else {
+        }
+        else {
             list.error = true
         }
     }

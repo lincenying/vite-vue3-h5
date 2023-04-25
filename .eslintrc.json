@@ -1,21 +1,19 @@
 {
-    "extends": ["lcy", "./.eslintrc-auto-import.json"],
-    "env": {
-        "node": true,
-        "vue/setup-compiler-macros": true
-    },
-    "globals": {
-        "echarts": true,
-        "$$": "readonly",
-        "$ref": "readonly",
-        "$computed": "readonly",
-        "$shallowRef": "readonly",
-        "$customRef": "readonly",
-        "$toRef": "readonly",
-        "defineOptions": "readonly",
-        "definePropsRefs": "readonly"
-    },
-    "rules": {
-
-    }
+  "extends": ["@lincy", "./.eslintrc-auto-import.json"],
+  "env": {
+    "node": true,
+    "vue/setup-compiler-macros": true
+  },
+  "globals": {
+    "echarts": true,
+    "$$": "readonly",
+    "$ref": "readonly",
+    "$computed": "readonly",
+    "$shallowRef": "readonly",
+    "$customRef": "readonly",
+    "$toRef": "readonly",
+    "defineOptions": "readonly",
+    "definePropsRefs": "readonly"
+  },
+  "rules": {}
 }

@@ -15,7 +15,7 @@
                 :center-box="true"
                 :auto-crop-width="cropperOption.autoCropWidth"
                 :auto-crop-height="cropperOption.autoCropHeight"
-            ></VueCropper>
+            />
         </div>
         <div style="text-align: center">
             <van-button type="primary" size="small" @click="handleSave">保存</van-button>
@@ -29,11 +29,11 @@
                     style="position: absolute; clip: rect(0 0 0 0)"
                     accept="image/png, image/jpeg, image/gif, image/jpg"
                     @change="handleUploadImg($event, 1)"
-                />
+                >
             </label>
         </div>
         <div v-if="avatar" class="preview">
-            <img :src="avatar" alt="" />
+            <img :src="avatar" alt="">
         </div>
     </div>
 </template>
@@ -90,17 +90,17 @@ let avatar = $ref('')
 const cropper = $ref<any>(null)
 const uploadImg = $ref<HTMLInputElement>()!
 
-const handleSave = async () => {
-    avatar = await new Promise((resolve) => cropper.getCropData(resolve))
+async function handleSave() {
+    avatar = await new Promise(resolve => cropper.getCropData(resolve))
 }
-const handleUpload = () => {
+function handleUpload() {
     cropper.getCropBlob((blob: Blob) => {
         const formData = new FormData()
         formData.append('file', blob, 'test.jpg')
         $Api.RESTful('qiniu', formData, 'post')
     })
 }
-const handleUploadImg = (ev: any, num: number) => {
+function handleUploadImg(ev: any, num: number) {
     const file = ev.target.files[0]
     const preg = /\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/
     if (!preg.test(ev.target?.value)) {
@@ -113,12 +113,13 @@ const handleUploadImg = (ev: any, num: number) => {
         if (typeof e.target.result === 'object') {
             // 把Array Buffer转化为blob 如果是base64不需要
             data = window.URL.createObjectURL(new Blob([e.target.result]))
-        } else {
+        }
+        else {
             data = e.target.result
         }
-        if (num === 1) {
+        if (num === 1)
             cropperOption.img = data
-        }
+
         uploadImg.value = ''
     }
     // 转化为base64
@@ -127,7 +128,7 @@ const handleUploadImg = (ev: any, num: number) => {
     reader.readAsArrayBuffer(file)
 }
 
-const onClickLeft = () => {
+function onClickLeft() {
     router.go(-1)
 }
 </script>

@@ -6,8 +6,8 @@
                 <van-grid square>
                     <van-grid-item v-for="value in 28" :key="value" icon="photo-o" text="文字" />
                 </van-grid>
-                <div class="w-30px h-30px"><MyIcon></MyIcon></div>
-                <JsxComponents></JsxComponents>
+                <div class="w-30px h-30px"><MyIcon /></div>
+                <JsxComponents />
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@ useHead({
 // const dataIsReady = inject('dataIsReady')
 // 全局组件通信 <===
 
-const onClickLeft = () => {
+function onClickLeft() {
     router.go(-1)
 }
 </script>
