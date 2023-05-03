@@ -8,7 +8,7 @@
 }
 
 html {
-    --body-width: 375px;
+    --body-width: #{$vmDesignWidth}px;
     --tabbar-height: 50px;
 
     font-size: math.div($vmFontSize, $vmDesignWidth) * 100vw;
@@ -18,8 +18,8 @@ html {
         font-size: math.div($vmFontSize, $vmDesignWidth) * $minWindow;
     }
 
-    @media screen and (min-width: 540PX) {
-        --body-width: 540PX;
+    @media screen and (min-width: $maxWindow) {
+        --body-width: $maxWindow;
 
         font-size: math.div($vmFontSize, $vmDesignWidth) * $maxWindow;
     }
@@ -102,10 +102,6 @@ body {
 }
 
 /* 通用样式 */
-
-.margin-top-20px {
-    margin-top: 10px;
-}
 
 .slide-left-enter,
 .slide-right-leave-active {
