@@ -1,16 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pxtorem = require('postcss-pxtorem')
 
-var charsetRemoval = () => {
+function charsetRemoval() {
     return {
         postcssPlugin: 'internal:charset-removal',
         AtRule: {
-            charset: atRule => {
-                if (atRule.name === 'charset') {
+            charset: (atRule) => {
+                if (atRule.name === 'charset')
                     atRule.remove()
-                }
-            }
-        }
+            },
+        },
     }
 }
 
@@ -21,8 +19,8 @@ module.exports = () => {
             pxtorem({
                 rootValue: 37.5,
                 propList: ['*'],
-                selectorBlackList: ['van-circle__layer']
-            })
-        ]
+                selectorBlackList: ['van-circle__layer'],
+            }),
+        ],
     }
 }
