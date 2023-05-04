@@ -1,25 +1,25 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "module": "ESNext",
-        "target": "ESNext",
-        "lib": ["DOM", "ESNext"],
-        "strict": true,
-        "esModuleInterop": true,
-        "jsx": "preserve",
-        "skipLibCheck": true,
-        "importHelpers": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "noUnusedLocals": true,
-        "strictNullChecks": true,
-        "allowJs": true,
-        "forceConsistentCasingInFileNames": true,
-        "types": ["vite/client", "vue/ref-macros", "unplugin-vue-macros/macros-global"],
-        "paths": {
-            "@/*": ["src/*"]
-        },
-        "outDir": "build"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "vite/client", "vue/ref-macros", "unplugin-vue-macros/macros-global"],
+    "paths": {
+      "@/*": ["src/*"]
     },
-    "exclude": ["node_modules", "dist/**/*", "public/**/*"]
+    "outDir": "build"
+  },
+  "exclude": ["node_modules", "dist/**/*", "public/**/*"]
 }
