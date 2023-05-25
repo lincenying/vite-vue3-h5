@@ -30,7 +30,7 @@
 import type { userListsInitApi } from '@/composables'
 
 defineOptions({
-    name: 'home-router',
+    name: 'HomeRouter',
 })
 
 const api: userListsInitApi = {

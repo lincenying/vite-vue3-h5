@@ -42,7 +42,7 @@
 import { VueCropper } from 'vue-cropper'
 
 defineOptions({
-    name: 'avatar-router',
+    name: 'AvatarRouter',
 })
 
 const { router } = useGlobal()

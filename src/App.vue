@@ -37,7 +37,7 @@ import 'vant/es/image-preview/style'
 import '@/assets/scss/style.scss'
 
 defineOptions({
-    name: 'app-root',
+    name: 'AppRoot',
 })
 
 const { route, globalStore } = useGlobal()

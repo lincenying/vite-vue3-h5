@@ -5,15 +5,7 @@
     "vue/setup-compiler-macros": true
   },
   "globals": {
-    "echarts": true,
-    "$$": "readonly",
-    "$ref": "readonly",
-    "$computed": "readonly",
-    "$shallowRef": "readonly",
-    "$customRef": "readonly",
-    "$toRef": "readonly",
-    "defineOptions": "readonly",
-    "definePropsRefs": "readonly"
+    "echarts": true
   },
   "rules": {}
 }

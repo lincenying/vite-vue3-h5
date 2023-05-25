@@ -21,7 +21,7 @@
 import type { Article } from '@/types'
 
 defineOptions({
-    name: 'home-detail-router',
+    name: 'HomeDetailRouter',
 })
 
 const { route, router } = useGlobal()

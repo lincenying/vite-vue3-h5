@@ -17,7 +17,7 @@
 import MyIcon from '@/assets/svgs/mp3.svg?component'
 
 defineOptions({
-    name: 'about-detail-router',
+    name: 'AboutDetailRouter',
 })
 
 const { router } = useGlobal()

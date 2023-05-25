@@ -64,7 +64,7 @@
 import { showImagePreview } from 'vant'
 
 defineOptions({
-    name: 'about-router',
+    name: 'AboutRouter',
 })
 
 const { ctx } = useGlobal()

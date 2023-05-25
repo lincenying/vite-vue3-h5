@@ -14,7 +14,7 @@ const prop = defineProps<{
 }>()
 
 defineOptions({
-    name: 'img-list',
+    name: 'ImgList',
 })
 
 // pinia 状态管理 ===>

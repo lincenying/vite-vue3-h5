@@ -25,7 +25,7 @@
 import type { userListsInitApi } from '@/composables'
 
 defineOptions({
-    name: 'lists-router',
+    name: 'ListsRouter',
 })
 
 const api: userListsInitApi[] = [

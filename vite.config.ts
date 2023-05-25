@@ -119,7 +119,6 @@ export default defineConfig(({ mode, command }) => {
                 resolvers: [VantResolver()],
                 defaultExportByFilename: false,
                 vueTemplate: true,
-                cache: false,
             }),
             Components({
                 include: [
