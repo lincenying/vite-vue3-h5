@@ -3,8 +3,8 @@
 :root {
     --design-width: #{$vmDesignWidth}px;
     --design-multiple: #{$vmDesignMultiple};
-    --max-window: #{$maxWindow};
-    --min-window: #{$minWindow};
+    --max-window: #{$vmMaxWindow};
+    --min-window: #{$vmMinWindow};
 }
 
 html {
@@ -14,14 +14,14 @@ html {
     font-size: math.div($vmFontSize, $vmDesignWidth) * 100vw;
 
     // 同时，通过Media Queries 限制根元素最大最小值
-    @media screen and (max-width: $minWindow) {
-        font-size: math.div($vmFontSize, $vmDesignWidth) * $minWindow;
+    @media screen and (max-width: $vmMinWindow) {
+        font-size: math.div($vmFontSize, $vmDesignWidth) * $vmMinWindow;
     }
 
-    @media screen and (min-width: $maxWindow) {
-        --body-width: $maxWindow;
+    @media screen and (min-width: $vmMaxWindow) {
+        --body-width: $vmMaxWindow;
 
-        font-size: math.div($vmFontSize, $vmDesignWidth) * $maxWindow;
+        font-size: math.div($vmFontSize, $vmDesignWidth) * $vmMaxWindow;
     }
 }
 
