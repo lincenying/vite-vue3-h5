@@ -2,8 +2,6 @@
 .idea/
 node_modules
 /dist
-/wz
-wz.zip
 
 # local env files
 .env.local
@@ -16,7 +14,6 @@ yarn-error.log*
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
