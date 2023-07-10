@@ -1,6 +1,6 @@
 import ls from 'store2'
 import { Random, sleep as Sleep } from '@lincy/utils'
-import type { Fn } from '@/types'
+import type { Fn, TopicList, useTabList, useTabListsInit, userListConfig, userListsInit } from '@/types'
 
 export function useGlobal() {
     const ins = getCurrentInstance()!
@@ -41,41 +41,11 @@ export function useLockFn(fn: Fn, autoUnlock: boolean | string = 'auto') {
     }
 }
 
-interface userListConfig {
-    timer: any
-    isLoaded: boolean
-    // 下拉刷新 ==>
-    isLoading: boolean
-    isRefresh: boolean
-    // <==下拉刷新
-    // 列表数据 ==>
-    page: number
-    list: any[]
-    // <==列表数据
-    // 滚动加载 ==>
-    loadStatus: 'loadmore' | 'nomore' | 'loading'
-    isLock: boolean
-    loading: boolean
-    error: boolean
-    finished: boolean
-    [propName: string]: any
-}
-
-export interface userListsInitApi {
-    method: 'get' | 'post' | 'put' | 'delete'
-    url: string
-    config: Record<string, any>
-}
-
-export interface userListsInit {
-    api: userListsInitApi
-}
-
-export function useLists(init: userListsInit) {
+export function useLists<T>(init: userListsInit) {
     const { globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
-    const res = reactive<userListConfig>({
+    const res: userListConfig<T> = reactive({
         ...init,
         timer: null,
         isLoaded: false,
@@ -108,7 +78,7 @@ export function useLists(init: userListsInit) {
         if (res.page > 1)
             res.loading = true
         await Sleep(Random(300, 600))
-        const { data, code } = await $Api[init.api.method](init.api.url, { ...init.api.config, page: res.page })
+        const { data, code } = await $api[init.api.method]<ResDataLists<T>>(init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer)
             clearTimeout(res.timer)
@@ -117,7 +87,7 @@ export function useLists(init: userListsInit) {
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据
             if (res.isRefresh) {
-                res.list = [].concat(data.data)
+                res.list = [...data.data]
                 res.isRefresh = false
             }
             else {
@@ -201,76 +171,37 @@ export function useSaveScroll() {
     })
 }
 
-interface TopicList {
-    page: number
-    items: any[]
-    refreshing: boolean
-    loading: boolean
-    error: boolean
-    finished: boolean
-}
-
-interface useTabList {
-    api: userListsInitApi[]
-    timer: any
-    list: TopicList[]
-    [propName: string]: any
-}
-
-interface useTabListsInit {
-    api: userListsInitApi[]
-    tabs: string[]
-}
-
-export function useTabLists(init: useTabListsInit) {
+export function useTabLists<T>(init: useTabListsInit) {
     const { options, globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
-    const res = reactive<useTabList>({
+    const res: useTabList<T> = reactive({
         ...init,
         timer: null,
         // 列表数据 ==>
-        list: [
-            {
-                page: 1,
-                items: [],
-                refreshing: false,
-                loading: false,
-                error: false,
-                finished: false,
-            },
-            {
-                page: 1,
-                items: [],
-                refreshing: false,
-                loading: false,
-                error: false,
-                finished: false,
-            },
-            {
-                page: 1,
-                items: [],
-                refreshing: false,
-                loading: false,
-                error: false,
-                finished: false,
-            },
-            {
-                page: 1,
-                items: [],
-                refreshing: false,
-                loading: false,
-                error: false,
-                finished: false,
-            },
-        ],
+        list: Array.from({ length: 5 }).fill('').map(() => ({
+            page: 1,
+            items: [],
+            refreshing: false,
+            loading: false,
+            error: false,
+            finished: false,
+        })),
         // <==列表数据
     })
+    // res.list.push({
+    //     page: 1,
+    //     items: [],
+    //     refreshing: false,
+    //     loading: false,
+    //     error: false,
+    //     finished: false,
+    // })
 
     const activeIndex = ref(0)
 
     const getList = async (index: number) => {
-        const list = res.list[index]
+        const list: TopicList<T> = JSON.parse(JSON.stringify(res.list[index]))
         if (list.page === 1) {
             const body = document.querySelector(`.${options.name}`)
             body && body.scrollTo(0, 0)
@@ -286,7 +217,7 @@ export function useTabLists(init: useTabListsInit) {
         // 异步更新数据
         const { method, url, config } = res.api[index]
         await Sleep(Random(300, 600))
-        const { code, data } = await $Api[method](url, { ...config, page: list.page })
+        const { code, data } = await $api[method as Methods]<ResDataLists<T>>(url, { ...config, page: list.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer)
             clearTimeout(res.timer)
@@ -294,7 +225,7 @@ export function useTabLists(init: useTabListsInit) {
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据
             if (list.refreshing) {
-                list.items = [].concat(data.data)
+                list.items = [...data.data]
                 list.refreshing = false
             }
             else {
@@ -312,6 +243,7 @@ export function useTabLists(init: useTabListsInit) {
         else {
             list.error = true
         }
+        res.list.splice(index, 1, list)
     }
 
     const onRefresh = async (index: number) => {
@@ -319,7 +251,7 @@ export function useTabLists(init: useTabListsInit) {
         res.list[index].page = 1
         await getList(index)
         res.list[index].refreshing = false
-        res.$toast('刷新成功')
+        showMsg('刷新成功')
     }
 
     return {

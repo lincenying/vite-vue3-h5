@@ -22,7 +22,7 @@ export default {
         port: 7771,
         proxy: {
             '/api': {
-                target: 'http://php.mmxiaowu.com',
+                target: 'https://php.mmxiaowu.com',
                 changeOrigin: true,
                 rewrite: (path: string) => path.replace(/^\/api/, '/api'),
             },

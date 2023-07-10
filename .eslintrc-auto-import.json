@@ -300,6 +300,18 @@
     "watchTriggerable": true,
     "watchWithFilter": true,
     "whenever": true,
-    "toValue": true
+    "toValue": true,
+    "$api": true,
+    "config": true,
+    "dataHasErrorKey": true,
+    "dataIsReadyKey": true,
+    "loginMsgBox": true,
+    "onLoginKey": true,
+    "routerKey": true,
+    "showDialogKey": true,
+    "showMsg": true,
+    "toggleDialogKey": true,
+    "updateParentKey": true,
+    "userToken": true
   }
 }

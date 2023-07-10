@@ -1,16 +1,4 @@
-import type { AxiosRequestConfig } from 'axios'
-
 export type Fn = (...args: any[]) => void
-
-export interface GlobalStore {
-    globalLoading: boolean
-    routerLoading: boolean
-    ISLocal: boolean
-    ISDEV: boolean
-    ISPRE: boolean
-    ISPROD: boolean
-    isPageSwitching: boolean
-}
 
 export interface Article {
     c_id: string
@@ -19,12 +7,54 @@ export interface Article {
     c_posttime?: string
 }
 
-export interface ApiReturn {
-    get(url: string, params: Obj, headers?: Obj): Promise<any>
-    post(url: string, data: Obj, headers?: Obj): Promise<any>
-    put(url: string, data: Obj, headers?: Obj): Promise<any>
-    delete(url: string, data: Obj, headers?: Obj): Promise<any>
-    file(url: string, data: Obj, headers?: Obj): Promise<any>
-    RESTful(url: string, params: Obj, method: 'get' | 'post' | 'put' | 'delete', headers?: Obj): Promise<any>
-    fetch(url: string, params: Obj, payload: AxiosRequestConfig, cancelToken?: any): Promise<any>
+export interface userListConfig<T = any> {
+    timer: any
+    isLoaded: boolean
+    // 下拉刷新 ==>
+    isLoading: boolean
+    isRefresh: boolean
+    // <==下拉刷新
+    // 列表数据 ==>
+    page: number
+    list: T[]
+    // <==列表数据
+    // 滚动加载 ==>
+    loadStatus: 'loadmore' | 'nomore' | 'loading'
+    isLock: boolean
+    loading: boolean
+    error: boolean
+    finished: boolean
+    [propName: string]: any
+}
+
+export interface TopicList<T = any> {
+    page: number
+    items: T[]
+    refreshing: boolean
+    loading: boolean
+    error: boolean
+    finished: boolean
+}
+
+export interface userListsInitApi {
+    method: Methods
+    url: string
+    config: Record<string, any>
+}
+
+export interface userListsInit {
+    api: userListsInitApi
+}
+
+export interface useTabList<T> {
+    api: userListsInitApi[]
+    timer: any
+    list: (TopicList<T>)[]
+    tabs: string[]
+    [propName: string]: any
+}
+
+export interface useTabListsInit {
+    api: userListsInitApi[]
+    tabs: string[]
 }

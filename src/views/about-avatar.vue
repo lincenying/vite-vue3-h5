@@ -97,7 +97,7 @@ function handleUpload() {
     cropper.getCropBlob((blob: Blob) => {
         const formData = new FormData()
         formData.append('file', blob, 'test.jpg')
-        $Api.RESTful('qiniu', formData, 'post')
+        $api.RESTful('qiniu', 'post', formData)
     })
 }
 function handleUploadImg(ev: any, num: number) {

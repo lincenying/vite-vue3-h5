@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import type { userListsInitApi } from '@/composables'
+import type { Article, userListsInitApi } from '@/types'
 
 defineOptions({
     name: 'HomeRouter',
@@ -39,7 +39,7 @@ const api: userListsInitApi = {
     config: { per_page: 20 },
 }
 
-const { res, getList, onRefresh } = useLists({ api })
+const { res, getList, onRefresh } = useLists<Article>({ api })
 
 useSaveScroll()
 

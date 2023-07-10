@@ -1,10 +1,8 @@
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosHeaders, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
-import ls from 'store2'
-import config from '@/config'
-import type { ApiReturn } from '@/types'
+import { userToken } from './config'
 
-window.$$axios = axios
+window.axios = axios
 
 const headers = {
     'X-Requested-With': 'XMLHttpRequest',
@@ -13,14 +11,15 @@ const headers = {
 
 const baseConfig = {
     headers,
-    timeout: 30000,
-    withCredentials: true,
+    timeout: 5000,
+    withCredentials: false,
 }
 
+if (import.meta.env.VITE_APP_ENV === 'production')
+    baseConfig.timeout = 300000
+
 axios.interceptors.request.use(
-    (config) => {
-        return config
-    },
+    config => config,
     error => Promise.resolve(error.response || error),
 )
 
@@ -29,77 +28,102 @@ axios.interceptors.response.use(
     error => Promise.resolve(error.response || error),
 )
 
-function checkStatus(response: AxiosResponse) {
+function checkStatus(response: AxiosResponse): ResponseData<any> {
     if (response && (response.status === 200 || response.status === 304))
-        return response
+        return response.data
 
     return {
-        data: {
-            code: -404,
-            message: (response && response.statusText) || '未知错误',
-            data: '',
-        },
+        code: -404,
+        info: response.statusText || response.toString(),
+        data: response.statusText || response.toString(),
+        message: `接口返回数据错误, 错误代码: ${response.status}`,
     }
 }
 
-function checkCode(res: any) {
-    if (res.data.code === -500)
-        window.location.href = '/backend'
-    else if (res.data.code === -400)
-        window.location.href = '/'
-
-    return res && res.data
+function checkCodeFn(data: ResponseData<any>) {
+    const code = [0, 200, 1000]
+    if (data.code === 401) {
+        userToken.value = ''
+        const pathname = encodeURIComponent(window.location.pathname)
+        if (!window.$$lock) {
+            window.$$lock = true
+            loginMsgBox('当前登录状态已失效, 请重新登录', pathname)
+        }
+    }
+    else if (!code.includes(Number(data.code))) {
+        showMsg(data.message)
+    }
+    else {
+        data.code = 200
+    }
+    return data
 }
 
-export const $Api: ApiReturn = {
-    async RESTful(url, params = {}, method = 'get', header = {}) {
-        const token = ls.get('token')
-        const payload: AxiosRequestConfig = {
+const api: ApiType = {
+    post(url, data, header, checkCode = true) {
+        return this.RESTful(url, 'post', data, header, checkCode)
+    },
+    get(url, params, header, checkCode = true) {
+        return this.RESTful(url, 'get', params, header, checkCode)
+    },
+    put(url, data, header, checkCode = true) {
+        return this.RESTful(url, 'put', data, header, checkCode)
+    },
+    delete(url, data, header, checkCode = true) {
+        return this.RESTful(url, 'delete', data, header, checkCode)
+    },
+    async downFile(url, method = 'get', data) {
+        const config: AxiosRequestConfig = {
             ...baseConfig,
+            responseType: 'arraybuffer',
             method,
-            url: config.apiUrl + url,
-            headers: {
-                ...baseConfig.headers,
-                Authorization: `Bearer ${token}`,
-                ...header,
-            },
+            url: import.meta.env.VITE_APP_API + url,
         }
         if (method === 'get')
-            payload.params = params
+            config.params = data
         else
-            payload.data = params
+            config.data = data
 
         if (url.includes('NoTimeout'))
-            payload.timeout = 9999999
-        const response = await axios(payload)
-        const data = await checkStatus(response)
-        return checkCode(data)
+            config.timeout = 9999999
+        const response = await axios(config)
+        return response
     },
-    async fetch(url, params = {}, payload = {}, cancelToken) {
-        payload.cancelToken = cancelToken
-        payload.method = payload.method || 'get'
-        payload.url = url || ''
-        if (payload.method === 'get')
-            payload.params = params
-        else
-            payload.data = params
 
-        const response = await axios(payload)
+    async RESTful(url, method = 'get', data, header, checkCode) {
+        const xhr = await this.$RESTful(url, method, data, header)
+        if (checkCode)
+            return checkCodeFn(xhr)
+        return xhr
+    },
+    async $RESTful(url, method = 'get', data, header) {
+        // if (url.split('/')[1] === '' || url.split('/')[1] === '') {
+        // } else {
+        url = import.meta.env.VITE_APP_API + url
+        // }
+        const config: AxiosRequestConfig = {
+            ...baseConfig,
+            headers: {
+                ...baseConfig.headers,
+                ...header,
+            },
+            method,
+            url,
+        }
+        if (userToken.value)
+            (config.headers as AxiosHeaders).Authorization = `Bearer ${userToken.value}`
+
+        if (method === 'get')
+            config.params = data
+        else
+            config.data = data
+
+        if (url.includes('NoTimeout'))
+            config.timeout = 9999999
+        const response = await axios(config)
         return checkStatus(response)
     },
-    file(url, data, header = {}) {
-        return this.RESTful(url, data, 'post', header)
-    },
-    post(url, data, header = {}) {
-        return this.RESTful(url, data, 'post', header)
-    },
-    get(url, params = {}, header = {}) {
-        return this.RESTful(url, params, 'get', header)
-    },
-    put(url, data, header = {}) {
-        return this.RESTful(url, data, 'put', header)
-    },
-    delete(url, data, header = {}) {
-        return this.RESTful(url, data, 'delete', header)
-    },
 }
+
+window.$$api = api
+export const $api = api

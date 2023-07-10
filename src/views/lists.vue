@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import type { userListsInitApi } from '@/composables'
+import type { Article, userListsInitApi } from '@/types'
 
 defineOptions({
     name: 'ListsRouter',
@@ -36,7 +36,7 @@ const api: userListsInitApi[] = [
 ]
 const tabs = ['全部', '问答', '分享', '推荐']
 
-const { res, getList, onRefresh, activeIndex } = useTabLists({ api, tabs })
+const { res, getList, onRefresh, activeIndex } = useTabLists<Article>({ api, tabs })
 
 useSaveScroll()
 </script>
