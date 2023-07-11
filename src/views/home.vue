@@ -27,13 +27,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Article, userListsInitApi } from '@/types'
+import type { Article, UserListsInitApi } from '@/types'
 
 defineOptions({
     name: 'HomeRouter',
 })
 
-const api: userListsInitApi = {
+const api: UserListsInitApi = {
     method: 'get',
     url: 'article/lists',
     config: { per_page: 20 },

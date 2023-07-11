@@ -22,13 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Article, userListsInitApi } from '@/types'
+import type { Article, UserListsInitApi } from '@/types'
 
 defineOptions({
     name: 'ListsRouter',
 })
 
-const api: userListsInitApi[] = [
+const api: UserListsInitApi[] = [
     { method: 'get', url: 'article/lists', config: { per_page: 20, tab: '' } },
     { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'ask' } },
     { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'share' } },

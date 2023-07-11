@@ -12,7 +12,8 @@
     "build": "vite build",
     "start": "vite preview",
     "lint": "eslint ./src --ext .vue,.ts,.tsx",
-    "lint:fix": "eslint ./src --ext .vue,.ts,.tsx --fix"
+    "lint:fix": "eslint ./src --ext .vue,.ts,.tsx --fix",
+    "lint:ts": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@lincy/utils": "^0.3.1",
@@ -60,7 +61,8 @@
     "vite-plugin-mock": "^3.0.0",
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-warmup": "^0.1.0",
-    "vite-svg-loader": "^4.0.0"
+    "vite-svg-loader": "^4.0.0",
+    "vue-tsc": "^1.8.4"
   },
   "pnpm": {
     "peerDependencyRules": {
