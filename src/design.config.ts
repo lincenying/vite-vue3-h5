@@ -1,5 +1,5 @@
 const vmDesignWidth = 375 // 设计稿宽度
-const vmDesignHeight = 1440 // 设计稿宽度
+const vmDesignHeight = 667 // 设计稿宽度
 const vmMinWidth = 320 // 兼容最小宽度
 const vmMaxWidth = 540 // 兼容最大宽度
 const vmFontSize = 37.5 // 为什么设置 100? 设置成便于计算, 计算rem时只需要将 设计稿的宽度 / 100 即可

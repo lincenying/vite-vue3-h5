@@ -56,14 +56,8 @@ declare interface Window {
     _minWidth: number
     _minWindow: string
     _fontSize: number
-    config: {
-        timer: {
-            [propName: string]: number
-        }
-    }
     $$lock?: boolean
     $$api: ApiType
-    randomArray: (lower: number, upper: number, length: number) => number[]
     $$time: NodeJS.Timeout
-    axios: any
+    axios: import('axios').AxiosStatic
 }
