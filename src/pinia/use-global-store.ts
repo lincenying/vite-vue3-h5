@@ -1,7 +1,7 @@
 import type { GlobalState } from './pinia.types'
 
 const useStore = defineStore('globalStore', () => {
-    const state = reactive<GlobalState>({
+    const state: GlobalState = reactive({
         globalLoading: true,
         routerLoading: false,
         ISLocal: import.meta.env.VITE_APP_ENV === 'development',

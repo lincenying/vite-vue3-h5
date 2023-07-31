@@ -312,6 +312,7 @@
     "showMsg": true,
     "toggleDialogKey": true,
     "updateParentKey": true,
-    "userToken": true
+    "userToken": true,
+    "UseTabLists": true
   }
 }
