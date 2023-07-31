@@ -9,8 +9,6 @@ declare type Obj = Record<string, any>
 /** 键为字符串, 值为 T 的对象 */
 declare type ObjT<T> = Record<string, T>
 
-type Methods = 'get' | 'post' | 'delete' | 'put'
-
 
 declare interface ResDataLists<T> {
     data: T[]
@@ -38,6 +36,8 @@ declare interface ResponseData<T> {
     info?: string
     [propName: string]: any
 }
+
+type Methods = 'get' | 'post' | 'delete' | 'put'
 
 declare interface ApiType {
     get<T>(url: string, data?: Obj, header?: Obj, checkCode?: boolean): Promise<ResponseData<T>>
