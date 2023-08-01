@@ -32,7 +32,7 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
-    "@lincy/eslint-config": "^2.0.7",
+    "@lincy/eslint-config": "^2.0.8",
     "@lincy/stylelint-config": "^1.15.10",
     "@lincy/vite-plugin-mock": "^3.0.0",
     "@types/lodash": "^4.14.196",
@@ -47,9 +47,9 @@
     "mockjs": "^1.1.0",
     "postcss": "^8.4.27",
     "postcss-px-to-viewport-8-plugin": "^1.2.2",
-    "sass": "^1.64.1",
+    "sass": "^1.64.2",
     "typescript": "^5.1.6",
-    "unocss": "^0.54.0",
+    "unocss": "^0.54.1",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.1",
     "unplugin-vue-macros": "^2.4.0",
