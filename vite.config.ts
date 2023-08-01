@@ -22,8 +22,9 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
 
     return {
         base: './',
-        ...Build,
-        ...Css,
+        server: Build.server,
+        build: Build.build,
+        css: Css,
         plugins: [
             ...Macros(),
             ...Components(),

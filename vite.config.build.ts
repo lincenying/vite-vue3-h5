@@ -1,9 +1,10 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import type { BuildOptions, ServerOptions } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export default {
+const config: { server: ServerOptions; build: BuildOptions } = {
     build: {
         target: 'es2018',
         cssTarget: 'chrome79',
@@ -29,3 +30,5 @@ export default {
         },
     },
 }
+
+export default config
