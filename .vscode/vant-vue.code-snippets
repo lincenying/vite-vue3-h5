@@ -1,0 +1,657 @@
+{
+    "Basic: van-button": {
+        "scope": "html,vue-html",
+        "prefix": "vanb",
+        "body": [
+            "<van-button type=\"${1|primary,info,warning,danger,default|}\">${2}</van-button>"
+        ],
+        "description": "Vant <van-button>按钮</van-button>"
+    },
+    "Basic: van-cell": {
+        "scope": "html,vue-html",
+        "prefix": "vancell",
+        "body": [
+            "<van-cell-group>",
+            "\t<van-cell title=\"单元格\" value=\"内容\" />",
+            "\t<van-cell title=\"单元格\" value=\"内容\" label=\"描述内容\" />",
+            "</van-cell-group>"
+        ],
+        "description": "Vant <van-cell>单元格</van-vell>"
+    },
+    "Basic: van-icon": {
+        "scope": "html,vue-html",
+        "prefix": "vanicon",
+        "body": [
+            "<van-icon name=\"${1|success,plus,cross,fail,arrow,arrow-left,arrow-up,arrow-down|}\" />"
+        ],
+        "description": "Vant <van-icon>Icon图标</van-icon>"
+    },
+    "Basic: van-image": {
+        "scope": "html,vue-html",
+        "prefix": "vanimg",
+        "body": ["<van-image src=\"${1}\" fit=\"${2|contain,cover,fill,none,scale-down|}\" />"],
+        "description": "Vant <van-image>图片</van-image>"
+    },
+    "Basic: Layout van-row": {
+        "scope": "html,vue-html",
+        "prefix": "vanr",
+        "body": ["<van-row>", "\t<van-col span=\"${1:12}\">${2}</van-col>", "\t<van-col span=\"${3:12}\">${4}</van-col>", "</van-row>"],
+        "description": "Vant <van-row>栅格布局<van-row>"
+    },
+    "Basic: Layout van-row-flex": {
+        "scope": "html,vue-html",
+        "prefix": "vanrf",
+        "body": [
+            "<van-row type=\"flex\" justify=\"${1|start,center,end,space-between,space-around|}\">",
+            "\t<van-col span=\"${2:6}\">${5}</van-col>",
+            "\t<van-col span=\"${3:6}\">${6}</van-col>",
+            "\t<van-col span=\"${4:6}\">${7}</van-col>",
+            "</van-row>"
+        ],
+        "description": "Vant <van-row type='flex'>flex布局</van-row>"
+    },
+    "Basic: Layout van-row-gutter": {
+        "scope": "html,vue-html",
+        "prefix": "vanrg",
+        "body": [
+            "<van-row gutter=\"${1:16}\">",
+            "\t<van-col span=\"8\">${2}</van-col>",
+            "\t<van-col span=\"8\">${3}</van-col>",
+            "\t<van-col span=\"8\">${4}</van-col>",
+            "</van-row>"
+        ],
+        "description": "Vant <van-row gutter=\"\">栅格布局(设置列元素间距)<van-row>"
+    },
+    "Basic: Layout van-col": {
+        "scope": "html,vue-html",
+        "prefix": "vanc",
+        "body": ["<van-col span=\"${1}\">${2}</van-col>"],
+        "description": "Vant <van-col span=\"\">栅格布局(列元素)</van-col>"
+    },
+    "Basic: Layout van-col-offset": {
+        "scope": "html,vue-html",
+        "prefix": "vancoloffse",
+        "body": ["<van-col span=\"${1}\" offset=\"${2}\">${3}</van-col>"],
+        "description": "Vant <van-col offset=\"3\">栅格布局(列元素偏移距离)</van-col>"
+    },
+    "Basic: van-popup": {
+        "scope": "html,vue-html",
+        "prefix": "vanpopup",
+        "body": ["<van-popup v-model=\"${1}\">${2}</van-popup>"],
+        "description": "Vant <van-popup>弹出层</van-popup>"
+    },
+
+    "Form: van-calendar": {
+        "scope": "html,vue-html",
+        "prefix": "vancld",
+        "body": ["<van-cell title=\"选择单个日期\" :value=\"${1}\" @click=\"${2}\" />", "<van-calendar v-model=\"${3}\" @confirm=\"${4}\" />"],
+        "description": "Vant <van-calendar>日历</van-calendar>"
+    },
+    "Form: van-checkbox": {
+        "scope": "html,vue-html",
+        "prefix": "vanck",
+        "body": ["<van-checkbox v-model=\"${1}\">复选框</van-checkbox>"],
+        "description": "Vant <van-checkbox>复选框</van-checkbox>"
+    },
+    "Form: van-datetime-picker": {
+        "scope": "html,vue-html",
+        "prefix": "vandate",
+        "body": [
+            "<van-datetime-picker type=\"${1|datetime,date,time,year-month|}\" v-model=\"${2}\" title=\"选择年月日\" :min-date=\"${3}\" :max-date=\"${4}\" />"
+        ],
+        "description": "Vant <van-datetime-picker>时间选择</van-datetime-picker>"
+    },
+    "Form: van-field": {
+        "scope": "html,vue-html",
+        "prefix": "vanfd",
+        "body": ["<van-field type=\"${1|text,password,textarea,number,tel,digit|}\" label=\"${2}\" placeholder=\"${3}\" v-model=\"${4}\" />"],
+        "description": "Vant <van-field>输入框</van-field>"
+    },
+    "Form: van-form": {
+        "scope": "html,vue-html",
+        "prefix": "vanform",
+        "body": [
+            "<van-form @submit=\"${1}\">",
+            "\t <van-field name=\"用户名\" label=\"用户名\" placeholder=\"请输入用户名\" v-model=\"${2}\" :rules=\"[{ required: true, message: '请填写用户名'}]\" />",
+            "\t <van-field type=\"password\" name=\"密码\" label=\"密码\" placeholder=\"请输入密码\" v-model=\"${3}\" :rules=\"[{ required: true, message: '请填写密码'}]\" />",
+            "\t <div style=\"margin: 16px;\">",
+            "\t\t<van-button round block type=\"info\" native-type=\"submit\">提交</van-button>",
+            "\t </div>",
+            "</van-form>"
+        ],
+        "description": "Vant <van-form>表单</van-form>"
+    },
+    "Form: van-kbn": {
+        "scope": "html,vue-html",
+        "prefix": "vankbn",
+        "body": [
+            "<van-cell @touchstart.native.stop=\"${1}\">弹出默认键盘</van-cell>",
+            "<van-number-keyboard:show=\"${2}\" @blur=\"${3}\" @input=\"${4}\" @delete=\"${5}\" />"
+        ],
+        "description": "Vant <van-number-keyboard>数字键盘</van-number-keyboard>"
+    },
+    "Form: van-pass": {
+        "scope": "html,vue-html",
+        "prefix": "vanpass",
+        "body": [
+            "<van-password-input :value=\"${1}\" info=\"密码为 6 位数字\" :focused=\"${2}\" @focus=\"${3}\" />",
+            "<van-number-keyboard :show=\"${4}\" @blur=\"${5}\" @input=\"${6}\" @delete=\"${7}\" />"
+        ],
+        "description": "Vant <van-password-input>密码输入框</van-password-input>"
+    },
+    "Form: van-picker": {
+        "scope": "html,vue-html",
+        "prefix": "vanpk",
+        "body": ["<van-picker title=\"标题\" show-toolbar :columns=\"${1}\" @confirm=\"${2}\" @cancel=\"${3}\" @change=\"${4}\" />"],
+        "description": "Vant <van-picker>选择器</van-picker>"
+    },
+    "Form: van-radio": {
+        "scope": "html,vue-html",
+        "prefix": "vanrd",
+        "body": [
+            "<van-radio-group v-model=\"\">",
+            "\t <van-radio name=\"1\">${1}</van-radio>",
+            "\t <van-radio name=\"2\">${2}</van-radio>",
+            "</van-radio-group>"
+        ],
+        "description": "Vant <van-radio>单选框</van-radio>"
+    },
+    "Form: van-rate": {
+        "scope": "html,vue-html",
+        "prefix": "vanrate",
+        "body": ["<van-rate v-model=\"${1}\" />"],
+        "description": "Vant <van-rate>评分<van-rate>"
+    },
+    "Form: van-search": {
+        "scope": "html,vue-html",
+        "prefix": "vansearch",
+        "body": ["<van-search v-model=\"${1}\" placeholder=\"请输入搜索关键词\" />"],
+        "description": "Vant <van-search>搜索</van-search>"
+    },
+    "Form: van-slider": {
+        "scope": "html,vue-html",
+        "prefix": "vanslider",
+        "body": ["<van-slider v-model=\"${1}\" @change=\"${2}\" />"],
+        "description": "Vant <van-slider>滑块</van-slider>"
+    },
+    "Form: van-stepper": {
+        "scope": "html,vue-html",
+        "prefix": "vanstepper",
+        "body": ["<van-stepper v-model=\"${1}\" />"],
+        "description": "Vant <van-stepper>步进器</van-stepper>"
+    },
+    "Form: van-switch": {
+        "scope": "html,vue-html",
+        "prefix": "vanswitch",
+        "body": ["<van-switch v-model=\"${1}\" />"],
+        "description": "Vant <van-switch>开关</van-switch>"
+    },
+    "Form: van-uploader": {
+        "scope": "html,vue-html",
+        "prefix": "vanup",
+        "body": ["<van-uploader :after-read=\"${1}\" />"],
+        "description": "Vant <van-uploader :after-read=\"\">文件上传</van-uploader>"
+    },
+
+    "Action: van-action-sheet": {
+        "scope": "html,vue-html",
+        "prefix": "vanas",
+        "body": ["<van-action-sheet  v-model=\"${1}\" :actions=\"\" @select=\"\" />"],
+        "description": "Vant <van-action-sheet>动作面板</van-action-sheet>"
+    },
+    "Action: van-dialog": {
+        "scope": "html,vue-html",
+        "prefix": "vandg",
+        "body": ["<van-dialog v-model=\"${1}\" title=\"${2}\"></van-dialog>"],
+        "description": "Vant <van-dialog>弹出框</van-dialog>"
+    },
+    "Action: Dialog Alert": {
+        "scope": "html,vue-html",
+        "prefix": "vanal",
+        "body": ["Dialog.alert({", "\t title: \"${1}\",", "\t message: \"${2}\",", "}).then(() => {", "\t ${3}", "})"],
+        "description": "Vant Dialog.alert('消息提示弹框')"
+    },
+    "Action: Dialog Confirm": {
+        "scope": "html,vue-html",
+        "prefix": "vancf",
+        "body": [
+            "Dialog.confirm({",
+            "\t title: \"${1}\",",
+            "\t message: \"${2}\",",
+            "}).then(() => {",
+            "\t ${3}",
+            "}).catch(() => {",
+            "\t ${4}",
+            "})"
+        ],
+        "description": "Vant Dialog.confirm('确认弹框')"
+    },
+    "Action: van-dropdown-menu": {
+        "scope": "html,vue-html",
+        "prefix": "vandm",
+        "body": [
+            "<van-dropdown-menu>",
+            "\t <van-dropdown-item v-model=\"${1}\" :options=\"${2}\" />",
+            "\t <van-dropdown-item v-model=\"${3}\" :options=\"${4}\" />",
+            "</van-dropdown-menu>"
+        ],
+        "description": "Vant <van-dropdown-menu>下拉菜单</van-dropdown-menu>"
+    },
+    "Action: van-loading": {
+        "scope": "html,vue-html",
+        "prefix": "vanld",
+        "body": ["<van-loading type=\"${1|circular,spinner|}\" />"],
+        "description": "Vant <van-loading>Loading加载</van-loading>"
+    },
+    "Action: Notify": {
+        "scope": "html,vue-html",
+        "prefix": "vannt",
+        "body": ["Notify('${1}')"],
+        "description": "Vant Notify(\"消息通知\")"
+    },
+    "Action: van-overlay": {
+        "scope": "html,vue-html",
+        "prefix": "vanol",
+        "body": ["<van-overlay :show=\"\" />"],
+        "description": "Vant <van-overlay>遮罩层</van-overlay>"
+    },
+    "Action: van-pull-refresh": {
+        "scope": "html,vue-html",
+        "prefix": "vanpr",
+        "body": ["<van-pull-refresh v-model=\"${1}\" @refresh=\"${2}\"></van-pull-refresh>"],
+        "description": "Vant <van-pull-refresh>下拉刷新</van-pull-refresh>"
+    },
+    "Action: van-share-sheet": {
+        "scope": "html,vue-html",
+        "prefix": "vanshare",
+        "body": [
+            "<van-cell title=\"显示分享面板\" @click=\"${1}\" />",
+            "<van-share-sheet v-model=\"${2}\" title=\"立即分享给好友\" :options=\"${3}\" @select=\"${4}\" />"
+        ],
+        "description": "Vant <van-swipe-cell>分享面板</van-swipe-cell>"
+    },
+    "Action: van-swipe-cell": {
+        "scope": "html,vue-html",
+        "prefix": "vansc",
+        "body": [
+            "<van-swipe-cell>",
+            "\t <template slot=\"left\">",
+            "\t \t <van-button square type=\"primary\" text=\"选择\" />",
+            "\t </template>",
+            "\t <van-cell :border=\"false\" title=\"单元格\" value=\"内容\" />",
+            "\t <template slot=\"right\">",
+            "\t \t<van-button square type=\"danger\" text=\"删除\" />",
+            "\t \t<van-button square type=\"primary\" text=\"收藏\" />",
+            "\t </template>",
+            "</van-swipe-cell>"
+        ],
+        "description": "Vant <van-swipe-cell>滑动单元格</van-swipe-cell>"
+    },
+    "Action: Toast": {
+        "scope": "html,vue-html",
+        "prefix": "vants",
+        "body": ["Toast(\"${1}\")"],
+        "description": "Vant Toast('轻提示')"
+    },
+
+    "Display: van-circle": {
+        "scope": "html,vue-html",
+        "prefix": "vancircle",
+        "body": ["<van-circle v-model=\"${1}\" :rate=\"${2}\" :speed=\"${3}\" :text=\"${4}\" />"],
+        "description": "Vant <van-circle>环形进度条</van-circle>"
+    },
+    "Display: van-collapse": {
+        "scope": "html,vue-html",
+        "prefix": "vancollapse",
+        "body": [
+            "<van-collapse v-model=\"${1}\">",
+            "\t <van-collapse-item title=\"标题1\" name=\"1\">内容1</van-collapse-item>",
+            "\t <van-collapse-item title=\"标题2\" name=\"2\">内容2</van-collapse-item>",
+            "\t <van-collapse-item title=\"标题3\" name=\"3\">内容3</van-collapse-item>",
+            "</van-collapse>"
+        ],
+        "description": "Vant <van-collapse>折叠面板</van-collapse>"
+    },
+    "Display: van-count-down": {
+        "scope": "html,vue-html",
+        "prefix": "vancd",
+        "body": ["<van-count-down :time=\"${1}\" />"],
+        "description": "Vant <van-count-down :time=\"60\">倒计时</van-count-down>"
+    },
+    "Display: van-divider": {
+        "scope": "html,vue-html",
+        "prefix": "vandv",
+        "body": ["<van-divider />"],
+        "description": "Vant <van-divider>分割线</van-divider>"
+    },
+    "Display: van-empty": {
+        "scope": "html,vue-html",
+        "prefix": "vanempty",
+        "body": ["<van-empty description=\"${1}\" />"],
+        "description": "Vant <van-empty description=\"描述文字\">空状态</van-empty>"
+    },
+    "Display: ImagePreview": {
+        "scope": "html,vue-html",
+        "prefix": "vanimagepv",
+        "body": ["ImagePreview([", "\t 'https://img.yzcdn.cn/vant/apple-1.jpg',", "\t 'https://img.yzcdn.cn/vant/apple-2.jpg',", "]);"],
+        "description": "Vant ImagePreview(['图片预览'])"
+    },
+    "Display: van-lazyload": {
+        "scope": "html,vue-html",
+        "prefix": "vanlz",
+        "body": ["<img v-for=\"${1}\" v-lazy=\"${2}\" />"],
+        "description": "Vant <van-lazy>懒加载</van-lazy>"
+    },
+    "Display: van-list": {
+        "scope": "html,vue-html",
+        "prefix": "vanlist",
+        "body": [
+            "<van-list v-model=\"${1}\" :finished=\"${2}\" finished-text=\"没有更多了\" @load=\"${3}\">",
+            "\t <van-cell v-for=\"item in list\" :key=\"item\" :title=\"item\" />",
+            "</van-list>"
+        ],
+        "description": "Vant <van-list>列表</van-list>"
+    },
+    "Display: van-notice-bar": {
+        "scope": "html,vue-html",
+        "prefix": "vanntb",
+        "body": ["<van-notice-bar text=\"通知内容\" left-icon=\"volume-o\" />"],
+        "description": "Vant <van-notice-bar />"
+    },
+    "Display: van-panel": {
+        "scope": "html,vue-html",
+        "prefix": "vanpn",
+        "body": ["<van-panel title=\"${1}\" desc=\"${2}\" status=\"${3}\">", "\t <div>${4}</div>", "</van-panel>"],
+        "description": "Vant <van-panel>面板</van-panel>"
+    },
+    "Display: van-progress": {
+        "scope": "html,vue-html",
+        "prefix": "vanprogress",
+        "body": ["<van-progress :percentage=\"50\" />"],
+        "description": "Vant <van-progress>进度条</van-progress>"
+    },
+    "Display: van-skeleton": {
+        "scope": "html,vue-html",
+        "prefix": "vansk",
+        "body": ["<van-skeleton title :row=\"${1}\" />"],
+        "description": "Vant <van-skeleton>骨架屏</van-skeleton>"
+    },
+    "Display: van-steps": {
+        "scope": "html,vue-html",
+        "prefix": "vansteps",
+        "body": [
+            "<van-steps :active=\"${1}\">",
+            "\t <van-step>步骤1</van-step>",
+            "\t <van-step>步骤2</van-step>",
+            "\t <van-step>步骤3</van-step>",
+            "\t <van-step>步骤4</van-step>",
+            "</van-steps>"
+        ],
+        "description": "Vant <van-steps></van-steps>"
+    },
+    "Display: van-sticky": {
+        "scope": "html,vue-html",
+        "prefix": "vansticky",
+        "body": ["<van-sticky>", "\t <van-button type=\"primary\">基础用法</van-button>", "</van-sticky>"],
+        "description": "Vant <van-sticky>粘性布局</van-sticky>"
+    },
+    "Display: van-swipe": {
+        "scope": "html,vue-html",
+        "prefix": "vansw",
+        "body": [
+            "<van-swipe :autoplay=\"3000\" indicator-color=\"white\">",
+            "\t <van-swipe-item>1</van-swipe-item>",
+            "\t <van-swipe-item>2</van-swipe-item>",
+            "\t <van-swipe-item>3</van-swipe-item>",
+            "\t <van-swipe-item>4</van-swipe-item>",
+            "</van-swipe>"
+        ],
+        "description": "Vant <van-swipe>轮播</van-swipe>"
+    },
+    "Display: van-tag": {
+        "scope": "html,vue-html",
+        "prefix": "vantag",
+        "body": ["<van-tag type=\"${1|primary,danger,success,warning|}\">${2}</van-tag>"],
+        "description": "Vant <van-tag>标签</van-tag>"
+    },
+
+    "Navigation: van-grid": {
+        "scope": "html,vue-html",
+        "prefix": "vangrid",
+        "body": [
+            "<van-grid>",
+            "\t <van-grid-item icon=\"${1}\" text=\"${2}\" />",
+            "\t <van-grid-item icon=\"${3}\" text=\"${4}\" />",
+            "\t <van-grid-item icon=\"${5}\" text=\"${6}\" />",
+            "\t <van-grid-item icon=\"${7}\" text=\"${8}\" />",
+            "</van-grid>"
+        ],
+        "description": "Vant <van-grid>宫格</van-grid>"
+    },
+    "Navigation: van-index-bar": {
+        "scope": "html,vue-html",
+        "prefix": "vanib",
+        "body": [
+            "<van-index-bar>",
+            "\t <van-index-anchor index=\"A\" />",
+            "\t <van-cell title=\"文本\"/>",
+            "\t <van-cell title=\"文本\"/>",
+            "\t <van-cell title=\"文本\"/>",
+            "\n",
+            "\t <van-index-anchor index=\"B\"/>",
+            "\t <van-cell title=\"文本\"/>",
+            "\t <van-cell title=\"文本\"/>",
+            "\t <van-cell title=\"文本\"/>",
+            "</van-index-bar>"
+        ],
+        "description": "Vant <van-index-bar>索引栏</van-index-bar>"
+    },
+    "Navigation: van-nav-bar": {
+        "scope": "html,vue-html",
+        "prefix": "vannb",
+        "body": ["<van-nav-bar title=\"标题\" left-text=\"返回\" right-text=\"按钮\" left-arrow @click-left=\"${1}\" @click-right=\"${2}\" />"],
+        "description": "Vant <van-nav-bar>导航栏</van-nav-bar>"
+    },
+    "Navigation: van-pagination": {
+        "scope": "html,vue-html",
+        "prefix": "vanpg",
+        "body": ["<van-pagination v-model=\"${1}\" :total-items=\"${2}\" :items-per-page=\"${3}\" />"],
+        "description": "Vant <van-pagination>分页</van-pagination>"
+    },
+    "Navigation: van-sidebar": {
+        "scope": "html,vue-html",
+        "prefix": "vansd",
+        "body": [
+            "<van-sidebar v-model=\"${1}\">",
+            "\t <van-sidebar-item title=\"标签名称\" />",
+            "\t <van-sidebar-item title=\"标签名称\" />",
+            "\t <van-sidebar-item title=\"标签名称\" />",
+            "</van-sidebar>"
+        ],
+        "description": "Vant <van-sidebar>侧边导航</van-sidebar>"
+    },
+    "Navigation: van-tabs": {
+        "scope": "html,vue-html",
+        "prefix": "vantabs",
+        "body": [
+            "<van-tabs v-model=\"${1}\">",
+            "\t <van-tab title=\"标签1\">内容 1</van-tab>",
+            "\t <van-tab title=\"标签2\">内容 2</van-tab>",
+            "\t <van-tab title=\"标签3\">内容 3</van-tab>",
+            "\t <van-tab title=\"标签4\">内容 4</van-tab>",
+            "</van-tabs>"
+        ],
+        "description": "Vant <van-tabs><van-tab>标签页</van-tab></van-tabs>"
+    },
+    "Navigation: van-tabbar": {
+        "scope": "html,vue-html",
+        "prefix": "vantbar",
+        "body": [
+            "<van-tabbar v-model=\"${1}\">",
+            "\t <van-tabbar-item icon=\"home-o\">菜单1</van-tabbar-item>",
+            "\t <van-tabbar-item icon=\"search\">菜单2</van-tabbar-item>",
+            "\t <van-tabbar-item icon=\"friends-o\">菜单3</van-tabbar-item>",
+            "\t <van-tabbar-item icon=\"setting-o\">菜单4</van-tabbar-item>",
+            "</van-tabbar>"
+        ],
+        "description": "Vant <van-tabbar>标签栏</van-tabbar>"
+    },
+    "Navigation: van-tree-select": {
+        "scope": "html,vue-html",
+        "prefix": "vantrs",
+        "body": ["<van-tree-select :items=\"${1}\" :active-id.sync=\"${2}\" :main-active-index.sync=\"${3}\" />"],
+        "description": "Vant <van-tree-select>分类选择</van-tree-select>"
+    },
+
+    "Business: van-address-edit": {
+        "scope": "html,vue-html",
+        "prefix": "vanade",
+        "body": [
+            "<van-address-edit",
+            "\t :area-list=\"\"",
+            "\t show-postal",
+            "\t show-delete",
+            "\t show-set-default",
+            "\t show-search-result",
+            "\t :search-result=\"\"",
+            "\t @save=\"\"",
+            "\t @delete=\"\"",
+            "\t @change-detail=\"\"",
+            "/>"
+        ],
+        "description": "Vant <van-address-edit>地址编辑</van-address-edit>"
+    },
+    "Business: van-address-list": {
+        "scope": "html,vue-html",
+        "prefix": "vanadl",
+        "body": [
+            "<van-address-list",
+            "\t :area-list=\"\"",
+            "\t v-model=\"\"",
+            "\t :list=\"\"",
+            "\t :disabled-list=\"\"",
+            "\t disabled-text=\"\"",
+            "\t @add=\"\"",
+            "\t @edit=\"\"",
+            "/>"
+        ],
+        "description": "Vant <van-address-list>地址列表</van-address-list>"
+    },
+    "Business: van-area": {
+        "scope": "html,vue-html",
+        "prefix": "vanarea",
+        "body": ["<van-area :area-list=\"\" />"],
+        "description": "Vant <van-area>省市区选择</van-area>"
+    },
+    "Business: van-card": {
+        "scope": "html,vue-html",
+        "prefix": "vancard",
+        "body": [
+            "<van-card",
+            "\t num=\"2\"",
+            "\t price=\"2.00\"",
+            "\t desc=\"描述信息\"",
+            "\t title=\"商品标题\"",
+            "\t thumb=\"https://img.yzcdn.cn/vant/t-thirt.jpg\"",
+            "/>"
+        ],
+        "description": "Vant <van-card>商品卡片</van-card>"
+    },
+    "Business: van-contact-card": {
+        "scope": "html,vue-html",
+        "prefix": "vanctc",
+        "body": [
+            "<!-- 联系人卡片 -->",
+            "<van-contact-card",
+            "\t :type=\"\"",
+            "\t :name=\"\"",
+            "\t :tel=\"\"",
+            "\t @click=\"\"",
+            "/>",
+            "\t",
+            "<!-- 联系人列表 -->",
+            "<van-popup v-model=\"\" position=\"\">",
+            "\t<van-contact-list",
+            "\t   v-model=\"\"",
+            "\t   :list=\"\"",
+            "\t   @add=\"\"",
+            "\t   @edit=\"\"",
+            "\t   @select=\"\"",
+            "\t/>",
+            "</van-popup>",
+            "\t",
+            "<!-- 联系人编辑 -->",
+            "<van-popup v-model=\"\" position=\"\">",
+            "\t<van-contact-edit",
+            "\t   :contact-info=\"\"",
+            "\t   :is-edit=\"\"",
+            "\t   @save=\"\"",
+            "\t   @delete=\"\"",
+            "\t/>",
+            "</van-popup>"
+        ],
+        "description": "Vant <van-contact-card>联系人</van-contact-card>"
+    },
+    "Business: van-coupon": {
+        "scope": "html,vue-html",
+        "prefix": "vancoup",
+        "body": [
+            "<!-- 优惠券单元格 -->",
+            "<van-coupon-cell",
+            "\t :coupons=\"\"",
+            "\t :chosen-coupon=\"\"",
+            "\t @click=\"\"",
+            "/>",
+            "\t",
+            "<!-- 优惠券列表 -->",
+            "<van-popup v-model=\"\" position=\"\">",
+            "\t<van-coupon-list",
+            "\t   v-model=\"\"",
+            "\t   :coupons=\"\"",
+            "\t   :chosen-coupon=\"\"",
+            "\t   :disabled-coupons=\"\"",
+            "\t   @change=\"\"",
+            "\t   @exchange=\"\"",
+            "\t/>",
+            "</van-popup>"
+        ],
+        "description": "Vant <van-coupon>优惠券</van-coupon>"
+    },
+    "Business: van-goods-action": {
+        "scope": "html,vue-html",
+        "prefix": "vangoods",
+        "body": [
+            "<van-goods-action>",
+            "\t <van-goods-action-icon icon=\"chat-o\" text=\"客服\"   @click=\"\" />",
+            "\t <van-goods-action-icon icon=\"cart-o\" text=\"购物车\" @click=\"\"/>",
+            "\t <van-goods-action-icon-button type=\"warning\" text=\"加入购物车\" @click=\"\" />",
+            "\t <van-goods-action-icon-button type=\"danger\"  text=\"立即购买\"   @click=\"\" />",
+            "</van-goods-action>"
+        ],
+        "description": "Vant <van-goods-action>商品导航</van-goods-action>"
+    },
+    "Business: van-submit-bar": {
+        "scope": "html,vue-html",
+        "prefix": "vansbar",
+        "body": ["<van-submit-bar", "\t :price=\"\"", "\t button-text=\"提交订单\"", "\t @submit=\"\"", "/>"],
+        "description": "Vant <van-submit-bar>提交订单栏</van-submit-bar>"
+    },
+    "Business: van-sku": {
+        "scope": "html,vue-html",
+        "prefix": "vansku",
+        "body": [
+            "<van-sku",
+            "\t :sku=\"\"",
+            "\t :goods=\"\"",
+            "\t :goods-id=\"\"",
+            "\t :quota=\"\"",
+            "\t :quota-used=\"\"",
+            "\t :hide-stock=\"\"",
+            "\t :message-config=\"\"",
+            "\t @buy-clicked=\"\"",
+            "\t @add-cart=\"\"",
+            "/>"
+        ],
+        "description": "Vant <van-sku>商品规格</van-sku>"
+    }
+}

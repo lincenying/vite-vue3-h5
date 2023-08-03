@@ -39,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { Dialog } from 'vant'
 import { VueCropper } from 'vue-cropper'
 
 defineOptions({
@@ -51,6 +52,12 @@ useHead({
     title: 'Avatar Detail',
 })
 
+Dialog.alert({
+    title: '标题',
+    message: '弹出的内容',
+}).then(() => {
+
+})
 // pinia 状态管理 ===>
 // const mainStore = useMainStore()
 // const { counter, name } = storeToRefs(mainStore)
