@@ -25,25 +25,41 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
         server: Build.server,
         build: Build.build,
         css: Css,
-        plugins: [
-            ...Macros(),
-            ...Components(),
-            UnoCSS(),
-            viteMockServe({
-                mockPath: 'mock',
-                enable: command === 'serve' || process.env.VITE_APP_ENV === 'test',
-                logger: true,
-            }),
-            warmup({
-                clientFiles: ['./src/main.ts', './src/views/*.vue'],
-            }),
-            Inspect(),
-            Progress(),
-        ],
         resolve: {
             alias: {
                 '@': path.join(__dirname, './src'),
             },
         },
+        plugins: [
+            ...Macros(),
+            ...Components(),
+            UnoCSS(),
+            /**
+             * 本地和生产模拟服务
+             * @see https://github.com/vbenjs/vite-plugin-mock/blob/main/README.zh_CN.md
+             */
+            viteMockServe({
+                mockPath: 'mock',
+                enable: command === 'serve' || process.env.VITE_APP_ENV === 'test',
+                logger: true,
+            }),
+            /**
+             * 服务器初始化后立即预热 Vite 的编译缓存
+             * @see https://github.com/bluwy/vite-plugin-warmup#readme
+             */
+            warmup({
+                clientFiles: ['./src/main.ts', './src/views/*.vue'],
+            }),
+            /**
+             * 检查Vite插件的中间状态
+             * @see https://github.com/antfu/vite-plugin-inspect#readme
+             */
+            Inspect(),
+            /**
+             * 打包时展示进度条的插件
+             * @see https://github.com/jeddygong/vite-plugin-progress/blob/main/README.zh-CN.md
+             */
+            Progress(),
+        ],
     }
 })
