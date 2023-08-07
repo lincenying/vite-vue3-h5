@@ -4,6 +4,10 @@ import VueMacros from 'unplugin-vue-macros'
 import type { PluginOption } from 'vite'
 
 export default (): PluginOption[] => ([
+    /**
+     * 探索更多的宏和语法糖到 Vue 中
+     * @see https://vue-macros.sxzz.moe/zh-CN/
+     */
     VueMacros.vite({
         plugins: {
             vue: vuePlugin({
