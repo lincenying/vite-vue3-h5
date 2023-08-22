@@ -81,37 +81,39 @@ export function useLists<T>(init: UserListsInit) {
         ...init,
         timer: null,
         isLoaded: false,
-        // 下拉刷新 ==>
-        isLoading: false,
-        isRefresh: false,
-        // <==下拉刷新
         // 列表数据 ==>
         page: 1,
-        list: [],
+        dataList: [],
         // <==列表数据
-        // 滚动加载 ==>
-        loadStatus: 'loadmore',
-        isLock: false,
-        loading: false,
-        error: false,
-        finished: false,
-        // <==滚动加载
+        config: {
+            // 下拉刷新 ==>
+            isLoading: false,
+            isRefresh: false,
+            // <==下拉刷新
+            // 滚动加载 ==>
+            loadStatus: 'loadmore',
+            isLock: false,
+            loading: false,
+            error: false,
+            finished: false,
+            // <==滚动加载
+        },
     })
 
     /**
      * 请求列表接口
      */
     const getList = async () => {
-        if (res.isLock)
+        if (res.config.isLock)
             return
-        res.isLock = true
+        res.config.isLock = true
         // 异步更新数据
         res.timer = setTimeout(() => {
             globalStore.$patch({ routerLoading: true })
         }, 500)
         // 第一页时不显示loading
         if (res.page > 1)
-            res.loading = true
+            res.config.loading = true
         await Sleep(Random(300, 600))
         const { data, code } = await $api[init.api.method]<ResDataLists<T>>(init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
@@ -123,29 +125,29 @@ export function useLists<T>(init: UserListsInit) {
 
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据
-            if (res.isRefresh) {
-                res.list = [...data.data]
-                res.isRefresh = false
+            if (res.config.isRefresh) {
+                res.dataList = [...data.data]
+                res.config.isRefresh = false
             }
             else {
-                res.list = res.list.concat(data.data)
+                res.dataList = res.dataList.concat(data.data)
             }
             await nextTick()
             // 加载状态结束
-            res.loading = false
+            res.config.loading = false
             // 数据全部加载完成
             if (data.last_page <= data.current_page) {
-                res.finished = true
-                res.loadStatus = 'nomore'
+                res.config.finished = true
+                res.config.loadStatus = 'nomore'
             }
             else {
-                res.loadStatus = 'loadmore'
+                res.config.loadStatus = 'loadmore'
                 res.page += 1
             }
-            res.isLock = false
+            res.config.isLock = false
         }
         else {
-            res.error = true
+            res.config.error = true
         }
     }
 
@@ -153,19 +155,19 @@ export function useLists<T>(init: UserListsInit) {
      * 刷新接口
      */
     const onRefresh = async () => {
-        res.isRefresh = true
+        res.config.isRefresh = true
         res.page = 1
         await getList()
-        res.isLoading = false
+        res.config.isLoading = false
     }
 
     /**
      * 触底回调
      */
     const reachBottom = () => {
-        if (res.loadStatus === 'nomore' || res.loadStatus === 'loading')
+        if (res.config.loadStatus === 'nomore' || res.config.loadStatus === 'loading')
             return
-        res.loadStatus = 'loading'
+        res.config.loadStatus = 'loading'
         getList()
     }
     const lazyLoading = () => {
@@ -179,7 +181,7 @@ export function useLists<T>(init: UserListsInit) {
 
     return {
         body,
-        res,
+        ...toRefs(res),
         getList,
         onRefresh,
         reachBottom,
@@ -192,7 +194,7 @@ export function useLists<T>(init: UserListsInit) {
  * @param init { api: 接口封装 }
  * @returns
  */
-export function UseTabLists<T>(init: UseTabListsInit) {
+export function useTabLists<T>(init: UseTabListsInit) {
     const { options, globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
