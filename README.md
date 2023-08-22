@@ -1,33 +1,30 @@
 # Vue3 项目模板
 
-## 已配置
-```
-Vuex、Vue-Router、ESlint、prettier、Vant
-```
+vue3 H5端脚手架, 包含技术栈(Vue3 + Vant + Pinia + Vite + TS + Unocss)
 
 ## Project setup
 ```
-yarn install
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn dev
+pnpm serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+pnpm build
 ```
 
 ### Preview for production
 ```
-yarn serve
+pnpm start
 ```
 
 ### Lints and fixes files
 ```
-yarn lint
+pnpm lint
 ```
 
 ### Customize configuration
