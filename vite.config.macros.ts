@@ -1,27 +1,34 @@
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import VueMacros from 'unplugin-vue-macros'
+
+import ReactivityTransform from '@vue-macros/reactivity-transform/vite'
+import DefineProps from '@vue-macros/define-props/vite'
+import DefinePropsRefs from '@vue-macros/define-props-refs/vite'
+
 import type { PluginOption } from 'vite'
 
 export default (): PluginOption[] => ([
-    /**
-     * 探索更多的宏和语法糖到 Vue 中
-     * @see https://vue-macros.sxzz.moe/zh-CN/
-     */
-    VueMacros.vite({
-        plugins: {
-            vue: vuePlugin({
-                template: {
-                    compilerOptions: {
-                        isCustomElement: (tag: string) => ['def'].includes(tag),
-                    },
-                },
-                script: {
-                    defineModel: true,
-                    propsDestructure: true, // 解构 props
-                },
-            }),
-            vueJsx: vueJsx(),
+    vuePlugin({
+        template: {
+            compilerOptions: {
+                isCustomElement: (tag: string) => ['def'].includes(tag),
+            },
         },
     }),
+    vueJsx(),
+    /**
+     * Reactivity Transform
+     * @see https://vue-macros.sxzz.moe/zh-CN/features/reactivity-transform.html
+     */
+    ReactivityTransform(),
+    /**
+     * defineProps
+     * @see https://vue-macros.sxzz.moe/zh-CN/macros/define-props.html
+     */
+    DefineProps(),
+    /**
+     * definePropsRefs
+     * @see https://vue-macros.sxzz.moe/zh-CN/macros/define-props-refs.html
+     */
+    DefinePropsRefs(),
 ])

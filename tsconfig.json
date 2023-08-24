@@ -15,11 +15,23 @@
     "strictNullChecks": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node", "vite/client", "vue/ref-macros", "unplugin-vue-macros/macros-global"],
+    "types": [
+      "node",
+      "vite/client",
+      "unplugin-vue-macros/macros-global"
+    ],
     "paths": {
       "@/*": ["src/*"]
     },
     "outDir": "build"
   },
-  "exclude": ["node_modules", "dist/**/*", "public/**/*"]
+  "exclude": ["node_modules", "dist/**/*", "public/**/*"],
+
+  "vueCompilerOptions": {
+    "target": 3, // or 2.7 for Vue 2
+    "plugins": [
+      "@vue-macros/volar/define-props-refs",
+      "@vue-macros/volar/define-props"
+    ]
+  }
 }
