@@ -14,9 +14,27 @@
             </transition>
         </router-view>
         <van-tabbar v-if="routeIsTab" route :border="false" class="fixed-center">
-            <van-tabbar-item replace to="/" icon="home-o">首页</van-tabbar-item>
-            <van-tabbar-item replace to="/lists" icon="home-o">列表</van-tabbar-item>
-            <van-tabbar-item replace to="/about" icon="search">关于</van-tabbar-item>
+            <van-tabbar-item replace to="/">
+                <span>首页</span>
+                <template #icon="props">
+                    <div v-if="props.active" class="i-mdi:home-account text-amber" />
+                    <div v-else class="i-mdi:home" />
+                </template>
+            </van-tabbar-item>
+            <van-tabbar-item replace to="/lists">
+                <span>列表</span>
+                <template #icon="props">
+                    <div v-if="props.active" class="i-mdi:view-dashboard-outline text-amber" />
+                    <div v-else class="i-mdi:view-dashboard-outline" />
+                </template>
+            </van-tabbar-item>
+            <van-tabbar-item replace to="/about">
+                <span>关于</span>
+                <template #icon="props">
+                    <div v-if="props.active" class="i-mdi:account-settings text-amber" />
+                    <div v-else class="i-mdi:account-settings-outline" />
+                </template>
+            </van-tabbar-item>
         </van-tabbar>
         <div v-if="globalLoading" class="global-loading">
             <van-loading type="spinner" size="32px" />

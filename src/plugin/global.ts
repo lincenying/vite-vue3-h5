@@ -7,7 +7,7 @@ function install(app: App) {
             const blackComponents = ['router-link', 'keep-alive', 'transition-group', 'KeepAlive', 'BaseTransition', 'RouterView']
             const componentName = this.$options.name
             if (componentName && !componentName.includes('van-') && !blackComponents.includes(componentName)) {
-                console.log(`%c[${UTC2Date('', 'y-m-d h:i:s.v')}] ${componentName} Mounted`, 'color: green')
+                console.log(`%c[${UTC2Date('', 'yyyy-mm-dd hh:ii:ss.SSS')}] ${componentName} Mounted`, 'color: green')
                 window[`$$${transformStr(componentName)}` as any] = this
             }
         },

@@ -6,7 +6,7 @@
                 <van-grid square>
                     <van-grid-item v-for="value in 28" :key="value" icon="photo-o" text="文字" />
                 </van-grid>
-                <div class="w-30px h-30px"><MyIcon /></div>
+                <div class="w-30px h-30px"></div>
                 <JsxComponents />
             </div>
         </div>
@@ -14,8 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import MyIcon from '@/assets/svgs/mp3.svg?component'
-
 defineOptions({
     name: 'AboutDetailRouter',
 })

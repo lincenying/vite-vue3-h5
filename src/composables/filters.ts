@@ -1,5 +1,5 @@
 function formatTime(value: any, format: string) {
-    format = format || 'y-m-d'
+    format = format || 'yyyy-mm-dd'
     return UTC2Date(value, format)
 }
 
