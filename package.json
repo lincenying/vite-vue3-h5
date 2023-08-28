@@ -9,6 +9,8 @@
     "postinstall": "husky install",
     "del": "sh delete-ts.sh",
     "serve": "cross-env DEBUG=vite:transform vite",
+    "build:test": "vite build --mode test",
+    "build:staging": "vite build --mode staging",
     "build": "vite build",
     "start": "vite preview",
     "lint": "eslint ./src --ext .vue,.ts,.tsx",
