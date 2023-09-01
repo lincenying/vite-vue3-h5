@@ -1,0 +1,48 @@
+{
+    "Notice: Dialog Alert": {
+        "scope": "javascript,typescript",
+        "prefix": "vanalert",
+        "body": [
+            "Dialog.alert({",
+            "    title: '${1:标题}',",
+            "    message: '${2:弹出内容}',",
+            "}).then(() => {",
+            "    $3",
+            "})"
+        ],
+        "description": "Vant alert"
+    },
+    "Notice: Dialog Confirm": {
+        "scope": "javascript,typescript",
+        "prefix": "vanconfirm",
+        "body": [
+            "Dialog.confirm({",
+            "    title: '${1:标题}',",
+            "    message: '${2:弹出内容}',",
+            "}).then(() => {",
+            "    $3",
+            "}).catch(() => {",
+            "    $4",
+            "})"
+        ],
+        "description": "Vant confirm"
+    },
+    "Notice: Notify": {
+        "scope": "javascript,typescript",
+        "prefix": "vannotify",
+        "body": [
+            "Notify({",
+            "    title: '${1:标题}',",
+            "    duration: 2000,",
+            "    background: '#1989fa',",
+            "})"
+        ],
+        "description": "Vant Notify"
+    },
+    "Notice: Toast": {
+        "scope": "javascript,typescript",
+        "prefix": "vantoast",
+        "body": ["Toast('${1:弹出内容}')"],
+        "description": "Vant Toast"
+    }
+}

@@ -1,21 +1,23 @@
-const vmDesignWidth = 375 // 设计稿宽度
-const vmDesignHeight = 667 // 设计稿宽度
-const vmMinWidth = 320 // 兼容最小宽度
-const vmMaxWidth = 540 // 兼容最大宽度
-const vmFontSize = 37.5 // 为什么设置 100? 设置成便于计算, 计算rem时只需要将 设计稿的宽度 / 100 即可
-
-const vmMinWindow = `${vmMinWidth}Px` // 兼容最小宽度
-const vmMaxWindow = `${vmMaxWidth}Px` // 兼容最大宽度
-const vmDesignMultiple = vmDesignWidth / 750
-
-export const designWidth = vmDesignWidth
-export const designHeight = vmDesignHeight
-export const designMultiple = vmDesignMultiple
-export const minWidth = vmMinWidth
-export const minWindow = vmMinWindow
-export const maxWidth = vmMaxWidth
-export const maxWindow = vmMaxWindow
-export const fontSize = vmFontSize
+/** 设计稿宽度 */
+export const designWidth = 375
+/** 设计稿高度 */
+export const designHeight = 667
+export const designMultiple = designWidth / 750
+/** 兼容最小宽度 */
+export const minWidth = 320
+/** 兼容最小宽度 */
+export const minWindow = `${minWidth}Px`
+/** 兼容最大宽度 */
+export const maxWidth = 540
+/** 兼容最大宽度 */
+export const maxWindow = `${maxWidth}Px`
+/**
+ * ```字号大小, 尽量配合Ui库, 比如vant就是设计稿宽度为375, rootfontsize为37.5
+ * 如果你的设计稿是750的, 方法有2
+ * 1: 将上面的设计稿宽度设置为750, 然后字号设置成75, 然后css代码的宽高按设计稿中实际的书写, 然后在postcss插件, 针对性判断vant的字号改成37.5(已自动适配)
+ * 2: 将上面的设计稿宽度设置为375, 然后字号设置成37.5, 然后css代码的宽高按设计稿中实际/2书写, 也可以将设计稿尺寸调整到375后, 按375的实际尺寸书写```
+ */
+export const fontSize = 37.5
 
 export const charsetRemoval = function () {
     return {

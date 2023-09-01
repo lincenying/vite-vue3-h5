@@ -1,8 +1,13 @@
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import Icons from 'unplugin-icons/vite'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 
 export default () => ([
+    /**
+     * 按需自动导入API
+     * @see https://github.com/antfu/unplugin-auto-import#readme
+     */
     AutoImport({
         eslintrc: {
             enabled: true,
@@ -32,6 +37,10 @@ export default () => ([
         defaultExportByFilename: false,
         vueTemplate: true,
     }),
+    /**
+     * 按需自动导入Vue组件
+     * @see https://github.com/antfu/unplugin-vue-components#readme
+     */
     Components({
         include: [
             /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
@@ -42,5 +51,13 @@ export default () => ([
         extensions: ['vue', 'tsx', 'jsx'],
         resolvers: [VantResolver()],
         dts: 'src/components.d.ts',
+    }),
+    /**
+     * 按需访问数千个图标作为组件
+     * @see https://github.com/antfu/unplugin-icons#readme
+     * @example <i-mdi-account-box style="font-size: 2em; color: red"/>
+     */
+    Icons({
+        autoInstall: true,
     }),
 ])

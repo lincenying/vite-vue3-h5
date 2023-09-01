@@ -3,11 +3,11 @@
     <div class="home-wrap" :class="$options.name">
         <div class="route-wrap">
             <van-tabs v-model:active="activeIndex" :sticky="true">
-                <van-tab v-for="(item, index) in res.tabs" :key="index" :title="item">
-                    <van-pull-refresh v-model="res.list[index].refreshing" @refresh="onRefresh(index)">
-                        <van-list v-model:loading="res.list[index].loading" :finished="res.list[index].finished" @load="getList(index)">
+                <van-tab v-for="(item, index) in tabs" :key="index" :title="item">
+                    <van-pull-refresh v-model="config.isLoading" @refresh="onRefresh">
+                        <van-list v-model:loading="config.loading" :finished="config.finished" @load="getList">
                             <van-cell
-                                v-for="sub_item in res.list[index].items"
+                                v-for="sub_item in dataList"
                                 :key="`${index}_${sub_item.c_id}}`"
                                 :title="sub_item.c_title"
                                 is-link
@@ -22,21 +22,24 @@
 </template>
 
 <script setup lang="ts">
-import type { Article, UserListsInitApi } from '@/types'
+import type { Article } from '@/types'
 
 defineOptions({
     name: 'ListsRouter',
 })
 
-const api: UserListsInitApi[] = [
-    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: '' } },
-    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'ask' } },
-    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'share' } },
-    { method: 'get', url: 'article/lists', config: { per_page: 20, tab: 'good' } },
-]
-const tabs = ['全部', '问答', '分享', '推荐']
+const activeIndex = ref(0)
 
-const { res, getList, onRefresh, activeIndex } = useTabLists<Article>({ api, tabs })
+const tabs = ref(['全部', '问答', '分享', '推荐'])
+const tabsKey = ref(['', 'ask', 'share', 'good'])
+
+const { api, page, config, dataList, getList, onRefresh } = useLists<Article>({ api: { method: 'get', url: 'article/lists', config: { per_page: 20, tab: '' } } })
+
+watch(activeIndex, (val: number) => {
+    page.value = 1
+    api.value.config.tab = tabsKey.value[val]
+    getList()
+})
 
 useSaveScroll()
 </script>
