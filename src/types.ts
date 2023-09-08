@@ -1,5 +1,3 @@
-export type Fn = (...args: any[]) => void
-
 export interface Article {
     c_id: string
     c_title: string
