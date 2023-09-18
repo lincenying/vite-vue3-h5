@@ -8,12 +8,12 @@ dependencies:
   '@lincy/utils':
     specifier: ^0.4.1
     version: 0.4.1
+  '@unhead/vue':
+    specifier: ^1.7.4
+    version: 1.7.4(vue@3.3.4)
   '@vueuse/core':
     specifier: ^10.4.1
     version: 10.4.1(vue@3.3.4)
-  '@vueuse/head':
-    specifier: ^2.0.0
-    version: 2.0.0(vue@3.3.4)
   axios:
     specifier: ^1.5.0
     version: 1.5.0
@@ -35,6 +35,9 @@ dependencies:
   store2:
     specifier: ^2.14.2
     version: 2.14.2
+  unhead:
+    specifier: ^1.7.4
+    version: 1.7.4
   vant:
     specifier: ^4.6.8
     version: 4.6.8(vue@3.3.4)
@@ -1348,13 +1351,6 @@ packages:
       '@unhead/schema': 1.7.4
     dev: false
 
-  /@unhead/ssr@1.7.4:
-    resolution: {integrity: sha512-2QqaHdC48XJGP9Pd0F2fblPv9/6G4IU04iZ5qLRAs6MFFmFEzrdvoooFlcwdcoH/WDGRnpYBmo+Us2nzQz1MMQ==}
-    dependencies:
-      '@unhead/schema': 1.7.4
-      '@unhead/shared': 1.7.4
-    dev: false
-
   /@unhead/vue@1.7.4(vue@3.3.4):
     resolution: {integrity: sha512-ZfgzOhg1Bxo9xwp3upawqerw4134hc9Lhz6t005ixcBwPX+39Wpgc9dC3lf+owFQEVuWkf8F+eAwK2sghVBK4A==}
     peerDependencies:
@@ -2144,18 +2140,6 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-
-  /@vueuse/head@2.0.0(vue@3.3.4):
-    resolution: {integrity: sha512-ykdOxTGs95xjD4WXE4na/umxZea2Itl0GWBILas+O4oqS7eXIods38INvk3XkJKjqMdWPcpCyLX/DioLQxU1KA==}
-    peerDependencies:
-      vue: '>=2.7 || >=3'
-    dependencies:
-      '@unhead/dom': 1.7.4
-      '@unhead/schema': 1.7.4
-      '@unhead/ssr': 1.7.4
-      '@unhead/vue': 1.7.4(vue@3.3.4)
-      vue: 3.3.4
-    dev: false
 
   /@vueuse/metadata@10.4.1:
     resolution: {integrity: sha512-2Sc8X+iVzeuMGHr6O2j4gv/zxvQGGOYETYXEc41h0iZXIRnRbJZGmY/QP8dvzqUelf8vg0p/yEA5VpCEu+WpZg==}

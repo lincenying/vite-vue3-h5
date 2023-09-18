@@ -22,7 +22,6 @@ export default () => ([
             'vue',
             'vue-router',
             '@vueuse/core',
-            '@vueuse/head',
             {
                 'pinia': ['defineStore', 'storeToRefs'],
                 'vue-router': ['createRouter', 'createWebHashHistory'],
