@@ -79,7 +79,6 @@ export function useSaveScroll() {
 /**
  * 单列表封装
  * @param init { api: 接口封装 }
- * @returns
  */
 export function useLists<T>(init: UserListsInit) {
     const globalStore = useGlobalStore()
@@ -200,7 +199,6 @@ export function useLists<T>(init: UserListsInit) {
 /**
  * Tab接口列表
  * @param init { api: 接口封装 }
- * @returns
  */
 export function useTabLists<T>(init: UseTabListsInit) {
     const { options, globalStore } = useGlobal()
