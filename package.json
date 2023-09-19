@@ -37,7 +37,7 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.54",
     "@lincy/base-config": "^0.0.2",
-    "@lincy/eslint-config": "^2.4.0",
+    "@lincy/eslint-config": "^2.5.0",
     "@lincy/stylelint-config": "^1.15.10",
     "@lincy/vite-plugin-mock": "^3.0.0",
     "@types/lodash": "^4.14.198",
@@ -50,7 +50,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "mockjs": "^1.1.0",
-    "postcss": "^8.4.29",
+    "postcss": "^8.4.30",
     "postcss-px-to-viewport-8-plugin": "^1.2.2",
     "sass": "^1.67.0",
     "typescript": "^5.2.2",
