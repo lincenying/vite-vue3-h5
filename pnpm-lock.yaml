@@ -48,8 +48,8 @@ dependencies:
     specifier: ^1.0.8
     version: 1.0.8
   vue-router:
-    specifier: ^4.2.4
-    version: 4.2.4(vue@3.3.4)
+    specifier: ^4.2.5
+    version: 4.2.5(vue@3.3.4)
 
 devDependencies:
   '@iconify-json/mdi':
@@ -59,8 +59,8 @@ devDependencies:
     specifier: ^0.0.2
     version: 0.0.2(postcss@8.4.30)(vite@4.4.9)
   '@lincy/eslint-config':
-    specifier: ^3.0.5
-    version: 3.0.5(eslint@8.49.0)(typescript@5.2.2)
+    specifier: ^3.0.10
+    version: 3.0.10(eslint@8.49.0)(typescript@5.2.2)
   '@lincy/stylelint-config':
     specifier: ^1.15.10
     version: 1.15.10(postcss@8.4.30)(stylelint@15.10.3)
@@ -902,8 +902,8 @@ packages:
       - vite
     dev: true
 
-  /@lincy/eslint-config@3.0.5(eslint@8.49.0)(typescript@5.2.2):
-    resolution: {integrity: sha512-ZCISROsizUCZDWgz+SrLTplOADZ1lTF/+avRe/5V+Vr4f/AqygTTRslChhwYFZiKlcoEbwAfmkdaQLVfYl7G/g==}
+  /@lincy/eslint-config@3.0.10(eslint@8.49.0)(typescript@5.2.2):
+    resolution: {integrity: sha512-lckXZ8JQ9KJ8Qf74NU9SKd4+IzZDMWRxtMajvJL6TrMNxWqBl1bc5bnm5+FDGBmWki0kYoD/eoHY2jy2wJL11Q==}
     peerDependencies:
       eslint: '>=8.0.0'
     dependencies:
@@ -5875,8 +5875,8 @@ packages:
       - supports-color
     dev: true
 
-  /vue-router@4.2.4(vue@3.3.4):
-    resolution: {integrity: sha512-9PISkmaCO02OzPVOMq2w82ilty6+xJmQrarYZDkjZBfl4RvYAlt4PKnEX21oW4KTtWfa9OuO/b3qk1Od3AEdCQ==}
+  /vue-router@4.2.5(vue@3.3.4):
+    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

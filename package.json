@@ -6,7 +6,7 @@
   "packageManager": "pnpm@8.4.0",
   "author": "lincenying <lincenying@qq.com>",
   "scripts": {
-    "prepare": "simple-git-hooks",
+    "prepare": "sh simple-git-hooks.sh",
     "del": "sh delete-ts.sh",
     "serve": "cross-env DEBUG=vite:transform vite",
     "build:test": "vite build --mode test",
@@ -32,12 +32,12 @@
     "vant": "^4.6.8",
     "vue": "^3.3.4",
     "vue-cropper": "^1.0.8",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.54",
     "@lincy/base-config": "^0.0.2",
-    "@lincy/eslint-config": "^3.0.5",
+    "@lincy/eslint-config": "^3.0.10",
     "@lincy/stylelint-config": "^1.15.10",
     "@lincy/vite-plugin-mock": "^3.0.0",
     "@types/lodash": "^4.14.198",
