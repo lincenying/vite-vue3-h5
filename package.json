@@ -13,8 +13,8 @@
     "build:staging": "vite build --mode staging",
     "build": "vite build",
     "start": "vite preview",
-    "lint": "eslint ./src --ext .vue,.ts,.tsx",
-    "lint:fix": "eslint ./src --ext .vue,.ts,.tsx --fix",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
     "lint:ts": "vue-tsc --noEmit"
   },
   "dependencies": {
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.54",
     "@lincy/base-config": "^0.0.2",
-    "@lincy/eslint-config": "^3.0.3",
+    "@lincy/eslint-config": "^3.0.5",
     "@lincy/stylelint-config": "^1.15.10",
     "@lincy/vite-plugin-mock": "^3.0.0",
     "@types/lodash": "^4.14.198",
@@ -82,7 +82,7 @@
     "pre-commit": "pnpm lint-staged"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,vue}": [
+    "*": [
       "eslint --fix"
     ]
   }

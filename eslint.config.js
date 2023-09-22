@@ -21,8 +21,14 @@ const config = eslintConfig(
             },
         },
     },
+    {
+        ignores: [
+            '**/assets',
+            '**/static',
+        ],
+    },
 )
 
-function a() {}
+function b() {}
 
 export default config
