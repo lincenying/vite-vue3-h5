@@ -29,6 +29,4 @@ const config = eslintConfig(
     },
 )
 
-function b() {}
-
 export default config
