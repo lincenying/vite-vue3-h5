@@ -31,7 +31,6 @@ declare type AnyFn<T = any> = (...args: any[]) => T
  */
 declare type Awaitable<T> = T | PromiseLike<T>
 
-
 declare interface ResDataLists<T> {
     data: T[]
     current_page: number

@@ -12,7 +12,10 @@ const config = lincy(
         plugins: {
             '@unocss': plugin,
         },
-        rules: plugin.configs.recommended.rules,
+        rules: {
+            ...plugin.configs.recommended.rules,
+            '@unocss/order': 'off',
+        },
     },
     {
         languageOptions: {
