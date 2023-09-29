@@ -16,7 +16,7 @@
                 </van-cell-group>
             </div>
             <div class="mt-10px">
-                <van-button plain hairline type="primary" size="small">细边框按钮</van-button>
+                <van-button hairline plain type="primary" size="small">细边框按钮</van-button>
                 <van-button loading type="primary" size="small" />
                 <van-button loading type="primary" size="small" loading-type="spinner" />
                 <van-button loading type="danger" size="small" loading-text="加载中..." />

@@ -33,22 +33,22 @@ const myDeck = [
     { suit: 'spades', card: 10 },
     { suit: 'hearts', card: 4 },
 ]
-const pickedCard1 = myDeck[pickCard(myDeck)]
-const pickedCard2 = pickCard(13)
+const _pickedCard1 = myDeck[pickCard(myDeck)]
+const _pickedCard2 = pickCard(13)
 
 // ==================
 
 function identity<T>(arg: T): string {
     return `${arg}!`
 }
-const output = identity<number>(123)
+const _output = identity<number>(123)
 
 function loggingIdentity<T>(arg: T[]): T[] {
     console.log(arg.length) // Array has a .length, so no more error
     return arg
 }
 
-const output2 = loggingIdentity<number>([123])
+const _output2 = loggingIdentity<number>([123])
 
 interface GenericIdentityFn {
     <T>(arg: T): Promise<T>
@@ -66,11 +66,11 @@ interface Lengthwise {
     length: number
 }
 
-const loggingIdentity2 = <T extends Lengthwise>(arg: T): T => {
+function loggingIdentity2<T extends Lengthwise>(arg: T): T {
     console.log(arg.length) // Now we know it has a .length property, so no more error
     return arg
 }
-const loggingIdentity3 = (arg: Lengthwise): Lengthwise => {
+function loggingIdentity3(arg: Lengthwise): Lengthwise {
     console.log(arg.length) // Now we know it has a .length property, so no more error
     return arg
 }

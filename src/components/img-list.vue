@@ -9,13 +9,13 @@
 </template>
 
 <script setup lang="ts">
-const prop = defineProps<{
-    imgArr: string[]
-}>()
-
 defineOptions({
     name: 'ImgList',
 })
+
+const prop = defineProps<{
+    imgArr: string[]
+}>()
 
 // pinia 状态管理 ===>
 // const mainStore = useMainStore()
