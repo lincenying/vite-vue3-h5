@@ -11,7 +11,12 @@ const App = defineComponent({
 
         return () => (
             <div p-20px>
-                <van-button onClick={withModifiers(inc, ['self'])}>&lt;&lt;&lt;&lt; {count} &lt;&lt;&lt;&lt;</van-button>
+                <van-button onClick={withModifiers(inc, ['self'])}>
+                    &lt;&lt;&lt;&lt;
+                    {count}
+                    {' '}
+                    &lt;&lt;&lt;&lt;
+                </van-button>
             </div>
         )
     },
