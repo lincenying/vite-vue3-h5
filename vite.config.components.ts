@@ -25,6 +25,7 @@ export default () => ([
             {
                 'pinia': ['defineStore', 'storeToRefs'],
                 'vue-router': ['createRouter', 'createWebHashHistory'],
+                '@unhead/vue': ['useHead'],
                 'vant': ['showDialog'],
                 '@lincy/utils': ['deepClone', 'deepMerge', 'UTC2Date'],
             },

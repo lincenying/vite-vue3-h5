@@ -133,17 +133,17 @@ export function useLists<T>(init: UserListsInit) {
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据
             if (res.config.isRefresh) {
-                res.dataList = [...data.data]
+                res.dataList = [...data.list]
                 res.config.isRefresh = false
             }
             else {
-                res.dataList = res.dataList.concat(data.data)
+                res.dataList = res.dataList.concat(data.list)
             }
             await nextTick()
             // 加载状态结束
             res.config.loading = false
             // 数据全部加载完成
-            if (data.last_page <= data.current_page) {
+            if (data.hasNext) {
                 res.config.finished = true
                 res.config.loadStatus = 'nomore'
             }
@@ -246,17 +246,17 @@ export function useTabLists<T>(init: UseTabListsInit) {
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据
             if (list.refreshing) {
-                list.items = [...data.data]
+                list.items = [...data.list]
                 list.refreshing = false
             }
             else {
-                list.items = list.items.concat(data.data)
+                list.items = list.items.concat(data.list)
             }
             await nextTick()
             // 加载状态结束
             list.loading = false
             // 数据全部加载完成
-            if (data.last_page <= data.current_page)
+            if (!data.hasNext)
                 list.finished = true
             else
                 list.page += 1

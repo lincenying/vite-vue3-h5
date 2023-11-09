@@ -16,7 +16,7 @@ const config: { server: ServerOptions; build: BuildOptions } = {
             input: {
                 main: path.resolve(__dirname, 'index.html'),
             },
-            external: /\.\/assets.*/,
+            external: /\.\/static.*/,
         },
     },
     server: {

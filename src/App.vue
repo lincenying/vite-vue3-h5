@@ -46,14 +46,6 @@
 </template>
 
 <script setup lang="ts">
-import 'uno.css'
-import 'vue-cropper/dist/index.css'
-import 'vant/es/toast/style'
-import 'vant/es/dialog/style'
-import 'vant/es/notify/style'
-import 'vant/es/image-preview/style'
-import '@/assets/scss/style.scss'
-
 defineOptions({
     name: 'AppRoot',
 })
