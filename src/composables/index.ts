@@ -121,7 +121,6 @@ export function useLists<T>(init: UserListsInit) {
         // 第一页时不显示loading
         if (res.page > 1)
             res.config.loading = true
-        await Sleep(Random(300, 600)) // 测试用, 记得删除
         const { data, code } = await $api[init.api.method]<ResDataLists<T>>(init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer)
