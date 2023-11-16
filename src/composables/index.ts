@@ -186,8 +186,8 @@ export function useLists<T>(init: UserListsInit) {
     }
 
     return {
-        body,
         ...toRefs(res),
+        body,
         getList,
         onRefresh,
         reachBottom,
@@ -207,7 +207,7 @@ export function useTabLists<T>(init: UseTabListsInit) {
         ...init,
         timer: null,
         // 列表数据 ==>
-        list: Array.from({ length: 5 }).fill('').map(() => ({
+        list: Array.from({ length: 5 }, () => '').map(() => ({
             page: 1,
             items: [],
             refreshing: false,
@@ -275,8 +275,8 @@ export function useTabLists<T>(init: UseTabListsInit) {
     }
 
     return {
-        body,
         res,
+        body,
         getList,
         onRefresh,
         activeIndex,
