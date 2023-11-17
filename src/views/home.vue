@@ -36,7 +36,7 @@ defineOptions({
 const apiConfig: UserListsInitApi = {
     method: 'get',
     url: 'article/lists',
-    config: { per_page: 20 },
+    config: { limit: 20 },
 }
 
 const { api, config, dataList, getList, onRefresh } = useLists<Article>({ api: apiConfig })

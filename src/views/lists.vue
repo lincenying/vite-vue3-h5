@@ -33,12 +33,15 @@ const activeIndex = ref(0)
 const tabs = ref(['全部', '问答', '分享', '推荐'])
 const tabsKey = ref(['', 'ask', 'share', 'good'])
 
-const { api, page, config, dataList, getList, onRefresh } = useLists<Article>({ api: { method: 'get', url: 'article/lists', config: { per_page: 20, tab: '' } } })
+const { api, page, config, dataList, getList, onRefresh } = useLists<Article>({ api: { method: 'get', url: 'article/lists', config: { limit: 20, tab: '' } } })
 
-watch(activeIndex, (val: number) => {
+watch(activeIndex, async (val: number) => {
     page.value = 1
     api.value.config.tab = tabsKey.value[val]
-    getList()
+    await getList()
+    const $body = document.querySelector('.body')
+    if ($body)
+        $body.scrollTop = 0
 })
 
 useSaveScroll()
