@@ -319,6 +319,14 @@
     "ExtractDefaultPropTypes": true,
     "ExtractPropTypes": true,
     "ExtractPublicPropTypes": true,
-    "WritableComputedRef": true
+    "WritableComputedRef": true,
+    "useClipboardItems": true,
+    "closeToast": true,
+    "showConfirmDialog": true,
+    "showFailToast": true,
+    "showLoadingToast": true,
+    "showSuccessToast": true,
+    "showToast": true,
+    "showImagePreview": true
   }
 }
