@@ -61,13 +61,9 @@
 </template>
 
 <script setup lang="ts">
-import { showImagePreview } from 'vant'
-
 defineOptions({
     name: 'AboutRouter',
 })
-
-const { ctx } = useGlobal()
 
 useHead({
     title: 'About',
@@ -116,7 +112,7 @@ function dateChange(val: { selectedValues: any[] }) {
 }
 
 function handleToast() {
-    const toast1 = ctx.$toast.loading({
+    const toast1 = showLoadingToast({
         duration: 0,
         mask: true,
         message: '加载中...',
@@ -138,16 +134,15 @@ function dialogBeforeClose(action: 'confirm' | 'cancel'): any {
     })
 }
 function handleDialog() {
-    ctx.$dialog
-        .confirm({
-            title: '提示',
-            message: '代码是写出来给人看的，附带能在机器上运行',
-        })
+    showConfirmDialog({
+        title: '提示',
+        message: '代码是写出来给人看的，附带能在机器上运行',
+    })
         .then(() => {
-            ctx.$toast.default('click confirm')
+            showToast('click confirm')
         })
         .catch(() => {
-            ctx.$toast.default('click cancel')
+            showToast('click cancel')
         })
 }
 

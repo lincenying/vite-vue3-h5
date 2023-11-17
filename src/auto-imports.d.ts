@@ -12,6 +12,7 @@ declare global {
   const UseTabLists: typeof import('./composables/index')['UseTabLists']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
+  const closeToast: typeof import('vant')['closeToast']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -103,9 +104,15 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const showConfirmDialog: typeof import('vant')['showConfirmDialog']
   const showDialog: typeof import('vant')['showDialog']
   const showDialogKey: typeof import('./composables/provide')['showDialogKey']
+  const showFailToast: typeof import('vant')['showFailToast']
+  const showImagePreview: typeof import('vant')['showImagePreview']
+  const showLoadingToast: typeof import('vant')['showLoadingToast']
   const showMsg: typeof import('./composables/message')['showMsg']
+  const showSuccessToast: typeof import('vant')['showSuccessToast']
+  const showToast: typeof import('vant')['showToast']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const syncRef: typeof import('@vueuse/core')['syncRef']
   const syncRefs: typeof import('@vueuse/core')['syncRefs']
@@ -153,6 +160,7 @@ declare global {
   const useBrowserLocation: typeof import('@vueuse/core')['useBrowserLocation']
   const useCached: typeof import('@vueuse/core')['useCached']
   const useClipboard: typeof import('@vueuse/core')['useClipboard']
+  const useClipboardItems: typeof import('@vueuse/core')['useClipboardItems']
   const useCloned: typeof import('@vueuse/core')['useCloned']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
@@ -329,6 +337,7 @@ declare module 'vue' {
     readonly UTC2Date: UnwrapRef<typeof import('@lincy/utils')['UTC2Date']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly closeToast: UnwrapRef<typeof import('vant')['closeToast']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -420,9 +429,15 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly showConfirmDialog: UnwrapRef<typeof import('vant')['showConfirmDialog']>
     readonly showDialog: UnwrapRef<typeof import('vant')['showDialog']>
     readonly showDialogKey: UnwrapRef<typeof import('./composables/provide')['showDialogKey']>
+    readonly showFailToast: UnwrapRef<typeof import('vant')['showFailToast']>
+    readonly showImagePreview: UnwrapRef<typeof import('vant')['showImagePreview']>
+    readonly showLoadingToast: UnwrapRef<typeof import('vant')['showLoadingToast']>
     readonly showMsg: UnwrapRef<typeof import('./composables/message')['showMsg']>
+    readonly showSuccessToast: UnwrapRef<typeof import('vant')['showSuccessToast']>
+    readonly showToast: UnwrapRef<typeof import('vant')['showToast']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
@@ -470,6 +485,7 @@ declare module 'vue' {
     readonly useBrowserLocation: UnwrapRef<typeof import('@vueuse/core')['useBrowserLocation']>
     readonly useCached: UnwrapRef<typeof import('@vueuse/core')['useCached']>
     readonly useClipboard: UnwrapRef<typeof import('@vueuse/core')['useClipboard']>
+    readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>
@@ -639,6 +655,7 @@ declare module '@vue/runtime-core' {
     readonly UTC2Date: UnwrapRef<typeof import('@lincy/utils')['UTC2Date']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly closeToast: UnwrapRef<typeof import('vant')['closeToast']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -730,9 +747,15 @@ declare module '@vue/runtime-core' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly showConfirmDialog: UnwrapRef<typeof import('vant')['showConfirmDialog']>
     readonly showDialog: UnwrapRef<typeof import('vant')['showDialog']>
     readonly showDialogKey: UnwrapRef<typeof import('./composables/provide')['showDialogKey']>
+    readonly showFailToast: UnwrapRef<typeof import('vant')['showFailToast']>
+    readonly showImagePreview: UnwrapRef<typeof import('vant')['showImagePreview']>
+    readonly showLoadingToast: UnwrapRef<typeof import('vant')['showLoadingToast']>
     readonly showMsg: UnwrapRef<typeof import('./composables/message')['showMsg']>
+    readonly showSuccessToast: UnwrapRef<typeof import('vant')['showSuccessToast']>
+    readonly showToast: UnwrapRef<typeof import('vant')['showToast']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly syncRef: UnwrapRef<typeof import('@vueuse/core')['syncRef']>
     readonly syncRefs: UnwrapRef<typeof import('@vueuse/core')['syncRefs']>
@@ -780,6 +803,7 @@ declare module '@vue/runtime-core' {
     readonly useBrowserLocation: UnwrapRef<typeof import('@vueuse/core')['useBrowserLocation']>
     readonly useCached: UnwrapRef<typeof import('@vueuse/core')['useCached']>
     readonly useClipboard: UnwrapRef<typeof import('@vueuse/core')['useClipboard']>
+    readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>

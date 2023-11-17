@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { Dialog } from 'vant'
+import { showDialog } from 'vant'
 import { VueCropper } from 'vue-cropper'
 
 defineOptions({
@@ -52,7 +52,7 @@ useHead({
     title: 'Avatar Detail',
 })
 
-Dialog.alert({
+showDialog({
     title: '标题',
     message: '弹出的内容',
 }).then(() => {

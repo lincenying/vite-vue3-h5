@@ -23,10 +23,10 @@ export default () => ([
             'vue-router',
             '@vueuse/core',
             {
+                'vant': ['closeToast', 'showConfirmDialog', 'showDialog', 'showFailToast', 'showLoadingToast', 'showSuccessToast', 'showToast', 'showImagePreview'],
                 'pinia': ['defineStore', 'storeToRefs'],
                 'vue-router': ['createRouter', 'createWebHashHistory'],
                 '@unhead/vue': ['useHead'],
-                'vant': ['showDialog'],
                 '@lincy/utils': ['deepClone', 'deepMerge', 'UTC2Date'],
             },
         ],
