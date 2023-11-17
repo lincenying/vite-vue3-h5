@@ -33,6 +33,10 @@ defineOptions({
     name: 'HomeRouter',
 })
 
+useHead({
+    title: 'Home',
+})
+
 const apiConfig: UserListsInitApi = {
     method: 'get',
     url: 'article/lists',

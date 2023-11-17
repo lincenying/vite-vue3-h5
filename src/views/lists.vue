@@ -28,6 +28,10 @@ defineOptions({
     name: 'ListsRouter',
 })
 
+useHead({
+    title: 'Lists',
+})
+
 const activeIndex = ref(0)
 
 const tabs = ref(['全部', '问答', '分享', '推荐'])
