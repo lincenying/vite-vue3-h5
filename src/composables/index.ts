@@ -1,5 +1,4 @@
 import ls from 'store2'
-import { Random, sleep as Sleep } from '@lincy/utils'
 import type { TopicList, UseTabList, UseTabListsInit, UserListConfig, UserListsInit } from '@/types'
 
 export function useGlobal() {
@@ -130,8 +129,8 @@ export function useLists<T>(init: UserListsInit) {
         res.isLoaded = true
 
         if (code === 200) {
-            // 如果是下拉刷新, 则只保留当前数据
-            if (res.config.isRefresh) {
+            // 如果是下拉刷新 或者是第1页, 则只保留当前数据
+            if (res.config.isRefresh || res.page === 1) {
                 res.dataList = [...data.list]
                 res.config.isRefresh = false
             }
@@ -142,7 +141,7 @@ export function useLists<T>(init: UserListsInit) {
             // 加载状态结束
             res.config.loading = false
             // 数据全部加载完成
-            if (data.hasNext) {
+            if (!data.hasNext) {
                 res.config.finished = true
                 res.config.loadStatus = 'nomore'
             }
@@ -226,7 +225,7 @@ export function useTabLists<T>(init: UseTabListsInit) {
             const body = document.querySelector(`.${options.name}`)
             body && body.scrollTo(0, 0)
         }
-        // 500毫秒显示路由loading
+        // 500毫秒数据还没请求完成, 显示路由loading
         res.timer = setTimeout(() => {
             globalStore.$patch({ routerLoading: true })
         }, 500)
@@ -236,7 +235,6 @@ export function useTabLists<T>(init: UseTabListsInit) {
 
         // 异步更新数据
         const { method, url, config } = res.api[index]
-        await Sleep(Random(300, 600))
         const { code, data } = await $api[method as Methods]<ResDataLists<T>>(url, { ...config, page: list.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
         if (res.timer)
