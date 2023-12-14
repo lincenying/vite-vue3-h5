@@ -36,7 +36,7 @@
     }
 
     .van-tabs {
-        @media screen and (min-width: 540PX) {
+        @media screen and (width >= 540px) {
             .van-sticky--fixed {
                 left: 50%;
                 width: 540PX;

@@ -71,8 +71,7 @@
             pre {
                 width: 100%;
                 padding: 10px 0;
-                overflow-x: scroll;
-                overflow-y: hidden;
+                overflow: scroll hidden;
                 -webkit-overflow-scrolling: touch;
             }
         }
