@@ -6,7 +6,6 @@ import type { ConfigEnv } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import { viteMockServe } from '@lincy/vite-plugin-mock'
 import UnoCSS from 'unocss/vite'
-import { warmup } from 'vite-plugin-warmup'
 import Progress from 'vite-plugin-progress'
 import Inspect from 'vite-plugin-inspect'
 
@@ -43,13 +42,6 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
                 mockPath: 'mock',
                 enable: command === 'serve' || process.env.VITE_APP_ENV === 'test',
                 logger: true,
-            }),
-            /**
-             * 服务器初始化后立即预热 Vite 的编译缓存
-             * @see https://github.com/bluwy/vite-plugin-warmup#readme
-             */
-            warmup({
-                clientFiles: ['./src/main.ts', './src/views/*.vue'],
             }),
             /**
              * 检查Vite插件的中间状态
