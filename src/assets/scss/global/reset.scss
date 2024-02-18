@@ -36,7 +36,7 @@ button,
 input,
 select,
 textarea { /* for ie */
-    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', SimSun, sans-serif;
     font-size: 12px;
     outline: none;
 }
@@ -58,7 +58,7 @@ code,
 kbd,
 pre,
 samp,
-tt { font-family: "Courier New", Courier, monospace; } /* 统一等宽字体 */
+tt { font-family: 'Courier New', Courier, monospace; } /* 统一等宽字体 */
 small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */
 
 /* 重置列表元素 */
@@ -79,7 +79,7 @@ acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，
 }
 
 q::before,
-q::after { content: ""; }
+q::after { content: ''; }
 
 /* 重置表单元素 */
 legend { color: #000; } /* for ie6 */

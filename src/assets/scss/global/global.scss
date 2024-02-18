@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 :root {
     // 设计稿宽度
@@ -193,7 +193,7 @@ body {
     height: 199.7%;
     pointer-events: none;
     border: 0 solid #e4e7ed;
-    content: " ";
+    content: ' ';
     transform: scale(0.5, 0.5);
     box-sizing: border-box;
     transform-origin: 0 0;
