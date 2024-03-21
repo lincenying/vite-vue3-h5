@@ -56,17 +56,17 @@ declare interface ResponseData<T> {
 type Methods = 'get' | 'post' | 'delete' | 'put'
 
 declare interface ApiType {
-    get<T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T>>
-    get<T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T> & U>
-    post<T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T>>
-    post<T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T> & U>
-    put<T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T>>
-    put<T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T> & U>
-    delete<T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T>>
-    delete<T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T> & U>
-    downFile(url: string, method: Methods, data?: Objable): Promise<any>
-    RESTful<T>(url: string, method: Methods, data?: Objable, header?: Objable, checkCode?: boolean): Promise<ResponseData<T>>
-    $RESTful<T>(url: string, method: Methods, data?: Objable, header?: Objable): Promise<ResponseData<T>>
+    get: <T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T>>
+    get: <T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T> & U>
+    post: <T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T>>
+    post: <T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T> & U>
+    put: <T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T>>
+    put: <T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T> & U>
+    delete: <T>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T>>
+    delete: <T, U = Obj>(url: string, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T> & U>
+    downFile: (url: string, method: Methods, data?: Objable) => Promise<any>
+    RESTful: <T>(url: string, method: Methods, data?: Objable, header?: Objable, checkCode?: boolean) => Promise<ResponseData<T>>
+    $RESTful: <T>(url: string, method: Methods, data?: Objable, header?: Objable) => Promise<ResponseData<T>>
 }
 
 declare interface Window {
