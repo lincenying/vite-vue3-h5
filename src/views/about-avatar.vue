@@ -17,16 +17,16 @@
                 :auto-crop-height="cropperOption.autoCropHeight"
             />
         </div>
-        <div style="text-align: center">
+        <div text-center>
             <van-button type="primary" size="small" @click="handleSave">保存</van-button>
             <van-button type="primary" size="small" @click="handleUpload">上传</van-button>
             <label for="uploads">
                 重选
                 <input
-                    id="uploads"
-                    ref="uploadImg"
+                    id="uploads" ref="uploadImg"
+                    absolute
                     type="file"
-                    style="position: absolute; clip: rect(0 0 0 0)"
+                    style="clip-path: polygon(0 100%, 0% 100%, 0 100%);"
                     accept="image/png, image/jpeg, image/gif, image/jpg"
                     @change="handleUploadImg($event, 1)"
                 >

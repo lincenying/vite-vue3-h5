@@ -31,7 +31,7 @@ export default () => ([
             },
         ],
         dts: 'src/auto-imports.d.ts',
-        dirs: ['src/components', 'src/composables', 'src/pinia', 'src/api'],
+        dirs: ['src/components', 'src/composables', 'src/stores'],
 
         resolvers: [VantResolver()],
         defaultExportByFilename: false,

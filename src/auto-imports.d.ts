@@ -6,7 +6,7 @@
 export {}
 declare global {
   const $Api: typeof import('./api/index')['$Api']
-  const $api: typeof import('./api/index')['$api']
+  const $api: typeof import('./composables/fetch')['$api']
   const EffectScope: typeof import('vue')['EffectScope']
   const UTC2Date: typeof import('@lincy/utils')['UTC2Date']
   const UseTabLists: typeof import('./composables/index')['UseTabLists']
@@ -18,7 +18,7 @@ declare global {
   const computedEager: typeof import('@vueuse/core')['computedEager']
   const computedInject: typeof import('@vueuse/core')['computedInject']
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
-  const config: typeof import('./api/config')['default']
+  const config: typeof import('./composables/config')['default']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
   const createApp: typeof import('vue')['createApp']
@@ -204,7 +204,7 @@ declare global {
   const useGamepad: typeof import('@vueuse/core')['useGamepad']
   const useGeolocation: typeof import('@vueuse/core')['useGeolocation']
   const useGlobal: typeof import('./composables/index')['useGlobal']
-  const useGlobalStore: typeof import('./pinia/use-global-store')['default']
+  const useGlobalStore: typeof import('./stores/use-global-store')['default']
   const useHead: typeof import('@unhead/vue')['useHead']
   const useIdle: typeof import('@vueuse/core')['useIdle']
   const useImage: typeof import('@vueuse/core')['useImage']
@@ -305,7 +305,7 @@ declare global {
   const useWindowFocus: typeof import('@vueuse/core')['useWindowFocus']
   const useWindowScroll: typeof import('@vueuse/core')['useWindowScroll']
   const useWindowSize: typeof import('@vueuse/core')['useWindowSize']
-  const userToken: typeof import('./api/config')['userToken']
+  const userToken: typeof import('./composables/config')['userToken']
   const watch: typeof import('vue')['watch']
   const watchArray: typeof import('@vueuse/core')['watchArray']
   const watchAtMost: typeof import('@vueuse/core')['watchAtMost']
@@ -334,7 +334,7 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
-    readonly $api: UnwrapRef<typeof import('./api/index')['$api']>
+    readonly $api: UnwrapRef<typeof import('./composables/fetch')['$api']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly UTC2Date: UnwrapRef<typeof import('@lincy/utils')['UTC2Date']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
@@ -345,7 +345,7 @@ declare module 'vue' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
-    readonly config: UnwrapRef<typeof import('./api/config')['default']>
+    readonly config: UnwrapRef<typeof import('./composables/config')['default']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -531,7 +531,7 @@ declare module 'vue' {
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
     readonly useGeolocation: UnwrapRef<typeof import('@vueuse/core')['useGeolocation']>
     readonly useGlobal: UnwrapRef<typeof import('./composables/index')['useGlobal']>
-    readonly useGlobalStore: UnwrapRef<typeof import('./pinia/use-global-store')['default']>
+    readonly useGlobalStore: UnwrapRef<typeof import('./stores/use-global-store')['default']>
     readonly useHead: UnwrapRef<typeof import('@unhead/vue')['useHead']>
     readonly useIdle: UnwrapRef<typeof import('@vueuse/core')['useIdle']>
     readonly useImage: UnwrapRef<typeof import('@vueuse/core')['useImage']>
@@ -631,7 +631,7 @@ declare module 'vue' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
-    readonly userToken: UnwrapRef<typeof import('./api/config')['userToken']>
+    readonly userToken: UnwrapRef<typeof import('./composables/config')['userToken']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchArray: UnwrapRef<typeof import('@vueuse/core')['watchArray']>
     readonly watchAtMost: UnwrapRef<typeof import('@vueuse/core')['watchAtMost']>
@@ -653,7 +653,7 @@ declare module 'vue' {
 declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
-    readonly $api: UnwrapRef<typeof import('./api/index')['$api']>
+    readonly $api: UnwrapRef<typeof import('./composables/fetch')['$api']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly UTC2Date: UnwrapRef<typeof import('@lincy/utils')['UTC2Date']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
@@ -664,7 +664,7 @@ declare module '@vue/runtime-core' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
-    readonly config: UnwrapRef<typeof import('./api/config')['default']>
+    readonly config: UnwrapRef<typeof import('./composables/config')['default']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -850,7 +850,7 @@ declare module '@vue/runtime-core' {
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
     readonly useGeolocation: UnwrapRef<typeof import('@vueuse/core')['useGeolocation']>
     readonly useGlobal: UnwrapRef<typeof import('./composables/index')['useGlobal']>
-    readonly useGlobalStore: UnwrapRef<typeof import('./pinia/use-global-store')['default']>
+    readonly useGlobalStore: UnwrapRef<typeof import('./stores/use-global-store')['default']>
     readonly useHead: UnwrapRef<typeof import('@unhead/vue')['useHead']>
     readonly useIdle: UnwrapRef<typeof import('@vueuse/core')['useIdle']>
     readonly useImage: UnwrapRef<typeof import('@vueuse/core')['useImage']>
@@ -950,7 +950,7 @@ declare module '@vue/runtime-core' {
     readonly useWindowFocus: UnwrapRef<typeof import('@vueuse/core')['useWindowFocus']>
     readonly useWindowScroll: UnwrapRef<typeof import('@vueuse/core')['useWindowScroll']>
     readonly useWindowSize: UnwrapRef<typeof import('@vueuse/core')['useWindowSize']>
-    readonly userToken: UnwrapRef<typeof import('./api/config')['userToken']>
+    readonly userToken: UnwrapRef<typeof import('./composables/config')['userToken']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchArray: UnwrapRef<typeof import('@vueuse/core')['watchArray']>
     readonly watchAtMost: UnwrapRef<typeof import('@vueuse/core')['watchAtMost']>

@@ -10,17 +10,13 @@
       "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
-    "types": [
-      "node",
-      "vite/client",
-      "unplugin-vue-macros/macros-global"
-    ],
+    "types": [],
     "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "importHelpers": true,
-    "outDir": "build",
+    "outDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
