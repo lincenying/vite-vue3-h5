@@ -94,7 +94,7 @@ const cropperOption = reactive({
     canMoveBox: false,
 })
 let avatar = $ref('')
-const cropper = $ref<any>(null)
+const cropper = $ref<InstanceType<typeof VueCropper>>(null)
 const uploadImg = $ref<HTMLInputElement>()!
 
 async function handleSave() {
