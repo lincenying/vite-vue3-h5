@@ -44,8 +44,9 @@ watch(activeIndex, async (val: number) => {
     api.value.config.tab = tabsKey.value[val]
     await getList()
     const $body = document.querySelector('.body')
-    if ($body)
+    if ($body) {
         $body.scrollTop = 0
+    }
 })
 
 useSaveScroll()

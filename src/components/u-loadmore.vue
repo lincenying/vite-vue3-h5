@@ -147,21 +147,27 @@ export default {
         // 显示的提示文字
         showText() {
             let text = ''
-            if (this.status === 'loadmore')
+            if (this.status === 'loadmore') {
                 text = this.loadText.loadmore
-            else if (this.status === 'loading')
+            }
+            else if (this.status === 'loading') {
                 text = this.loadText.loading
-            else if (this.status === 'nomore' && this.isDot)
+            }
+            else if (this.status === 'nomore' && this.isDot) {
                 text = this.dotText
-            else text = this.loadText.nomore
+            }
+            else {
+                text = this.loadText.nomore
+            }
             return text
         },
     },
     methods: {
         loadMore() {
             // 只有在“加载更多”的状态下才发送点击事件，内容不满一屏时无法触发底部上拉事件，所以需要点击来触发
-            if (this.status === 'loadmore')
+            if (this.status === 'loadmore') {
                 this.$emit('loadmore')
+            }
         },
     },
 }

@@ -28,8 +28,9 @@ const config: CSSOptions = {
                 viewportWidth: (file: string) => {
                     // 字号 * 100
                     let viewportWidth = fontSize * 100
-                    if (file.includes('vant'))
+                    if (file.includes('vant')) {
                         viewportWidth = fontSize * (375 / designWidth * 100)
+                    }
 
                     return viewportWidth
                 }, // UI设计稿的宽度

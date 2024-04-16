@@ -24,8 +24,9 @@ export const charsetRemoval = function () {
         postcssPlugin: 'internal:charset-removal',
         AtRule: {
             charset: (atRule: any) => {
-                if (atRule.name === 'charset')
+                if (atRule.name === 'charset') {
                     atRule.remove()
+                }
             },
         },
     }

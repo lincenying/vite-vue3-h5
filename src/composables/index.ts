@@ -41,13 +41,15 @@ export function useGlobal() {
 export function useLockFn(fn: AnyFn, autoUnlock: boolean | 'auto' = 'auto') {
     const lock = ref(false)
     return async (...args: any[]) => {
-        if (lock.value)
+        if (lock.value) {
             return
+        }
         lock.value = true
         try {
             const $return: any = await fn(...args)
-            if (autoUnlock === true || (autoUnlock === 'auto' && $return !== false))
+            if (autoUnlock === true || (autoUnlock === 'auto' && $return !== false)) {
                 lock.value = false
+            }
         }
         catch (e) {
             lock.value = false
@@ -60,8 +62,9 @@ export function useSaveScroll() {
     const ins = getCurrentInstance()
     const route = useRoute()
     let name: string | undefined = ''
-    if (ins)
+    if (ins) {
         name = ins.type.name
+    }
 
     onActivated(() => {
         if (name) {
@@ -76,8 +79,9 @@ export function useSaveScroll() {
 
     onBeforeRouteLeave((to, from, next) => {
         const body = document.querySelector('.body')
-        if (body)
+        if (body) {
             ls.set(from.fullPath, body.scrollTop || 0)
+        }
 
         next()
     })
@@ -118,20 +122,23 @@ export function useLists<T>(init: UserListsInit) {
      * 请求列表接口
      */
     const getList = async () => {
-        if (res.config.isLock)
+        if (res.config.isLock) {
             return
+        }
         res.config.isLock = true
         // 异步更新数据
         res.timer = setTimeout(() => {
             globalStore.$patch({ routerLoading: true })
         }, 500)
         // 第一页时不显示loading
-        if (res.page > 1)
+        if (res.page > 1) {
             res.config.loading = true
+        }
         const { data, code } = await $api[init.api.method]<ResDataLists<T>>(init.api.url, { ...init.api.config, page: res.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
-        if (res.timer)
+        if (res.timer) {
             clearTimeout(res.timer)
+        }
 
         globalStore.$patch({ routerLoading: false })
         res.isLoaded = true
@@ -178,8 +185,9 @@ export function useLists<T>(init: UserListsInit) {
      * 触底回调
      */
     const reachBottom = () => {
-        if (res.config.loadStatus === 'nomore' || res.config.loadStatus === 'loading')
+        if (res.config.loadStatus === 'nomore' || res.config.loadStatus === 'loading') {
             return
+        }
         res.config.loadStatus = 'loading'
         getList()
     }
@@ -188,8 +196,9 @@ export function useLists<T>(init: UserListsInit) {
         const scrollTop = body.scrollTop
         const clientHeight = body.clientHeight
         const scrollHeight = body.scrollHeight
-        if (scrollTop + clientHeight >= scrollHeight - 300)
+        if (scrollTop + clientHeight >= scrollHeight - 300) {
             reachBottom()
+        }
     }
 
     return {
@@ -238,15 +247,17 @@ export function useTabLists<T>(init: UseTabListsInit) {
             globalStore.$patch({ routerLoading: true })
         }, 500)
         // 第一页直接用路由loading
-        if (list.page === 1)
+        if (list.page === 1) {
             list.loading = false
+        }
 
         // 异步更新数据
         const { method, url, config } = res.api[index]
         const { code, data } = await $api[method as Methods]<ResDataLists<T>>(url, { ...config, page: list.page })
         // 500毫秒内已经加载完成数据, 则清除定时器, 不再显示路由loading
-        if (res.timer)
+        if (res.timer) {
             clearTimeout(res.timer)
+        }
         globalStore.$patch({ routerLoading: false })
         if (code === 200) {
             // 如果是下拉刷新, 则只保留当前数据
@@ -261,10 +272,12 @@ export function useTabLists<T>(init: UseTabListsInit) {
             // 加载状态结束
             list.loading = false
             // 数据全部加载完成
-            if (!data.hasNext)
+            if (!data.hasNext) {
                 list.finished = true
-            else
+            }
+            else {
                 list.page += 1
+            }
         }
         else {
             list.error = true

@@ -124,8 +124,9 @@ function handleUploadImg(ev: any, num: number) {
         else {
             data = e.target.result
         }
-        if (num === 1)
+        if (num === 1) {
             cropperOption.img = data
+        }
 
         uploadImg.value = ''
     }

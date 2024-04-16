@@ -74,12 +74,15 @@ watch(
         // 同级路由切换或者打开的第一个页面, 使用 fade 切换动画
         // 打开子级路由, 使用 slide-left 切换动画
         // 子级路由返回, 使用 slide-right 切换动画
-        if (!metaIndex || newMetaIndex === metaIndex)
+        if (!metaIndex || newMetaIndex === metaIndex) {
             transitionName = 'fade'
-        else if (newMetaIndex > metaIndex)
+        }
+        else if (newMetaIndex > metaIndex) {
             transitionName = 'slide-left'
-        else
+        }
+        else {
             transitionName = 'slide-right'
+        }
 
         metaIndex = newMetaIndex
     },

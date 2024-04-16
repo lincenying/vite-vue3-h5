@@ -7,8 +7,9 @@ const modules: Record<string, any> = import.meta.glob('../mock/*.ts', { eager: t
 
 const _mockModules: Array<MockMethod> = []
 Object.keys(modules).forEach((key) => {
-    if (key.includes('/_'))
+    if (key.includes('/_')) {
         return
+    }
 
     _mockModules.push(...modules[key].default)
 })

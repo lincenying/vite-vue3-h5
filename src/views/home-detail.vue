@@ -58,8 +58,9 @@ useHead({
 async function getDetail() {
     // this.$store.commit('global/routerLoading', true)
     const { code, data } = await $api.get<Article>(`article/detail/${route.query.id}`, {})
-    if (code === 200)
+    if (code === 200) {
         detail = data
+    }
 
     // this.$store.commit('global/routerLoading', false)
 }
