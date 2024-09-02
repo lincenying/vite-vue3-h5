@@ -240,7 +240,8 @@ export function useTabLists<T>(init: UseTabListsInit) {
         const list: TopicList<T> = JSON.parse(JSON.stringify(res.list[index]))
         if (list.page === 1) {
             const body = document.querySelector(`.${options.name}`)
-            body && body.scrollTo(0, 0)
+            if (body)
+                body.scrollTo(0, 0)
         }
         // 500毫秒数据还没请求完成, 显示路由loading
         res.timer = setTimeout(() => {

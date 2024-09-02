@@ -109,7 +109,7 @@ function handleUpload() {
 }
 function handleUploadImg(ev: any, num: number) {
     const file = ev.target.files[0]
-    const preg = /\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/
+    const preg = /\.(?:gif|jpg|jpeg|png|bmp)$/i
     if (!preg.test(ev.target?.value)) {
         console.log('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')
         return false

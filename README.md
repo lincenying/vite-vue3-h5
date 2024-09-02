@@ -144,13 +144,7 @@ const { api, page, config, dataList, getList, onRefresh } = useLists<Article>(ap
             error-text="请求失败，点击重新加载"
             @load="getList"
         >
-            <van-cell
-                v-for="(item, index) in dataList"
-                :key="`${index}_${item.c_id}`"
-                :title="item.c_title"
-                is-link
-                :to="`/home/detail?id=${item.c_id}`"
-            />
+            <van-cell v-for="(item, index) in dataList" :key="`${index}_${item.c_id}`" :title="item.c_title" is-link :to="`/home/detail?id=${item.c_id}`" />
         </van-list>
     </van-pull-refresh>
 </template>

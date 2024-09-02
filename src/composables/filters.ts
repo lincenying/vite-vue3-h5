@@ -22,7 +22,9 @@ function arrToStr(value: string | any[]) {
 
         return value
     }
-    catch (error) {
+    catch (error: unknown) {
+        const err = error as Error
+        console.log(err.message)
         return ''
     }
 }
