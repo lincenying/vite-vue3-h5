@@ -1,11 +1,11 @@
+import type { PluginOption } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 
-import ReactivityTransform from '@vue-macros/reactivity-transform/vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import DefineProps from '@vue-macros/define-props/vite'
 import DefinePropsRefs from '@vue-macros/define-props-refs/vite'
 
-import type { PluginOption } from 'vite'
+import ReactivityTransform from '@vue-macros/reactivity-transform/vite'
 
 export default (): PluginOption[] => ([
     vuePlugin({

@@ -1,5 +1,5 @@
-import { closeToast, showConfirmDialog, showDialog, showFailToast, showLoadingToast, showSuccessToast, showToast } from 'vant'
 import type { App } from 'vue'
+import { closeToast, showConfirmDialog, showDialog, showFailToast, showLoadingToast, showSuccessToast, showToast } from 'vant'
 
 function install(app: App) {
     app.config.globalProperties.$dialog = {

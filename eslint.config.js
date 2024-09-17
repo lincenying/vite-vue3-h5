@@ -15,6 +15,10 @@ const config = await lincy(
             markdown: true,
             toml: false,
         },
+        ignores: [
+            '**/assets',
+            '**/static',
+        ],
     },
     {
         languageOptions: {
@@ -22,12 +26,6 @@ const config = await lincy(
                 ...autoImport.globals,
             },
         },
-    },
-    {
-        ignores: [
-            '**/assets',
-            '**/static',
-        ],
     },
 )
 

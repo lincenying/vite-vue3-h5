@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import { UTC2Date, transformStr } from '@lincy/utils'
+import { transformStr, UTC2Date } from '@lincy/utils'
 
 function install(app: App) {
     app.mixin({

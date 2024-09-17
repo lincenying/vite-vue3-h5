@@ -1,18 +1,18 @@
+import type { ConfigEnv } from 'vite'
 import path from 'node:path'
 import process from 'node:process'
-import { fileURLToPath } from 'node:url'
 
-import type { ConfigEnv } from 'vite'
-import { defineConfig, loadEnv } from 'vite'
+import { fileURLToPath } from 'node:url'
 import { viteMockServe } from '@lincy/vite-plugin-mock'
 import UnoCSS from 'unocss/vite'
-import Progress from 'vite-plugin-progress'
+import { defineConfig, loadEnv } from 'vite'
 import Inspect from 'vite-plugin-inspect'
+import Progress from 'vite-plugin-progress'
 
-import Macros from './vite.config.macros'
-import Components from './vite.config.components'
 import Build from './vite.config.build'
+import Components from './vite.config.components'
 import Css from './vite.config.css'
+import Macros from './vite.config.macros'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }: ConfigEnv) => {

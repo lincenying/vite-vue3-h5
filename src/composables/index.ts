@@ -1,5 +1,5 @@
+import type { TopicList, UserListConfig, UserListsInit, UseTabList, UseTabListsInit } from '@/types'
 import ls from 'store2'
-import type { TopicList, UseTabList, UseTabListsInit, UserListConfig, UserListsInit } from '@/types'
 
 export function useGlobal() {
     const ins = getCurrentInstance()!
@@ -77,7 +77,7 @@ export function useSaveScroll() {
         }
     })
 
-    onBeforeRouteLeave((to, from, next) => {
+    onBeforeRouteLeave((_to, from, next) => {
         const body = document.querySelector('.body')
         if (body) {
             ls.set(from.fullPath, body.scrollTop || 0)

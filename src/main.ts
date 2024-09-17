@@ -1,13 +1,13 @@
 // import 'default-passive-events'
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 import { createHead } from '@unhead/vue'
+import { createPinia } from 'pinia'
+import { createApp } from 'vue'
 
 import App from './App.vue'
-import router from './router'
-import vant from './plugin/vant'
 import global from './plugin/global'
+import vant from './plugin/vant'
+import router from './router'
 
 import 'uno.css'
 import 'vue-cropper/dist/index.css'
