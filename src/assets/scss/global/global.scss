@@ -19,10 +19,10 @@ html {
     font-size: math.div($vmFontSize, $vmDesignWidth) * 100vw;
 
     // 同时，通过Media Queries 限制根元素最大最小值
+
     @media screen and (max-width: $vmMinWindow) {
         font-size: math.div($vmFontSize, $vmDesignWidth) * $vmMinWindow;
     }
-
     @media screen and (min-width: $vmMaxWindow) {
         --body-width: $vmMaxWindow;
 

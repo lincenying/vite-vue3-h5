@@ -1,5 +1,4 @@
-@import 'global/reset';
-@import 'global/global';
-@import 'global/vant';
-@import './pages/home';
-@import './pages/about';
+@use 'global/reset';
+@use 'global/vant';
+@use './pages/home';
+@use './pages/about';

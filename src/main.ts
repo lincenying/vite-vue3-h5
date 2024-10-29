@@ -15,6 +15,8 @@ import 'vant/es/toast/style'
 import 'vant/es/dialog/style'
 import 'vant/es/notify/style'
 import 'vant/es/image-preview/style'
+
+import './assets/scss/global/global.scss'
 import './assets/scss/style.scss'
 
 console.log(`当前环境: ${import.meta.env.VITE_APP_ENV}`)

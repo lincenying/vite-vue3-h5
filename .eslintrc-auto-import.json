@@ -327,6 +327,13 @@
     "showLoadingToast": true,
     "showSuccessToast": true,
     "showToast": true,
-    "showImagePreview": true
+    "showImagePreview": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }
