@@ -31,7 +31,7 @@ export default () => ([
             },
         ],
         dts: 'src/auto-imports.d.ts',
-        dirs: ['src/components', 'src/composables', 'src/stores'],
+        dirs: ['src/components', 'src/**/components', 'src/composables', 'src/stores'],
 
         resolvers: [VantResolver()],
         defaultExportByFilename: false,
@@ -42,6 +42,7 @@ export default () => ([
      * @see https://github.com/antfu/unplugin-vue-components#readme
      */
     Components({
+        dirs: ['src/components', 'src/**/components'],
         include: [
             /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
             /\.vue$/,
