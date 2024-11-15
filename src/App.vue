@@ -62,7 +62,8 @@ setTimeout(() => {
     globalStore.setGlobalLoading(false)
 }, 200)
 
-const cacheComponents = $ref('home-router,lists-router,about-router')
+// 需要缓存路由的 name, 必须要和路由组件的 name 保持一致, 即 defineOptions 里的 name 参数
+const cacheComponents = $ref('HomeRouter,ListsRouter,AboutRouter')
 
 let transitionName = $ref('fade')
 let metaIndex = $ref<number>(route.meta.index as number)
