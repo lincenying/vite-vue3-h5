@@ -17,11 +17,11 @@
                 :auto-crop-height="cropperOption.autoCropHeight"
             />
         </div>
-        <div text-center>
+        <div flex="~ justify-center" mt-20px text-center>
             <van-button type="primary" size="small" @click="handleSave">保存</van-button>
             <van-button type="primary" size="small" @click="handleUpload">上传</van-button>
-            <label for="uploads">
-                重选
+            <label for="uploads" ml-5px>
+                <span class="van-button van-button--primary van-button--small lh-30px!">选择图片</span>
                 <input
                     id="uploads" ref="uploadImg"
                     absolute
@@ -53,8 +53,8 @@ useHead({
 })
 
 showDialog({
-    title: '标题',
-    message: '弹出的内容',
+    title: '提示',
+    message: '可以点[选择图片]更换图片',
 }).then(() => {
 
 })
@@ -82,7 +82,7 @@ showDialog({
 // 全局组件通信 <===
 
 const cropperOption = reactive({
-    img: 'http://cdn.xyxiao.cn/Landscape_1.jpg',
+    img: 'https://p3-pc.douyinpic.com/aweme/1080x1080/aweme-avatar/tos-cn-avt-0015_2f07496a52314c3e024eaafaba73dd35.jpeg',
     autoCrop: true,
     autoCropWidth: 200,
     autoCropHeight: 200,
