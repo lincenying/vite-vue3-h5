@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const config: { server: ServerOptions; build: BuildOptions } = {
+const config: { server: ServerOptions, build: BuildOptions } = {
     build: {
         target: 'es2018',
         cssTarget: 'chrome79',

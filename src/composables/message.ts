@@ -1,7 +1,7 @@
 import { showFailToast, showSuccessToast, showToast } from 'vant'
 
 type MessageType = 'success' | 'info' | 'error'
-type ConfigType = string | { content: string; type: MessageType }
+type ConfigType = string | { content: string, type: MessageType }
 
 const types = {
     info: showToast,
