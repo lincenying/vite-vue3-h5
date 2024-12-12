@@ -16,6 +16,17 @@ const config: { server: ServerOptions, build: BuildOptions } = {
             input: {
                 main: path.resolve(__dirname, 'index.html'),
             },
+            output: {
+                manualChunks(id: string) {
+                    // 处理css分块
+                    if (id.includes('node_modules')) {
+                        return 'vendor'
+                    }
+                    if (id.includes('__uno.css')) {
+                        return 'unocss'
+                    }
+                },
+            },
             external: /\.\/static.*/,
         },
     },
