@@ -13,6 +13,47 @@ vue3 H5端脚手架, 包含技术栈(Vue3 + Vant + Pinia + Vite + TS + Unocss)
 -   [vite-vue3-h5](https://github.com/lincenying/vite-vue3-h5) - Vue3 + Vant + Vite 入门模板
 -   [vite-vue3-admin](https://github.com/lincenying/vite-vue3-admin) - Vue3 + ElementPlus + Vite 管理后台入
 
+## 使用
+
+```bash
+npx degit lincenying/vite-vue3-h5 my-h5-app
+cd my-h5-app
+pnpm i # 如果你没有安装 pnpm，请运行：npm install -g pnpm
+```
+
+### 开发环境
+
+```bash
+pnpm serve
+```
+
+### 生产环境
+
+```bash
+# 测试环境
+pnpm build:test
+# 预发布环境
+pnpm build:staging
+# 生产环境
+pnpm build
+```
+
+### 生产环境预览
+
+```bash
+pnpm start
+```
+
+### Lint 和修复文件
+
+```bash
+pnpm lint # eslint检测不修复
+pnpm lint:fix # eslint检测并修复
+pnpm lint:ts # ts 类型检测
+pnpm lint:css # css 检测并修复
+
+```
+
 ## 环境变量
 
 预留4套环境变量, 具体参数可查看根目录的 `.env.xxx`, 其中 `development` 为开发环境, `test, staging, production` 依次为 `测试环境, 预发布环境, 正式环境`
@@ -235,41 +276,6 @@ https://unocss.dev/
 根目录下的`.eslintrc.json`、`.stylelintrc.json`、`.prettier`内置了 lint 规则，帮助你规范地开发代码，有助于提高团队的代码质量和协作性，可以根据团队的规则进行修改
 注意: `prettier`只在编辑器层面, 在`eslint`中并没有添加`prettier`插件
 
-## Project setup
+## License
 
-```
-pnpm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-pnpm serve
-```
-
-### Compiles and minifies for production
-
-```bash
-# 测试环境
-pnpm build:test
-# 预发布环境
-pnpm build:staging
-# 生产环境
-pnpm build
-```
-
-### Preview for production
-
-```
-pnpm start
-```
-
-### Lints and fixes files
-
-```
-pnpm lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[MIT]
