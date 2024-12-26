@@ -1,19 +1,12 @@
-interface requestParams {
-    method: string
-    body: any
-    headers?: { authorization?: string }
-    query: any
-}
-
-const baseApi = 'mock-api'
+import type { MockMethod } from './_mock.types'
+import { baseApi } from './_api'
 
 export default [
     {
         // 左上
         url: `/${baseApi}/index/getLeftTop`,
         method: 'get',
-        response: (request: requestParams) => {
-            const query = request?.query
+        response: () => {
             /* 请求参数-GET
              * id: number = id
              */
@@ -21,7 +14,7 @@ export default [
              * Null
              */
             /* 返回数据
-             {
+            {
                 code: 200, // 状态码, 200正常, 401未登录, 其他为异常
                 message: 'ok', // 异常时抛出的错误信息
                 data: array = [{
@@ -31,9 +24,8 @@ export default [
                     title: string = '标题',
                     date: string = '日期;
                 }, ]
-             }
+            }
              */
-            console.log('query.id :>> ', query.id)
             return {
                 code: 200,
                 message: 'ok',
@@ -48,7 +40,7 @@ export default [
         // 左下
         url: `/${baseApi}/index/getLeftBottom`,
         method: 'get',
-        response: (_request: requestParams) => {
+        response: () => {
             /* 请求参数-GET
              * id: id
              */
@@ -57,7 +49,7 @@ export default [
              */
             /* 返回数据
             /* 返回数据
-             {
+            {
                 code: 200, // 状态码, 200正常, 401未登录, 其他为异常
                 message: 'ok', // 异常时抛出的错误信息
                 data: object = {
@@ -66,7 +58,7 @@ export default [
                     county: [number,number, ...] = '县级数据',
                     township: [number,number, ...] = '乡级数据'
                 }
-             }
+            }
              */
             return {
                 code: 200,
@@ -84,7 +76,7 @@ export default [
         // 右上
         url: `/${baseApi}/index/getRightTop`,
         method: 'get',
-        response: (_request: requestParams) => {
+        response: () => {
             /* 请求参数-GET
              * id: id
              */
@@ -92,20 +84,21 @@ export default [
              * Null
              */
             /* 返回数据
-             {
+            {
                 code: 200, // 状态码, 200正常, 401未登录, 其他为异常
                 message: 'ok', // 异常时抛出的错误信息
                 data: object = {
                     usage: number = '使用率'
                 }
-             }
+            }
              */
             return {
                 code: 200,
                 message: 'ok',
-                data: {
-                    usage: '@integer(10, 100)',
-                },
+                data: Array.from({ length: 50 }, () => ({
+                    title: '@csentence',
+                    date: '@date("yyyy-MM-dd")',
+                })),
             }
         },
     },
@@ -113,7 +106,7 @@ export default [
         // 右下
         url: `/${baseApi}/index/getRightBottom`,
         method: 'get',
-        response: (_request: requestParams) => {
+        response: () => {
             /* 请求参数-GET
              * id: id
              */
@@ -121,7 +114,7 @@ export default [
              * Null
              */
             /* 返回数据
-             {
+            {
                 code: 200, // 状态码, 200正常, 401未登录, 其他为异常
                 message: 'ok', // 异常时抛出的错误信息
                 data: object = {
@@ -131,7 +124,7 @@ export default [
                     memory_usage_peak: number = '内存使用率峰值'
                     storage_usage_s: number = '存储使用率'
                 }
-             }
+            }
              */
             return {
                 code: 200,
@@ -150,7 +143,7 @@ export default [
         // 中间
         url: `/${baseApi}/index/getCenter`,
         method: 'get',
-        response: (_request: requestParams) => {
+        response: () => {
             /* 请求参数-GET
              * id: id
              */
@@ -158,7 +151,7 @@ export default [
              * Null
              */
             /* 返回数据
-             {
+            {
                 code: 200, // 状态码, 200正常, 401未登录, 其他为异常
                 message: 'ok', // 异常时抛出的错误信息
                 data: object = {
@@ -169,7 +162,7 @@ export default [
                     big_data_server: number = '大数据服务器'
                     big_data_cluster: number = '大数据集群'
                 }
-             }
+            }
              */
             return {
                 code: 200,
@@ -186,11 +179,39 @@ export default [
         },
     },
     {
+        // 中间
+        url: `/${baseApi}/index/getEcharts`,
+        method: 'get',
+        response: () => {
+            /* 请求参数-GET
+             * id: id
+             */
+            /* 请求参数-POST
+             * Null
+             */
+            /* 返回数据
+            {
+                code: 200, // 状态码, 200正常, 401未登录, 其他为异常
+                message: 'ok', // 异常时抛出的错误信息
+                data: object = {
+                    cloud: number = '云租户数'
+                }
+            }
+             */
+            return {
+                code: 200,
+                message: 'ok',
+                data: {
+                    cloud: 80,
+                },
+            }
+        },
+    },
+    {
         // 租户总览
         url: `/${baseApi}/index/tenantOverview`,
         method: 'get',
-        response: (request: requestParams) => {
-            const query = request?.query
+        response: ({ query }) => {
             /* 请求参数-GET
              * page: number = 分页
              * pageSize: number = 每页数量
@@ -199,7 +220,7 @@ export default [
              * Null
              */
             /* 返回数据
-             {
+            {
                 code: 200, // 状态码, 200正常, 401未登录, 其他为异常
                 message: 'ok', // 异常时抛出的错误信息
                 data: object = {
@@ -213,9 +234,8 @@ export default [
                         address: string = '地址;
                     }]
                 }
-             }
+            }
              */
-            console.log('query.page :>> ', query.page)
             const page = query.page || 1
             const pageSize = query.pageSize || 10
             return {
@@ -234,5 +254,5 @@ export default [
                 },
             }
         },
-    },
-]
+    } as MockMethod<{ page: number, pageSize: number }>,
+] as MockMethod[]
