@@ -267,13 +267,13 @@ https://github.com/anncwb/vite-plugin-mock/tree/master/#readme
 
 unocss是一个及时/按需/原子化的css引擎, 项目中也做了相关配置, 可直接使用
 配置见:
-https://github.com/lincenying/base-config/blob/main/src/uno.h5.config.ts
+https://github.com/lincenying/unocss-base-config/blob/main/src/uno.h5.config.ts
 官方文档见:
 https://unocss.dev/
 
 ## eslint/stylelint/prettierrc/vue-tsc
 
-根目录下的`.eslintrc.json`、`.stylelintrc.json`、`.prettier`内置了 lint 规则，帮助你规范地开发代码，有助于提高团队的代码质量和协作性，可以根据团队的规则进行修改
+根目录下的`eslint.config.ts`、`stylelint.config.js`、`.prettier`内置了 lint 规则，帮助你规范地开发代码，有助于提高团队的代码质量和协作性，可以根据团队的规则进行修改
 注意: `prettier`只在编辑器层面, 在`eslint`中并没有添加`prettier`插件
 
 ## License
