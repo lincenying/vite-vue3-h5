@@ -27,6 +27,7 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
         css: Css,
         resolve: {
             alias: {
+                '~': path.join(__dirname, './src'),
                 '@': path.join(__dirname, './src'),
             },
         },
