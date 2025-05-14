@@ -340,6 +340,8 @@
     "useSSRWidth": true,
     "onElementRemoval": true,
     "createRef": true,
-    "useCountdown": true
+    "useCountdown": true,
+    "Slot": true,
+    "Slots": true
   }
 }

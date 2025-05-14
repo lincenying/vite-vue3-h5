@@ -19,7 +19,7 @@ export const maxWindow = `${maxWidth}Px`
  */
 export const fontSize = 37.5
 
-export const charsetRemoval = function () {
+export function charsetRemoval() {
     return {
         postcssPlugin: 'internal:charset-removal',
         AtRule: {
