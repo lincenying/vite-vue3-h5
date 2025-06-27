@@ -31,7 +31,7 @@ const config: { server: ServerOptions, build: BuildOptions } = {
         },
     },
     server: {
-        port: 7771,
+        port: 7871,
         proxy: {
             '/api': {
                 target: 'https://php.mmxiaowu.com',
@@ -45,6 +45,9 @@ const config: { server: ServerOptions, build: BuildOptions } = {
          */
         warmup: {
             clientFiles: ['./src/main.ts', './src/views/**/*.vue'],
+        },
+        hmr: {
+            port: 57871,
         },
     },
 }
