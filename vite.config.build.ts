@@ -32,6 +32,7 @@ const config: { server: ServerOptions, build: BuildOptions } = {
     },
     server: {
         port: 7871,
+        open: true,
         proxy: {
             '/api': {
                 target: 'https://php.mmxiaowu.com',
