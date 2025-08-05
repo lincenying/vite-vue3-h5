@@ -80,7 +80,13 @@ export function useSaveScroll() {
     onBeforeRouteLeave((_to, from, next) => {
         const body = document.querySelector('.body')
         if (body) {
-            ls.set(from.fullPath, body.scrollTop || 0)
+            const scrollTop = body ? body.scrollTop : 0
+            if (scrollTop === 0) {
+                ls.remove(from.fullPath)
+            }
+            else {
+                ls.set(from.fullPath, scrollTop)
+            }
         }
 
         next()
