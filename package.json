@@ -16,7 +16,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ts": "vue-tsc --noEmit",
-    "lint:css": "stylelint '**/*.{css,scss}' --fix"
+    "lint:css": "stylelint '**/*.{css,scss}' --fix",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@lincy/utils": "^0.7.0",
@@ -84,7 +85,7 @@
     ]
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npm run lint-staged"
   },
   "lint-staged": {
     "*.{[jt]s?(x),vue,md}": [
