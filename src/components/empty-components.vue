@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { withDefaults } from 'unplugin-vue-macros/macros' assert { type: 'macro' }
+import { withDefaults } from 'vue-macros/macros' assert { type: 'macro' }
 
 defineOptions({
     name: 'EmptyComponents',
