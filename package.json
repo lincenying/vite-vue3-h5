@@ -17,7 +17,8 @@
     "lint:fix": "eslint . --fix",
     "lint:ts": "vue-tsc --noEmit",
     "lint:css": "stylelint '**/*.{css,scss}' --fix",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "copy": "deploy_dist vite-vue3-h5/dist"
   },
   "dependencies": {
     "@lincy/utils": "^0.7.0",
