@@ -3,7 +3,7 @@
   "type": "module",
   "version": "3.0.0",
   "private": true,
-  "packageManager": "pnpm@10.18.3",
+  "packageManager": "pnpm@10.20.0",
   "author": "lincenying <lincenying@qq.com>",
   "scripts": {
     "prepare[-del]": "npx simple-git-hooks",
@@ -23,8 +23,8 @@
   "dependencies": {
     "@lincy/utils": "^0.7.0",
     "@unhead/vue": "^2.0.19",
-    "@vueuse/core": "^13.9.0",
-    "axios": "^1.12.2",
+    "@vueuse/core": "^14.0.0",
+    "axios": "^1.13.1",
     "default-passive-events": "^4.0.0",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
@@ -43,7 +43,7 @@
     "@lincy/stylelint-config": "^2.2.0",
     "@lincy/unocss-base-config": "^2.3.0",
     "@types/lodash": "^4.17.20",
-    "@types/node": "^24.8.1",
+    "@types/node": "^24.9.2",
     "@types/qs": "^6.14.0",
     "@unocss/eslint-plugin": "^66.5.4",
     "@vitejs/plugin-vue": "^6.0.1",
@@ -51,7 +51,7 @@
     "@vue-macros/volar": "^3.1.1",
     "cross-env": "^10.1.0",
     "eslint": "^9.38.0",
-    "lint-staged": "^16.2.4",
+    "lint-staged": "^16.2.6",
     "mockjs": "^1.1.0",
     "postcss": "^8.5.6",
     "postcss-px-to-viewport-8-plugin": "^1.2.5",
@@ -65,12 +65,12 @@
     "unplugin-icons": "^22.5.0",
     "unplugin-vue-components": "^30.0.0",
     "url-search-params-polyfill": "^8.2.5",
-    "vite": "^7.1.10",
+    "vite": "^7.1.12",
     "vite-plugin-inspect": "^11.3.3",
     "vite-plugin-mock": "^3.0.2",
     "vite-plugin-progress": "^0.0.7",
     "vue-macros": "^3.1.1",
-    "vue-tsc": "^3.1.1"
+    "vue-tsc": "^3.1.2"
   },
   "pnpm": {
     "peerDependencyRules": {
