@@ -32,8 +32,8 @@ html {
 
 // body 也增加最大最小宽度限制，避免默认100%宽度的 block 元素跟随 body 而过大过小
 body {
-    max-width: var(--max-window);
     min-width: var(--min-window);
+    max-width: var(--max-window);
     min-height: 100vh;
     margin: 0 auto !important;
     font-size: 12px;
@@ -45,22 +45,22 @@ body {
 .fixed-center {
     left: calc((100% - var(--body-width)) / 2) !important;
     width: 100%;
-    max-width: var(--max-window);
     min-width: var(--min-window);
+    max-width: var(--max-window);
 }
 
 .body {
     position: absolute;
+    box-sizing: border-box;
     width: 100%;
+    min-width: var(--min-window);
+    max-width: var(--max-window);
 
     // height: 100vh;
     // padding-bottom: var(--tabbar-height);
     height: 100vh;
-    max-width: var(--max-window);
-    min-width: var(--min-window);
     overflow-y: scroll;
     background: #f8f8f8;
-    box-sizing: border-box;
     transition: all 0.4s;
     -webkit-overflow-scrolling: touch;
 
@@ -82,11 +82,11 @@ body {
     left: 0;
     z-index: 999;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgb(255, 255, 255, 0.1);
 }
 
 .router-loading {
@@ -95,11 +95,11 @@ body {
     left: 0;
     z-index: 1000;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgb(255, 255, 255, 0.1);
 }
 
 .load-more {
@@ -187,15 +187,15 @@ body {
     top: 0;
     left: 0;
     z-index: 2;
+    box-sizing: border-box;
 
     // 多加0.1%，能解决有时候边框缺失的问题
     width: 199.8%;
     height: 199.7%;
     pointer-events: none;
-    border: 0 solid #e4e7ed;
     content: ' ';
+    border: 0 solid #e4e7ed;
     transform: scale(0.5, 0.5);
-    box-sizing: border-box;
     transform-origin: 0 0;
 }
 

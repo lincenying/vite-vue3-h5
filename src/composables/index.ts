@@ -1,4 +1,4 @@
-import type { TopicList, UserListConfig, UserListsInit, UseTabList, UseTabListsInit } from '@/types'
+import type { GlobalList, GlogbalTabList, GlogbalTabListsInit, UserListConfig, UserListsInit } from '~/types/global.types'
 import ls from 'store2'
 
 export function useGlobal() {
@@ -97,17 +97,17 @@ export function useSaveScroll() {
  * 单列表封装
  * @param init { api: 接口封装 }
  */
-export function useLists<T>(init: UserListsInit) {
+export function useLists<T, U>(init: UserListsInit<U>) {
     const globalStore = useGlobalStore()
 
     const body = $ref<HTMLElement>()!
-    const res: UserListConfig<T> = reactive({
+    const res = reactive({
         ...init,
-        timer: null,
+        timer: null as Nullable<NodeJS.Timeout>,
         isLoaded: false,
         // 列表数据 ==>
         page: 1,
-        dataList: [],
+        dataList: [] as T[],
         // <==列表数据
         config: {
             // 下拉刷新 ==>
@@ -115,14 +115,14 @@ export function useLists<T>(init: UserListsInit) {
             isRefresh: false,
             // <==下拉刷新
             // 滚动加载 ==>
-            loadStatus: 'loadmore',
+            loadStatus: 'loadmore' as 'loadmore' | 'nomore' | 'loading',
             isLock: false,
             loading: false,
             error: false,
             finished: false,
             // <==滚动加载
         },
-    })
+    }) as UserListConfig<T, U>
 
     /**
      * 请求列表接口
@@ -167,6 +167,7 @@ export function useLists<T>(init: UserListsInit) {
                 res.config.loadStatus = 'nomore'
             }
             else {
+                res.config.finished = false
                 res.config.loadStatus = 'loadmore'
                 res.page += 1
             }
@@ -221,11 +222,11 @@ export function useLists<T>(init: UserListsInit) {
  * Tab接口列表
  * @param init { api: 接口封装 }
  */
-export function useTabLists<T>(init: UseTabListsInit) {
+export function GlogbalTabLists<T>(init: GlogbalTabListsInit) {
     const { options, globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
-    const res: UseTabList<T> = reactive({
+    const res: GlogbalTabList<T> = reactive({
         ...init,
         timer: null,
         // 列表数据 ==>
@@ -243,7 +244,7 @@ export function useTabLists<T>(init: UseTabListsInit) {
     const activeIndex = ref(0)
 
     const getList = async (index: number) => {
-        const list: TopicList<T> = JSON.parse(JSON.stringify(res.list[index]))
+        const list: GlobalList<T> = JSON.parse(JSON.stringify(res.list[index]))
         if (list.page === 1) {
             const body = document.querySelector(`.${options.name}`)
             if (body)

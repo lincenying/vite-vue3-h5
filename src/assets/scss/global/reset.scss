@@ -68,14 +68,14 @@ ol { list-style: none; }
 /* 重置文本格式元素 */
 a {
     text-decoration: none;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: rgb(255, 255, 255, 0);
 }
 a:hover { text-decoration: none; }
 
 abbr[title],
 acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
-    border-bottom: 1px dotted;
     cursor: help;
+    border-bottom: 1px dotted;
 }
 
 q::before,
@@ -98,13 +98,13 @@ button {
     cursor: pointer;
     background: none;
     border: none;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: rgb(255, 255, 255, 0);
 }
 
 /* 重置表格元素 */
 table {
-    border-collapse: collapse;
     border-spacing: 0;
+    border-collapse: collapse;
 }
 
 /* 重置 hr */
@@ -124,9 +124,9 @@ html { overflow: hidden; }
 .disabled {
     pointer-events: none;
     cursor: not-allowed;
-    opacity: 0.65;
     filter: alpha(opacity=65);
     box-shadow: none;
+    opacity: 0.65;
 }
 
 ::-webkit-scrollbar {

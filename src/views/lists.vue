@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Article } from '@/types'
+import type { Article } from '@/types/home.types'
+import type { UserListsInitApi } from '~/types/global.types'
 
 defineOptions({
     name: 'ListsRouter',
@@ -37,7 +38,18 @@ const activeIndex = ref(0)
 const tabs = ref(['全部', '问答', '分享', '推荐'])
 const tabsKey = ref(['', 'ask', 'share', 'good'])
 
-const { api, page, config, dataList, getList, onRefresh } = useLists<Article>({ api: { method: 'get', url: 'article/lists', config: { limit: 20, tab: '' } } })
+interface UserConfigType {
+    limit: number
+    tab: string
+}
+
+const apiConfig: UserListsInitApi<UserConfigType> = {
+    method: 'get',
+    url: 'article/lists',
+    config: { limit: 20, tab: '' },
+}
+
+const { api, page, config, dataList, getList, onRefresh } = useLists<Article, UserConfigType>({ api: apiConfig })
 
 watch(activeIndex, async (val: number) => {
     page.value = 1

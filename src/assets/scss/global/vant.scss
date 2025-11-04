@@ -12,17 +12,17 @@
 .wrap {
     .van-tabbar {
         position: absolute !important;
-        border-top: 1px solid #f8f8f8;
-        box-sizing: border-box;
         z-index: 999 !important;
+        box-sizing: border-box;
         overflow: hidden;
+        border-top: 1px solid #f8f8f8;
     }
 
     .body {
         .van-nav-bar {
-            border-bottom: 1px solid #f8f8f8;
-            box-sizing: border-box;
             z-index: 999 !important;
+            box-sizing: border-box;
+            border-bottom: 1px solid #f8f8f8;
         }
 
         .van-skeleton__row,

@@ -1,10 +1,3 @@
-export interface Article {
-    c_id: string
-    c_title: string
-    c_content: string
-    c_posttime?: string
-}
-
 export interface _UserListConfig<T = any> {
     /** 定时器 */
     timer: Nullable<NodeJS.Timeout>
@@ -37,19 +30,19 @@ export interface _UserListConfig<T = any> {
     }
 }
 
-export interface UserListsInitApi {
+export interface UserListsInitApi<T = Record<string, any>> {
     method: Methods
     url: string
-    config: Record<string, any>
+    config: T
 }
 
-export interface UserListsInit {
-    api: UserListsInitApi
+export interface UserListsInit<T = Record<string, any>> {
+    api: UserListsInitApi<T>
 }
 
-export type UserListConfig<T = any> = _UserListConfig<T> & UserListsInit
+export type UserListConfig<T = any, U = Record<string, any>> = _UserListConfig<T> & UserListsInit<U>
 
-export interface TopicList<T = any> {
+export interface GlobalList<T = any> {
     page: number
     items: T[]
     refreshing: boolean
@@ -58,15 +51,15 @@ export interface TopicList<T = any> {
     finished: boolean
 }
 
-export interface UseTabList<T> {
+export interface GlogbalTabList<T> {
     api: UserListsInitApi[]
     timer: any
-    list: (TopicList<T>)[]
+    list: (GlobalList<T>)[]
     tabs: string[]
     [propName: string]: any
 }
 
-export interface UseTabListsInit {
+export interface GlogbalTabListsInit {
     api: UserListsInitApi[]
     tabs: string[]
 }

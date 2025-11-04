@@ -27,7 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Article, UserListsInitApi } from '@/types'
+import type { UserListsInitApi } from '~/types/global.types'
+import type { Article } from '~/types/home.types'
 
 defineOptions({
     name: 'HomeRouter',
@@ -37,13 +38,17 @@ useHead({
     title: 'Home',
 })
 
-const apiConfig: UserListsInitApi = {
+interface UserConfigType {
+    limit: number
+}
+
+const apiConfig: UserListsInitApi<UserConfigType> = {
     method: 'get',
     url: 'article/lists',
     config: { limit: 20 },
 }
 
-const { api, config, dataList, getList, onRefresh } = useLists<Article>({ api: apiConfig })
+const { api, config, dataList, getList, onRefresh } = useLists<Article, UserConfigType>({ api: apiConfig })
 
 console.log(api)
 

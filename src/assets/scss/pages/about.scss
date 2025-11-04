@@ -19,6 +19,7 @@
 
 .avatar-wrap {
     .croppa-container {
+        box-sizing: content-box;
         display: block;
         width: 200Px;
         height: 200Px;
@@ -27,7 +28,6 @@
 
         // border: 2px solid grey;
         border-radius: 4px;
-        box-sizing: content-box;
 
         canvas {
             border-radius: 0.08rem;
