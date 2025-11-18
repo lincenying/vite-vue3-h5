@@ -9,6 +9,7 @@ declare global {
   const $Api: typeof import('./api/index')['$Api']
   const $api: typeof import('./composables/fetch')['$api']
   const EffectScope: typeof import('vue')['EffectScope']
+  const GlogbalTabLists: typeof import('./composables/index')['GlogbalTabLists']
   const UTC2Date: typeof import('@lincy/utils')['UTC2Date']
   const UseTabLists: typeof import('./composables/index')['UseTabLists']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
@@ -355,6 +356,7 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly $api: UnwrapRef<typeof import('./composables/fetch')['$api']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly GlogbalTabLists: UnwrapRef<typeof import('./composables/index')['GlogbalTabLists']>
     readonly UTC2Date: UnwrapRef<typeof import('@lincy/utils')['UTC2Date']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -629,7 +631,6 @@ declare module 'vue' {
     readonly useStyleTag: UnwrapRef<typeof import('@vueuse/core')['useStyleTag']>
     readonly useSupported: UnwrapRef<typeof import('@vueuse/core')['useSupported']>
     readonly useSwipe: UnwrapRef<typeof import('@vueuse/core')['useSwipe']>
-    readonly useTabLists: UnwrapRef<typeof import('./composables/index')['useTabLists']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTemplateRefsList: UnwrapRef<typeof import('@vueuse/core')['useTemplateRefsList']>
     readonly useTextDirection: UnwrapRef<typeof import('@vueuse/core')['useTextDirection']>
