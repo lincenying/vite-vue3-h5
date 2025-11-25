@@ -3,7 +3,7 @@
   "type": "module",
   "version": "3.0.0",
   "private": true,
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@10.23.0",
   "author": "lincenying <lincenying@qq.com>",
   "scripts": {
     "prepare[-del]": "npx simple-git-hooks",
@@ -33,57 +33,44 @@
     "store2": "^2.14.4",
     "unhead": "^2.0.19",
     "vant": "^4.9.21",
-    "vue": "^3.5.24",
+    "vue": "^3.5.25",
     "vue-cropper": "^1.1.4",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@lincy/eslint-config": "^6.0.0",
+    "@lincy/eslint-config": "^6.0.1",
     "@lincy/stylelint-config": "^2.2.0",
     "@lincy/unocss-base-config": "^2.3.0",
-    "@types/lodash": "^4.17.20",
+    "@types/lodash": "^4.17.21",
     "@types/node": "^24.10.1",
     "@types/qs": "^6.14.0",
-    "@unocss/eslint-plugin": "^66.5.6",
-    "@vitejs/plugin-vue": "^6.0.1",
-    "@vitejs/plugin-vue-jsx": "^5.1.1",
+    "@unocss/eslint-plugin": "^66.5.9",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "@vitejs/plugin-vue-jsx": "^5.1.2",
     "@vue-macros/volar": "^3.1.1",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
-    "lint-staged": "^16.2.6",
+    "lint-staged": "^16.2.7",
     "mockjs": "^1.1.0",
     "postcss": "^8.5.6",
     "postcss-px-to-viewport-8-plugin": "^1.2.5",
-    "sass": "^1.94.1",
+    "sass": "^1.94.2",
     "simple-git-hooks": "^2.13.1",
-    "stylelint": "^16.25.0",
+    "stylelint": "^16.26.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
-    "unocss": "^66.5.6",
+    "unocss": "^66.5.9",
     "unplugin-auto-import": "^20.2.0",
     "unplugin-icons": "^22.5.0",
     "unplugin-vue-components": "^30.0.0",
     "url-search-params-polyfill": "^8.2.5",
-    "vite": "^7.2.2",
+    "vite": "^7.2.4",
     "vite-plugin-inspect": "^11.3.3",
     "vite-plugin-mock": "^3.0.2",
     "vite-plugin-progress": "^0.0.7",
     "vue-macros": "^3.1.1",
-    "vue-tsc": "^3.1.4"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "rollup",
-        "postcss",
-        "esbuild",
-        "prettier"
-      ]
-    },
-    "onlyBuiltDependencies": [
-      "simple-git-hooks"
-    ]
+    "vue-tsc": "^3.1.5"
   },
   "simple-git-hooks[-del]": {
     "pre-commit": "npm run lint-staged"

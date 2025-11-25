@@ -59,7 +59,7 @@ export interface GlogbalTabList<T> {
     [propName: string]: any
 }
 
-export interface GlogbalTabListsInit {
+export interface GlobalTabListsInit {
     api: UserListsInitApi[]
     tabs: string[]
 }

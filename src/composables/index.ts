@@ -1,4 +1,4 @@
-import type { GlobalList, GlogbalTabList, GlogbalTabListsInit, UserListConfig, UserListsInit } from '~/types/global.types'
+import type { GlobalList, GlobalTabListsInit, GlogbalTabList, UserListConfig, UserListsInit } from '~/types/global.types'
 import ls from 'store2'
 
 export function useGlobal() {
@@ -222,7 +222,7 @@ export function useLists<T, U>(init: UserListsInit<U>) {
  * Tab接口列表
  * @param init { api: 接口封装 }
  */
-export function GlogbalTabLists<T>(init: GlogbalTabListsInit) {
+export function globalTabLists<T>(init: GlobalTabListsInit) {
     const { options, globalStore } = useGlobal()
 
     const body = $ref<HTMLElement>()!
