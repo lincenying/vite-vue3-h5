@@ -1,17 +1,15 @@
 <template>
-    <div>{{ title }}</div>
+    <div>{{ msg }}</div>
 </template>
 
 <script lang="ts" setup>
-import { withDefaults } from 'vue-macros/macros' assert { type: 'macro' }
-
 defineOptions({
     name: 'EmptyComponents',
 })
 
-const { title } = withDefaults(definePropsRefs<{
-    title?: string
-}>(), {
-    title: 'title',
-})
+const { msg = 'hello world' } = defineProps<Props>()
+
+interface Props {
+    msg?: string
+}
 </script>
