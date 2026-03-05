@@ -77,7 +77,7 @@ export function useSaveScroll() {
         }
     })
 
-    onBeforeRouteLeave((_to, from, next) => {
+    onBeforeRouteLeave((_to, from) => {
         const body = document.querySelector('.body')
         if (body) {
             const scrollTop = body ? body.scrollTop : 0
@@ -88,8 +88,6 @@ export function useSaveScroll() {
                 ls.set(from.fullPath, scrollTop)
             }
         }
-
-        next()
     })
 }
 
