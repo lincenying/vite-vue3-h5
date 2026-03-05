@@ -24,7 +24,7 @@ html {
         font-size: math.div($vmFontSize, $vmDesignWidth) * $vmMinWindow;
     }
     @media screen and (min-width: $vmMaxWindow) {
-        --body-width: $vmMaxWindow;
+        --body-width: #{$vmMaxWindow};
 
         font-size: math.div($vmFontSize, $vmDesignWidth) * $vmMaxWindow;
     }
