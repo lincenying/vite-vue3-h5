@@ -6,12 +6,9 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const $Api: typeof import('./api/index')['$Api']
-  const $api: typeof import('./composables/fetch').$api
+  const $api: typeof import('./composables/axios').$api
   const EffectScope: typeof import('vue').EffectScope
-  const GlogbalTabLists: typeof import('./composables/index')['GlogbalTabLists']
   const UTC2Date: typeof import('@lincy/utils').UTC2Date
-  const UseTabLists: typeof import('./composables/index')['UseTabLists']
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
   const closeToast: typeof import('vant').closeToast
@@ -65,7 +62,6 @@ declare global {
   const jsxComponents: typeof import('./components/jsx-components').default
   const loginMsgBox: typeof import('./composables/message').loginMsgBox
   const makeDestructurable: typeof import('@vueuse/core').makeDestructurable
-  const manualResetRef: typeof import('@vueuse/core')['manualResetRef']
   const markRaw: typeof import('vue').markRaw
   const nextTick: typeof import('vue').nextTick
   const onActivated: typeof import('vue').onActivated
@@ -109,7 +105,6 @@ declare global {
   const refWithControl: typeof import('@vueuse/core').refWithControl
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
-  const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
   const routerKey: typeof import('./composables/provide').routerKey
   const shallowReactive: typeof import('vue').shallowReactive
   const shallowReadonly: typeof import('vue').shallowReadonly
@@ -276,7 +271,6 @@ declare global {
   const useScriptTag: typeof import('@vueuse/core').useScriptTag
   const useScroll: typeof import('@vueuse/core').useScroll
   const useScrollLock: typeof import('@vueuse/core').useScrollLock
-  const useSeoMeta: typeof import('@vueuse/head')['useSeoMeta']
   const useSessionStorage: typeof import('@vueuse/core').useSessionStorage
   const useShare: typeof import('@vueuse/core').useShare
   const useSlots: typeof import('vue').useSlots
@@ -289,7 +283,6 @@ declare global {
   const useStyleTag: typeof import('@vueuse/core').useStyleTag
   const useSupported: typeof import('@vueuse/core').useSupported
   const useSwipe: typeof import('@vueuse/core').useSwipe
-  const useTabLists: typeof import('./composables/index')['useTabLists']
   const useTemplateRef: typeof import('vue').useTemplateRef
   const useTemplateRefsList: typeof import('@vueuse/core').useTemplateRefsList
   const useTextDirection: typeof import('@vueuse/core').useTextDirection
@@ -356,7 +349,7 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
-    readonly $api: UnwrapRef<typeof import('./composables/fetch')['$api']>
+    readonly $api: UnwrapRef<typeof import('./composables/axios')['$api']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly UTC2Date: UnwrapRef<typeof import('@lincy/utils')['UTC2Date']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
