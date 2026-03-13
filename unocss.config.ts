@@ -4,4 +4,6 @@ import { fontSize } from './src/design.config'
 export default h5Config({
     baseFontSize: fontSize,
     unti: 'rem',
+}, 'wind3', {
+    preflight: false,
 })
