@@ -5,7 +5,9 @@ catalogMode: prefer
 ignoreWorkspaceRootCheck: true
 
 # npm 包注册表的基本 URL（包括尾部斜杠）
-registry: https://registry.npmmirror.com
+registry: https://registry.npmmirror.com/
+registries:
+  default: https://registry.npmmirror.com/
 
 # 是否强制提升所有依赖
 shamefullyHoist: true
@@ -17,6 +19,9 @@ shellEmulator: true
 # 当设置为 true 时，pnpm 会强制安装指定版本的对等依赖；
 # 设置为 false 时，会忽略版本不一致的警告
 strictPeerDependencies: false
+
+# 定义了版本发布后 pnpm 安装之前必须经过的最少分钟数
+minimumReleaseAge: 0
 
 # 当设置为“禁止降级”时，如果软件包的信任级别较之前的版本有所降低，pnpm 将无法安装
 trustPolicy: no-downgrade
@@ -30,59 +35,58 @@ trustPolicyExclude:
 catalogs:
   dev:
     '@iconify-json/mdi': ^1.2.3
-    '@lincy/unocss-base-config': ^2.6.2
-    '@vitejs/plugin-vue': ^6.0.5
+    '@lincy/unocss-base-config': ^2.7.1
+    '@vitejs/plugin-vue': ^6.0.7
     '@vitejs/plugin-vue-jsx': ^5.1.5
     '@vue-macros/volar': ^3.1.2
-    baseline-browser-mapping: ^2.10.7
+    baseline-browser-mapping: ^2.10.31
     cross-env: ^10.1.0
-    lint-staged: ^16.3.3
     mockjs: ^1.1.0
-    postcss: ^8.5.8
+    postcss: ^8.5.15
     postcss-px-to-viewport-8-plugin: ^1.2.5
-    sass-embedded: ^1.98.0
+    sass-embedded: ^1.100.0
     tslib: ^2.8.1
     typescript: ^5.9.3
-    unocss: ^66.6.6
+    unocss: ^66.7.0
     unplugin-auto-import: ^21.0.0
     unplugin-icons: ^23.0.1
-    unplugin-vue-components: ^31.0.0
+    unplugin-vue-components: ^32.1.0
     url-search-params-polyfill: ^8.2.5
-    vite: ^7.3.1
+    vite: ^8.0.14
     vite-plugin-inspect: ^11.3.3
     vite-plugin-mock: ^3.0.2
     vite-plugin-progress: ^0.0.7
     vue-macros: ^3.1.2
-    vue-tsc: ^3.2.5
+    vue-tsc: ^3.3.1
 
   lint:
-    '@lincy/eslint-config': ^6.5.2
+    '@lincy/eslint-config': ^7.2.0
     '@lincy/stylelint-config': ^2.2.2
-    '@unocss/eslint-plugin': ^66.6.6
-    eslint: ^10.0.3
-    stylelint: ^17.4.0
+    '@unocss/eslint-plugin': ^66.7.0
+    eslint: ^10.4.0
+    stylelint: ^17.12.0
 
   prod:
     '@lincy/utils': ^0.7.3
-    '@unhead/vue': ^2.1.12
-    '@vueuse/core': ^14.2.1
-    axios: ^1.13.6
+    '@unhead/vue': ^3.1.0
+    '@vueuse/core': ^14.3.0
+    axios: ^1.16.1
     default-passive-events: ^4.0.0
-    lodash: ^4.17.23
+    lodash: ^4.18.1
     md5: ^2.3.0
     pinia: ^3.0.4
-    qs: ^6.15.0
+    qs: ^6.15.2
     store2: ^2.14.4
-    unhead: ^2.1.12
-    vant: ^4.9.22
-    vue: ^3.5.30
+    unhead: ^3.1.0
+    vant: ^4.9.24
+    vue: ^3.5.34
     vue-cropper: ^1.1.4
-    vue-router: ^5.0.3
+    vue-router: ^5.0.7
 
   types:
     '@types/lodash': ^4.17.24
-    '@types/node': ^25.5.0
-    '@types/qs': ^6.15.0
+    '@types/node': ^25.9.1
+    '@types/qs': ^6.15.1
 
 onlyBuiltDependencies:
   - vue-demi
@@ -94,3 +98,7 @@ peerDependencyRules:
     - postcss
     - esbuild
     - prettier
+
+allowBuilds:
+  esbuild: true
+  oxc-resolver: true
