@@ -1,6 +1,6 @@
 import type { CSSOptions } from 'vite'
 import viewport from 'postcss-px-to-viewport-8-plugin'
-import { charsetRemoval, designHeight, designMultiple, designWidth, fontSize, maxWidth, maxWindow, minWidth, minWindow } from './src/design.config'
+import { charsetRemoval, designHeight, designMultiple, designWidth, fontSize, maxWidth, maxWindow, minWidth, minWindow } from './src/design.config.ts'
 
 const config: CSSOptions = {
     preprocessorOptions: {

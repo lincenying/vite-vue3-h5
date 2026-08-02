@@ -3,7 +3,7 @@
   "type": "module",
   "version": "3.0.0",
   "private": true,
-  "packageManager": "pnpm@11.2.2",
+  "packageManager": "pnpm@11.18.0",
   "author": "lincenying <lincenying@qq.com>",
   "scripts": {
     "del": "sh delete-ts.sh",
@@ -48,6 +48,7 @@
     "@vitejs/plugin-vue": "catalog:dev",
     "@vitejs/plugin-vue-jsx": "catalog:dev",
     "@vue-macros/volar": "catalog:dev",
+    "caniuse-lite": "catalog:dev",
     "cross-env": "catalog:dev",
     "eslint": "catalog:lint",
     "mockjs": "catalog:dev",
