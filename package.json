@@ -51,6 +51,7 @@
     "caniuse-lite": "catalog:dev",
     "cross-env": "catalog:dev",
     "eslint": "catalog:lint",
+    "eslint-plugin-format": "catalog:lint",
     "mockjs": "catalog:dev",
     "postcss": "catalog:dev",
     "postcss-px-to-viewport-8-plugin": "catalog:dev",

@@ -228,7 +228,7 @@ export function globalTabLists<T>(init: GlobalTabListsInit) {
         ...init,
         timer: null,
         // 列表数据 ==>
-        list: Array.from({ length: 5 }, () => '').map(() => ({
+        list: Array.from({ length: 5 }).fill('').map(() => ({
             page: 1,
             items: [],
             refreshing: false,
